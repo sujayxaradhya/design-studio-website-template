@@ -1,6 +1,6 @@
 # AGENTS.md: design studio website template
 
-One-page website for a design, brand or digital agency. One file, `index.html`, with inline CSS and scripts (GSAP, ScrollTrigger, Lenis from jsDelivr); no build step, and none is needed for copy, colour or photo edits.
+One-page website for a design, brand or digital agency. One file, `index.html`, with inline CSS and scripts, no JavaScript libraries: the scroll motion is CSS scroll-driven animations plus a small inline motion kit; no build step, and none is needed for copy, colour or photo edits. A GSAP build of the same page is `index.gsap.html` (GSAP 3.13.0, ScrollTrigger, Lenis 1.3.4 from jsDelivr): edit one of the two, not both.
 
 ## Files
 Edit these files, not a page fetched by URL (that arrives as a summary).
@@ -14,21 +14,16 @@ Upload `index.html`, LICENSE and CREDITS.md; not this file, README.md or `previe
 
 ## Keep
 - Every `id`, `data-8b-section`, `data-8b-motion` and `data-8b-part` (`section:<id>` styles, `scene:<id>` animation).
+- The motion parts `motion-gate` (head: sets `data-8b-live` on `<html>` only with scroll-driven animation support and no reduced motion), `motion-kit` and `motion`, and every other `data-8b-*` attribute (`data-8b-items` groups, `data-8b-off`, `data-8b-enter`): the CSS and the kit read them. Items ordered by `--i` follow their group; counts the CSS fixes are listed under Known limits (`data-8b-fixed` marks such a group).
 - Selectors the scripts use:
   - `section-script:navigation`: `.nav__menu` `.menu` `.menu__close`
-  - `scene:hero`: `.statement__dot` `.hero__aperture` `.hero__tint` `.hero__orbit` `.hero__word` `.hero__intro`
-  - `scene:statement`: `.statement__line` `.statement__dot` `.statement__index`
-  - `scene:work`: `.work__track` `.work__window` `.work__stage` `.work__plate` `.case__img` `.case`
-  - `scene:again`: `.again__stage` `.again__head` `.again__swing` `.again__wheel` `.partner`
-  - `scene:capabilities`: `.service` `.service__shade`
-  - `scene:method`: `.step` `.method__station` `.method__steps` `.method__arc` `.method__arm`
   - `section-script:contact`: `.contact__form` `.contact__status` `data-success` `data-error`
   - `section-script:footer`: `.footer__news` `.footer__note` `data-success` `data-error`
-  - `scene:studio`: `.studio__collage` `.shot`
-  - `scene:journal`: `.journal__shot` `.story`
-  - `scene:contact`: `.contact__voice` `.contact__title` `.m-dot`
-  - `scene:footer`: `.footer__aperture` `.footer__period` `.footer__bye` `.footer__tint` `.footer__word`
-- `hero` directly above `statement`, `work` directly above `again`: the animation crosses that border and stops if they are split.
+  - `scene-script:hero`: `.hero__aperture` `data-8b-section` `.statement__dot`
+  - `scene-script:work`: `.work__stage` `.work__window` `.work__track` `.case`
+  - `scene-script:again`: `.again__stage` `.again__head` `.again__wheel` `.partner`
+  - `scene-script:studio`: `.studio__collage` `.shot`
+  - `scene-script:footer`: `.footer__aperture` `.footer__period`
 - `style="--len:N"` = characters in that display line, spaces included: `Hello` is 5, `Let's talk` is 10, `Bye` is 3.
 - Section headings (and Open roles) end in a violet dot (`<span class="m-dot">`), not a typed full stop: keep the span when you change one. Hello and Bye use a round photo instead; case, partner, service, step and story titles have no dot.
 - "Hello" in the hero is sized by its `style="--len:N"` on phones only (wide screens use a fixed size), and "Let's talk" in contact by its own --len; "Bye" in the footer has a fixed size whatever its --len says. Keep Hello and Bye to one short word.
@@ -40,8 +35,8 @@ Upload `index.html`, LICENSE and CREDITS.md; not this file, README.md or `previe
 - `data-8b-placeholder` (og-image, favicon, email, phone, form, social): real value in, attribute out; no value, remove the row (no image: drop `og:image`, set `twitter:card` to `summary`).
 - Instagram, LinkedIn and Vimeo links in the footer: now the networks' home pages; owner's target: your studio's profiles, or remove them.
 - Case cards in work and stories in journal: now nothing (they are not links); owner's target: your case-study and article pages, by wrapping each card or story in a link.
-- The form in `#contact` (fields `name`, `email`, `company`, `topic`, `message`) sends nothing; `section-script:contact` validates it and shows the thank-you text. Formspree: `action="https://formspree.io/f/<id>"` and `fetch` POST `new FormData(form)` first. Netlify: `data-netlify="true"` and a hidden `form-name`. Or delete it and the script.
-- The form in `#footer` (fields `email`) sends nothing; `section-script:footer` validates it and shows the thank-you text. Formspree: `action="https://formspree.io/f/<id>"` and `fetch` POST `new FormData(form)` first. Netlify: `data-netlify="true"` and a hidden `form-name`. Or delete it and the script.
+- The form in `#contact` (fields `name`, `email`, `company`, `topic`, `message`) sends nothing; `section-script:contact` handles its submit in the page (read it before you connect a service). Formspree: `action="https://formspree.io/f/<id>"` and `fetch` POST `new FormData(form)` first. Netlify: `data-netlify="true"` and a hidden `form-name`. Or delete it and the script.
+- The form in `#footer` (fields `email`) sends nothing; `section-script:footer` handles its submit in the page (read it before you connect a service). Formspree: `action="https://formspree.io/f/<id>"` and `fetch` POST `new FormData(form)` first. Netlify: `data-netlify="true"` and a hidden `form-name`. Or delete it and the script.
 - The name Onda (any letter case); the favicon letter and colours in `<link rel="icon">`.
 - Photos (26, Unsplash: hero 1, footer 1, work 5, again 6, capabilities 5, studio 5, journal 4): `src`, no `srcset`/`sizes`, `width`/`height` to the ratio, `alt`, CREDITS.md.
 - `<title>`, meta description, og tags.
@@ -60,7 +55,9 @@ All demo text, never to be invented:
 ## Known limits
 - The contact form and the newsletter field send nothing; they check the fields in the browser and show a status text.
 - Without JavaScript the phone menu button cannot open the overlay; the footer still links Work, Services, Approach, Studio and Journal.
-- During the hero → statement handoff the travelling round photo briefly crosses the statement lines before it lands; on phones, during the work → again handoff, the rising wheel briefly overlaps the right side of the again lead. Both clear before the transition ends.
+- In a browser without CSS scroll-driven animations (Firefox today) and with reduced motion, the page shows its finished layout: case cards and long-term clients in grids, services as a plain list, the journal frame showing only the first story's photo. Hello still rises on load and the round photos turn, except with reduced motion.
+- Some scroll rules count items with CSS `:nth-of-type`: the two statement lines, the five service cards (each of the first four shrinks under the next) and the four journal stories with their four frame photos. When you add or remove one of these, extend or trim the matching rules in `scene:capabilities` or `scene:journal`.
+- During the hero to statement handoff the travelling round photo briefly crosses the statement lines before it lands; on phones, during the work to again handoff, the rising wheel briefly overlaps the right side of the again lead. Both clear before the transition ends.
 
 ## Check
-375 and 1440 px, reduced motion on, console clean; `data-8b-placeholder` and Onda left only in class names.
+375 and 1440 px, reduced motion on, a browser without scroll-driven animations (Firefox: the finished static layout), console clean; `data-8b-placeholder` and Onda left only in class names.
