@@ -1,25 +1,31 @@
 # AGENTS.md: design studio website template
 
-One-page website for a design, brand or digital agency. An Astro site (`npm run dev`, `npm run build` to `dist/`), no JavaScript libraries in the page: the scroll motion is CSS scroll-driven animations plus a small motion kit (`src/scripts/motion-kit.js`).
+One-page website for a design, brand or digital agency. An Astro site (`npm run dev`, `npm run build` to `dist/`), the scroll motion is GSAP with ScrollTrigger and Lenis smooth scrolling, installed from npm and bundled (`src/scripts/motion.js`).
 
 ## Files
-- `src/components/<Section>.astro`: one per section, in page order in `src/pages/index.astro`. Repeated items (cases, partners, services, steps, shots, roles, stories, questions) are arrays in the component's frontmatter: edit the array, not the markup. Each holds its `section:<id>` styles (`<style is:global>`), its `scene:<id>` styles (`<style is:inline data-8b-part="scene:<id>">`, which the kit switches off if the scene script fails) and its scripts.
+- `src/components/<Section>.astro`: one per section, in page order in `src/pages/index.astro`. Repeated items (cases, partners, services, steps, shots, roles, stories, questions) are arrays in the component's frontmatter: edit the array, not the markup. Each holds its styles (`<style is:global>`: `@layer sections`, plus an `@layer scenes` block for the scroll layout its scene switches on with a class such as `is-track`) and its scripts, where `scene('<id>', setup)` builds its GSAP timelines.
 - `src/site.ts`: emails, offices, phones and nav links used by several sections.
-- `src/layouts/Layout.astro`: `<head>`, meta tags and the `motion-gate` script; `src/styles/global.css`: fonts, `tokens`, `base`, `system` and `motion`.
+- `src/layouts/Layout.astro`: `<head>` and meta tags; `src/styles/global.css`: fonts, `tokens`, `base` and `system`; `src/scripts/motion.js`: GSAP, ScrollTrigger and Lenis setup, `scene()`, and the `data-8b-motion` effects.
 Deploy `dist/` with LICENSE and CREDITS.md; GitHub Pages builds it with `.github/workflows/deploy.yml` (set `site` and `base` in `astro.config.mjs`).
 
 ## Keep
-- Every `id`, `data-8b-section`, `data-8b-motion` and `data-8b-part` (`section:<id>` styles, `scene:<id>` animation).
-- The motion parts `motion-gate` (head, `is:inline`: sets `data-8b-live` on `<html>` only with scroll-driven animation support and no reduced motion), `src/scripts/motion-kit.js` and `motion`, and every other `data-8b-*` attribute (`data-8b-items` groups, `data-8b-off`, `data-8b-enter`): the CSS and the kit read them. Items ordered by `--i` follow their group; counts the CSS fixes are listed under Known limits (`data-8b-fixed` marks such a group).
+- Every `id`, `data-8b-section` (the hand-off scenes check section order with `adjacent()`) and `data-8b-motion` (`rise` headings, `ink` paragraphs, `iris` images).
+- `scene()` runs each setup only without reduced motion and reverts a setup that throws, so that section keeps its static layout. Return a cleanup function from any setup that adds classes or inline styles.
+- `data-lenis-prevent` on the phone menu, so the overlay scrolls on its own while Lenis is stopped.
 - Selectors the component scripts use:
   - `Navigation.astro`: `.nav__menu` `.menu` `.menu__close`
+  - `Statement.astro`: `.statement__line` `.statement__dot` `.statement__index`
   - `Contact.astro`: `.contact__form` `.contact__status` `data-success` `data-error`
   - `Footer.astro`: `.footer__news` `.footer__note` `data-success` `data-error`
-  - `Hero.astro`: `.hero__aperture` `data-8b-section` `.statement__dot`
-  - `Work.astro`: `.work__stage` `.work__window` `.work__track` `.case`
-  - `Again.astro`: `.again__stage` `.again__head` `.again__wheel` `.partner`
+  - `Hero.astro`: `.hero__aperture` `.hero__tint` `.hero__orbit` `.hero__word` `.hero__intro` `.statement__dot`
+  - `Work.astro`: `.work__plate` `.work__stage` `.work__window` `.work__track` `.case` `.case__img`
+  - `Again.astro`: `.again__stage` `.again__head` `.again__swing` `.again__wheel` `.partner`
+  - `Capabilities.astro`: `.service` `.service__shade`
+  - `Method.astro`: `.method__steps` `.method__arc` `.method__arm` `.step` `.method__station`
   - `Studio.astro`: `.studio__collage` `.shot`
-  - `Footer.astro`: `.footer__aperture` `.footer__period`
+  - `Journal.astro`: `.story` `.journal__shot`
+  - `Contact.astro`: `.contact__voice` `.contact__title .m-dot`
+  - `Footer.astro`: `.footer__aperture` `.footer__period` `.footer__bye` `.footer__tint` `.footer__word`
 - `style="--len:N"` = characters in that display line, spaces included: `Hello` is 5, `Let's talk` is 10, `Bye` is 3.
 - Section headings (and Open roles) end in a violet dot (`<span class="m-dot">`), not a typed full stop: keep the span when you change one. Hello and Bye use a round photo instead; case, partner, service, step and story titles have no dot.
 - "Hello" in the hero is sized by its `style="--len:N"` on phones only (wide screens use a fixed size), and "Let's talk" in contact by its own --len; "Bye" in the footer has a fixed size whatever its --len says. Keep Hello and Bye to one short word.
@@ -51,9 +57,9 @@ All demo text, never to be invented:
 ## Known limits
 - The contact form and the newsletter field send nothing; they check the fields in the browser and show a status text.
 - Without JavaScript the phone menu button cannot open the overlay; the footer still links Work, Services, Approach, Studio and Journal.
-- In a browser without CSS scroll-driven animations (Firefox today) and with reduced motion, the page shows its finished layout: case cards and long-term clients in grids, services as a plain list, the journal frame showing only the first story's photo. Hello still rises on load and the round photos turn, except with reduced motion.
-- Some scroll rules count items with CSS `:nth-of-type`: the two statement lines, the five service cards (each of the first four shrinks under the next) and the four journal stories with their four frame photos (one `stories` array feeds both). When you add or remove one of these, extend or trim the matching rules in `scene:capabilities` or `scene:journal`.
+- With reduced motion, or if a scene fails, the page shows its finished layout: case cards and long-term clients in grids, services as a plain list, the journal frame showing only the first story's photo. Hello rises on load and the round photos turn in CSS, except with reduced motion.
+- The scenes read item counts from the page, but the layout fixes some: the ring has four stations for four process steps, the desktop collage places five photos with `:nth-child`, and the journal frame needs one photo per story (one `stories` array feeds both).
 - During the hero to statement handoff the travelling round photo briefly crosses the statement lines before it lands; on phones, during the work to again handoff, the rising wheel briefly overlaps the right side of the again lead. Both clear before the transition ends.
 
 ## Check
-`npm run build` passes; 375 and 1440 px, reduced motion on, a browser without scroll-driven animations (Firefox: the finished static layout), console clean; `data-8b-placeholder` and Onda left only in class names.
+`npm run build` passes; 375 and 1440 px in Chrome, Safari and Firefox, reduced motion on (the finished static layout), console clean; `data-8b-placeholder` and Onda left only in class names.

@@ -8,33 +8,6 @@ const cases = [
 ];
 ---
 <!-- work: case studies: five large cards on a horizontal track (demo: five client launches) (animation: scene:work) -->
-<style is:inline data-8b-part="scene:work">
-@layer scenes {
-@media (prefers-reduced-motion: no-preference) {
-  [data-8b-live] #work { height: calc(100svh + var(--run, 0px)); }
-  [data-8b-live] #work .work__stage { position: sticky; top: 0; height: 100svh; min-height: 560px; padding-top: clamp(84px, 13svh, 120px); padding-bottom: clamp(24px, 5svh, 48px); grid-template-rows: auto minmax(0, 1fr); overflow: clip; }
-  [data-8b-live] #work .work__window { display: flex; align-items: center; min-height: 0; transform-origin: 0 50%; }
-  [data-8b-live] #work .work__track { display: flex; gap: clamp(14px, 1.6vw, 24px); width: max-content; height: min(100%, 64svh); }
-  [data-8b-live] #work .case { width: auto; height: 100%; aspect-ratio: 4 / 5; flex: none; }
-  @media (min-width: 700px) { [data-8b-live] #work .case { aspect-ratio: 16 / 10.5; } }
-}
-}
-@layer scenes {
-[data-8b-live] #work { view-timeline: --work-t1 block; view-timeline-inset: 0; }
-[data-8b-live] #work .work__plate, [data-8b-live] #work .work__track, [data-8b-live] #work .case__img, [data-8b-live] #work .work__window, [data-8b-live] #work .case { animation-timeline: --work-t1; animation-fill-mode: both; }
-[data-8b-live] #work .work__plate { animation-name: work-plate-grow; animation-range: cover 0% cover 85vh; animation-timing-function: cubic-bezier(0.3333, 0.6667, 0.6667, 1); }
-[data-8b-live] #work .work__track { animation-name: work-track-slide; animation-range: cover 100vh cover calc(100% - 100vh); animation-timing-function: linear; transform: none; }
-[data-8b-live] #work .case__img { animation-name: work-img-drift; animation-range: cover 100vh cover calc(100% - 100vh); animation-timing-function: linear; transform: none; }
-[data-8b-live] #work .work__window, [data-8b-live] #work .case { animation-range: cover calc(100% - 100vh) cover calc(100% - 30vh); animation-timing-function: cubic-bezier(0.3333, 0, 0.6667, 0.3333); transform: none; }
-[data-8b-live] #work .work__window { animation-name: work-window-sweep; }
-[data-8b-live] #work .case { animation-name: work-case-bend; }
-@keyframes work-plate-grow { 0% { clip-path: inset(0% 3.2% round 44px); } 100% { clip-path: inset(0%); } }
-@keyframes work-track-slide { 0% { translate: 0px 0px; } 100% { translate: calc(-1 * var(--work-run, 0px)) 0px; } }
-@keyframes work-img-drift { 0% { translate: -5% 0px; } 100% { translate: 5% 0px; } }
-@keyframes work-window-sweep { 0% { translate: 0px 0px; } 100% { translate: -20vw 0px; } }
-@keyframes work-case-bend { 0% { translate: 0px 0px; rotate: 0deg; } 100% { translate: var(--work-x, 0px) var(--work-y, 0px); rotate: var(--work-r, 0deg); } }
-}
-</style>
 <section id="work" data-8b-section="work" aria-labelledby="work-title">
   <div class="work__plate" aria-hidden="true"></div>
   <div class="work__stage">
@@ -43,7 +16,7 @@ const cases = [
       <p class="m-text-5 work__lead">Five launches from the last two years. Every one of them is still growing.</p>
     </div>
     <div class="work__window">
-      <ul class="work__track" data-8b-items=":scope > .case" data-8b-fixed="5">
+      <ul class="work__track">
         {cases.map(item => (
           <li class="case">
             <div class="case__media"><img class="case__img" src={item.src} width="1600" height="1000" alt={item.alt} loading="lazy"></div>
@@ -77,31 +50,47 @@ const cases = [
   #work .case:last-child:nth-child(odd) { grid-column: span 2; aspect-ratio: 16 / 6.5; }
 }
 }
+@layer scenes {
+@media (prefers-reduced-motion: no-preference) {
+  #work.is-track { height: calc(100svh + var(--run, 0px)); }
+  #work.is-track .work__stage { position: sticky; top: 0; height: 100svh; min-height: 560px; padding-top: clamp(84px, 13svh, 120px); padding-bottom: clamp(24px, 5svh, 48px); grid-template-rows: auto minmax(0, 1fr); overflow: clip; }
+  #work.is-track .work__window { display: flex; align-items: center; min-height: 0; transform-origin: 0 50%; }
+  #work.is-track .work__track { display: flex; gap: clamp(14px, 1.6vw, 24px); width: max-content; height: min(100%, 64svh); }
+  #work.is-track .case { width: auto; height: 100%; aspect-ratio: 4 / 5; flex: none; }
+  @media (min-width: 700px) { #work.is-track .case { aspect-ratio: 16 / 10.5; } }
+}
+}
 </style>
 
 <script>
-import { box, measure, scene, set } from '../scripts/motion-kit.js';
+import { adjacent, box, gsap, scene, ScrollTrigger } from '../scripts/motion.js';
 
-// Holds the stage while the track slides by --work-run, then bends the cards onto a curve.
+// Holds the stage while the track slides by --run, then bends the cards onto a curve into Again.
 scene('work', () => {
   const work = document.getElementById('work')!;
   const stage = work.querySelector('.work__stage')!;
   const frame = work.querySelector<HTMLElement>('.work__window')!;
   const track = work.querySelector<HTMLElement>('.work__track')!;
-  measure(() => {
-    const run = Math.max(0, track.offsetWidth - (work.clientWidth - 2 * parseFloat(getComputedStyle(stage).paddingLeft)));
-    set(work, { '--run': `${Math.round(run)}px`, '--work-run': `${run.toFixed(2)}px` });
-    const radius = innerWidth < 700 ? innerWidth * 2.1 : innerWidth * 0.95;
-    const origin = box(frame).x;
-    track.querySelectorAll<HTMLElement>('.case').forEach(card => {
-      const offset = origin + card.offsetLeft + card.offsetWidth / 2 - run - innerWidth / 2;
-      const angle = offset / radius;
-      set(card, {
-        '--work-x': `${(radius * Math.sin(angle) - offset).toFixed(2)}px`,
-        '--work-y': `${(radius * (1 - Math.cos(angle))).toFixed(2)}px`,
-        '--work-r': `${(angle * 180 / Math.PI).toFixed(3)}deg`
-      });
-    });
-  });
+  work.classList.add('is-track');
+  const run = () => Math.max(0, track.offsetWidth - (work.clientWidth - 2 * parseFloat(getComputedStyle(stage).paddingLeft)));
+  const setRun = () => work.style.setProperty('--run', `${Math.round(run())}px`);
+  setRun();
+  ScrollTrigger.addEventListener('refreshInit', setRun);
+  gsap.fromTo(work.querySelector('.work__plate'), { clipPath: 'inset(0% 3.2% 0% 3.2% round 44px)' }, { clipPath: 'inset(0% 0% 0% 0% round 0px)', ease: 'power1.out', scrollTrigger: { trigger: work, start: 'top bottom', end: 'top 15%', scrub: true } });
+  const slide = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: work, start: 'top top', end: 'bottom bottom', scrub: true, invalidateOnRefresh: true } });
+  slide.to(track, { x: () => -run() }, 0);
+  work.querySelectorAll('.case__img').forEach(image => slide.fromTo(image, { xPercent: -5 }, { xPercent: 5 }, 0));
+  if (adjacent('work', 'again')) {
+    const radius = () => (innerWidth < 700 ? innerWidth * 2.1 : innerWidth * 0.95);
+    const bend = (card: HTMLElement) => {
+      const offset = box(frame).x + card.offsetLeft + card.offsetWidth / 2 - run() - innerWidth / 2;
+      const angle = offset / radius();
+      return { x: radius() * Math.sin(angle) - offset, y: radius() * (1 - Math.cos(angle)), rotation: angle * 180 / Math.PI };
+    };
+    const exit = gsap.timeline({ defaults: { ease: 'power1.in', duration: 1 }, scrollTrigger: { trigger: work, start: 'bottom bottom', end: 'bottom 30%', scrub: true, invalidateOnRefresh: true } });
+    exit.to(frame, { x: () => -innerWidth * 0.2 }, 0);
+    track.querySelectorAll<HTMLElement>('.case').forEach(card => exit.to(card, { x: () => bend(card).x, y: () => bend(card).y, rotation: () => bend(card).rotation }, 0));
+  }
+  return () => { work.classList.remove('is-track'); work.style.removeProperty('--run'); ScrollTrigger.removeEventListener('refreshInit', setRun); };
 });
 </script>

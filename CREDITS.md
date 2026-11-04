@@ -42,4 +42,9 @@ Loaded from images.unsplash.com. Free to use under the [Unsplash License](https:
 
 ## Libraries
 
-None in the page. The site is built with Astro (MIT): https://astro.build
+Installed from npm and bundled into the page:
+
+- GSAP 3 with ScrollTrigger, GreenSock, standard "no charge" license: https://gsap.com/standard-license
+- Lenis 1, darkroom.engineering, MIT: https://github.com/darkroomengineering/lenis
+
+The site is built with Astro (MIT): https://astro.build

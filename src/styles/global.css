@@ -158,22 +158,3 @@ main { overflow-x: clip; }
 .m-field:focus-visible { outline: none; border-bottom-color: var(--color-3); box-shadow: var(--shadow-2); }
 textarea.m-field { min-height: 112px; resize: vertical; }
 }
-@layer scenes {
-[data-8b-live] [data-8b-motion~="rise"] { animation-name: motion-rise; animation-duration: 0.95s; animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); animation-fill-mode: both; animation-play-state: paused; }
-[data-8b-live] [data-8b-motion~="rise"] .m-dot { animation-name: motion-rise-dot; animation-duration: 0.75s; animation-delay: 0.42s; animation-timing-function: linear(0, 0.1254, 0.2419, 0.3497, 0.4492, 0.5406, 0.6243, 0.7005, 0.7696, 0.8318, 0.8875, 0.9369, 0.9804, 1.0182, 1.0507, 1.0781, 1.1008, 1.119, 1.1331, 1.1433, 1.15, 1.1534, 1.1539, 1.1517, 1.1472, 1.1406, 1.1323, 1.1225, 1.1116, 1.0998, 1.0875, 1.0749, 1.0624, 1.0502, 1.0387, 1.0281, 1.0188, 1.011, 1.0051, 1.0013, 1); animation-fill-mode: both; animation-play-state: paused; }
-[data-8b-live] [data-8b-motion~="rise"].is-in, [data-8b-live] [data-8b-motion~="rise"].is-in .m-dot { animation-play-state: running; }
-@keyframes motion-rise { 0% { translate: 0 38%; clip-path: inset(0% -6% 100% -6%); } 99.998% { clip-path: inset(-30% -6% -30% -6%); } 100% { translate: 0 0; clip-path: none; } }
-@keyframes motion-rise-dot { 0% { scale: 0; translate: 0 -260%; } 100% { scale: 1; translate: 0 0; } }
-[data-8b-live] [data-8b-motion~="ink"] { view-timeline: --motion-ink block; }
-[data-8b-live] [data-8b-motion~="ink"] .w { --motion-ink-total: calc(0.3 + 0.06 * (var(--n) - 1)); animation-name: motion-ink; animation-timeline: --motion-ink; animation-range: cover calc(12vh + 0.06 * var(--i) / var(--motion-ink-total) * (100% - 80vh)) cover calc(12vh + (0.06 * var(--i) + 0.3) / var(--motion-ink-total) * (100% - 80vh)); animation-timing-function: linear; animation-fill-mode: both; }
-@keyframes motion-ink { 0% { opacity: 0.16; } 100% { opacity: 1; } }
-[data-8b-live] [data-8b-motion~="arrive"] [data-8b-items] > * { animation-name: motion-arrive; animation-duration: 0.8s; animation-delay: calc(var(--i, 0) * 0.07s); animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); animation-fill-mode: both; animation-play-state: paused; }
-[data-8b-live] [data-8b-motion~="arrive"].is-in [data-8b-items] > * { animation-play-state: running; }
-@keyframes motion-arrive { 0% { translate: 0 70%; opacity: 0; } 100% { translate: 0 0; opacity: 1; } }
-[data-8b-live] [data-8b-motion~="iris"] { animation-name: motion-iris-clippath; animation-duration: 1.15s; animation-delay: 0s; animation-timing-function: cubic-bezier(0.87, 0, 0.13, 1); animation-fill-mode: both; animation-play-state: paused; }
-[data-8b-live] [data-8b-motion~="iris"].is-in { animation-play-state: running; }
-[data-8b-live] [data-8b-motion~="iris"] img { animation-name: motion-iris-img-scale; animation-duration: 1.5s; animation-delay: 0.15s; animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); animation-fill-mode: both; animation-play-state: paused; transform: none; }
-[data-8b-live] [data-8b-motion~="iris"].is-in img { animation-play-state: running; }
-@keyframes motion-iris-clippath { 0% { clip-path: circle(0% at 50% 50%); } 99.998% { clip-path: circle(75% at 50% 50%); } 100% { clip-path: none; } }
-@keyframes motion-iris-img-scale { 0% { scale: 1.2; } 100% { scale: 1; } }
-}

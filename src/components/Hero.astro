@@ -2,26 +2,6 @@
 import ArrowLink from './ArrowLink.astro';
 ---
 <!-- hero: first screen: a one-word greeting whose full stop is a giant round photo (demo: "Hello") (animation: scene:hero) -->
-<style is:inline data-8b-part="scene:hero">
-@layer scenes {
-[data-8b-live] { --ease-power1-inout: linear(0, 0.0013, 0.005, 0.0112, 0.02, 0.0313, 0.045, 0.0612, 0.08, 0.1013, 0.125, 0.1512, 0.18, 0.2112, 0.245, 0.2813, 0.32, 0.3613, 0.405, 0.4512, 0.5, 0.5487, 0.595, 0.6388, 0.68, 0.7188, 0.755, 0.7887, 0.82, 0.8488, 0.875, 0.8988, 0.92, 0.9387, 0.955, 0.9688, 0.98, 0.9888, 0.995, 0.9988, 1); --ease-power3-in: linear(0, 0, 0, 0, 0.0001, 0.0002, 0.0005, 0.0009, 0.0016, 0.0026, 0.0039, 0.0057, 0.0081, 0.0112, 0.015, 0.0198, 0.0256, 0.0326, 0.041, 0.0509, 0.0625, 0.076, 0.0915, 0.1093, 0.1296, 0.1526, 0.1785, 0.2076, 0.2401, 0.2763, 0.3164, 0.3608, 0.4096, 0.4632, 0.522, 0.5862, 0.6561, 0.7321, 0.8145, 0.9037, 1); }
-[data-8b-live] #hero { view-timeline: --hero-t1 block; view-timeline-inset: 0; }
-[data-8b-live] #hero .hero__aperture, [data-8b-live] #hero .hero__word, [data-8b-live] #hero .hero__tint { animation-timeline: --hero-t1; animation-fill-mode: both; }
-[data-8b-live] #hero .hero__aperture { animation-name: hero-aperture-move, hero-aperture-shrink; animation-range: cover calc(100% - 100vh) cover calc(100% - 30vh); animation-timing-function: var(--ease-power1-inout), var(--ease-power3-in); transform: none; }
-[data-8b-live] #hero .hero__orbit { animation-name: hero-orbit, hero-orbit-fade; animation-duration: 13s, auto; animation-iteration-count: infinite, 1; animation-timing-function: linear, linear; animation-timeline: auto, --hero-t1; animation-range: normal, cover calc(100% - 100vh) cover calc(100% - 79vh); animation-fill-mode: none, both; }
-[data-8b-live] #hero .hero__intro { animation-name: hero-lift, hero-intro-exit; animation-duration: 0.9s, auto; animation-delay: 0.12s, 0s; animation-timing-function: cubic-bezier(.16, .84, .24, 1), cubic-bezier(0.3333, 0, 0.6667, 0.3333); animation-timeline: auto, --hero-t1; animation-range: normal, cover calc(100% - 100vh) cover calc(100% - 30vh); animation-fill-mode: backwards, both; }
-[data-8b-live] #hero .hero__tint { animation-name: hero-tint-flood; animation-range: cover calc(100% - 72vh) cover calc(100% - 30vh); animation-timing-function: cubic-bezier(0.3333, 0, 0.6667, 0); }
-@keyframes hero-aperture-move { 0% { translate: 0px 0px; } 100% { translate: var(--hero-dx, 0px) var(--hero-dy, 0px); } }
-@keyframes hero-aperture-shrink { 0% { scale: 1; } 100% { scale: var(--hero-s, 1); } }
-@keyframes hero-orbit-fade { 0% { opacity: 1; } 100% { opacity: 0; } }
-@keyframes hero-word-aside { 0% { translate: 0px 0px; } 100% { translate: -14% 0px; } }
-@keyframes hero-intro-exit { 0% { translate: 0px 0px; } 100% { translate: 0px -70px; } }
-@keyframes hero-tint-flood { 0% { opacity: 0; } 100% { opacity: 1; } }
-@media (min-width: 900px) and (orientation: landscape) {
-  [data-8b-live] #hero .hero__word { animation-name: hero-word-aside; animation-range: cover calc(100% - 100vh) cover calc(100% - 30vh); animation-timing-function: cubic-bezier(0.3333, 0, 0.6667, 0.3333); transform: none; }
-}
-}
-</style>
 <section id="hero" data-8b-section="hero" aria-labelledby="hero-title">
   <div class="hero__intro">
     <p class="m-text-5 hero__lead">We're Onda, an independent brand, product and AI studio. We make things people come back to, and we'd love to hear what you're making.</p>
@@ -71,26 +51,26 @@ import ArrowLink from './ArrowLink.astro';
 </style>
 
 <script>
-import { box, measure, scene, set, watchOffscreen } from '../scripts/motion-kit.js';
+import { adjacent, box, gsap, scene, watchOffscreen } from '../scripts/motion.js';
 
 const hero = document.getElementById('hero')!;
 watchOffscreen(hero);
 
 // The round photo travels into the statement heading's dot.
 scene('hero', () => {
-  const aperture = hero.querySelector('.hero__aperture');
-  const sections = () => [...document.querySelectorAll('[data-8b-section]')].filter(section => section.getAttribute('data-8b-section') !== 'navigation');
-  measure(() => {
-    const order = sections();
-    const next = order[order.indexOf(hero) + 1];
-    const target = next && next.id === 'statement' ? next.querySelector('.statement__dot') : null;
-    if (!target) { set(hero, { '--hero-dx': '0px', '--hero-dy': '0px', '--hero-s': '1' }); return; }
+  if (!adjacent('hero', 'statement')) return;
+  const aperture = hero.querySelector('.hero__aperture')!;
+  const target = document.querySelector('#statement .statement__dot')!;
+  const geometry = () => {
     const from = box(aperture), to = box(target);
-    set(hero, {
-      '--hero-dx': `${(to.x + to.w / 2 - from.x - from.w / 2).toFixed(2)}px`,
-      '--hero-dy': `${(to.y + to.h / 2 - from.y - from.h / 2).toFixed(2)}px`,
-      '--hero-s': (to.w / from.w).toFixed(4)
-    });
-  });
+    return { x: to.cx - from.cx, y: to.cy - from.cy, scale: to.w / from.w };
+  };
+  gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: hero, start: 'bottom bottom', end: 'bottom 30%', scrub: true, invalidateOnRefresh: true } })
+    .to(aperture, { x: () => geometry().x, y: () => geometry().y, ease: 'power1.inOut', duration: 1 }, 0)
+    .to(aperture, { scale: () => geometry().scale, ease: 'power3.in', duration: 1 }, 0)
+    .to(hero.querySelector('.hero__tint'), { opacity: 1, ease: 'power2.in', duration: 0.6 }, 0.4)
+    .to(hero.querySelector('.hero__orbit'), { opacity: 0, duration: 0.3 }, 0)
+    .to(hero.querySelector('.hero__word'), { xPercent: () => (matchMedia('(min-width: 900px) and (orientation: landscape)').matches ? -14 : 0), ease: 'power1.in', duration: 1 }, 0)
+    .to(hero.querySelector('.hero__intro'), { y: -70, ease: 'power1.in', duration: 1 }, 0);
 });
 </script>

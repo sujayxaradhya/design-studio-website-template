@@ -10,7 +10,7 @@ const faqs = [
 <!-- faq: questions and answers (native <details>) -->
 <section id="faq" data-8b-section="faq" aria-labelledby="faq-title">
   <h2 class="m-text-3 faq__title" id="faq-title" data-8b-motion="rise">Fair questions<span class="m-dot" aria-hidden="true"></span></h2>
-  <div class="faq__list" data-8b-items=":scope > details">
+  <div class="faq__list">
     {faqs.map(faq => <details class="faq__item"><summary class="m-text-7">{faq.q}<span class="faq__mark" aria-hidden="true"></span></summary><p class="m-text faq__answer">{faq.a}</p></details>)}
   </div>
 </section>
