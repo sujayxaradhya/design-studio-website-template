@@ -9,63 +9,20 @@ const services = [
 ];
 ---
 <!-- capabilities: services: five cards that stack as you scroll, each with deliverable badges and a photo (animation: scene:capabilities) -->
-<style is:inline data-8b-part="scene:capabilities">
-@layer scenes {
-@media (prefers-reduced-motion: no-preference) {
-  [data-8b-live] #capabilities .service { position: sticky; top: calc(clamp(80px, 12svh, 108px) + var(--i) * 14px); transform-origin: 50% 0; }
-}
-}
-@layer scenes {
-[data-8b-live] #capabilities .capabilities__deck > .service { --i: calc(0 + var(--i) * 1); }
-[data-8b-live] #capabilities { timeline-scope: --capabilities-t1, --capabilities-t2, --capabilities-t3, --capabilities-t4; }
-[data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(-n+4) { animation-name: capabilities-li-service-scale; transform: none; }
-[data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(-n+4), [data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(-n+4) > .service__shade { animation-timing-function: linear; animation-fill-mode: both; }
-[data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(2) { view-timeline: --capabilities-t1 block; view-timeline-inset: 0; animation-timeline: --capabilities-t2; }
-[data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(3) { view-timeline: --capabilities-t2 block; view-timeline-inset: 0; animation-timeline: --capabilities-t3; }
-[data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(4) { view-timeline: --capabilities-t3 block; view-timeline-inset: 0; animation-timeline: --capabilities-t4; }
-[data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(5) { view-timeline: --capabilities-t4 block; view-timeline-inset: 0; }
-[data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(1) { animation-timeline: --capabilities-t1; }
-[data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(-n+4) > .service__shade { animation-name: capabilities-span-service-shade-opacity; }
-[data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(1) > .service__shade { animation-timeline: --capabilities-t1; }
-[data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(2) > .service__shade { animation-timeline: --capabilities-t2; }
-[data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(3) > .service__shade { animation-timeline: --capabilities-t3; }
-[data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(4) > .service__shade { animation-timeline: --capabilities-t4; }
-@keyframes capabilities-li-service-scale { 0% { scale: 1; } 100% { scale: 0.9; } }
-@keyframes capabilities-span-service-shade-opacity { 0% { opacity: 0; } 100% { opacity: 0.55; } }
-@media (min-width: 900px) {
-  [data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(2) { animation-range: cover 0% cover calc(100vh - 124px); }
-  [data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(3) { animation-range: cover 0% cover calc(100vh - 138px); }
-  [data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(4) { animation-range: cover 0% cover calc(100vh - 152px); }
-  [data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(1), [data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(1) > .service__shade { animation-range: cover 0% cover calc(100vh - 110px); }
-  [data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(2) > .service__shade { animation-range: cover 0% cover calc(100vh - 124px); }
-  [data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(3) > .service__shade { animation-range: cover 0% cover calc(100vh - 138px); }
-  [data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(4) > .service__shade { animation-range: cover 0% cover calc(100vh - 152px); }
-}
-@media (max-width: 899px) {
-  [data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(2) { animation-range: cover 0% cover calc(100vh - 125.4px); }
-  [data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(3) { animation-range: cover 0% cover calc(100vh - 139.4px); }
-  [data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(4) { animation-range: cover 0% cover calc(100vh - 153.4px); }
-  [data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(1), [data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(1) > .service__shade { animation-range: cover 0% cover calc(100vh - 111.4px); }
-  [data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(2) > .service__shade { animation-range: cover 0% cover calc(100vh - 125.4px); }
-  [data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(3) > .service__shade { animation-range: cover 0% cover calc(100vh - 139.4px); }
-  [data-8b-live] #capabilities .capabilities__deck > li:nth-of-type(4) > .service__shade { animation-range: cover 0% cover calc(100vh - 153.4px); }
-}
-}
-</style>
 <section id="capabilities" data-8b-section="capabilities" aria-labelledby="capabilities-title">
   <div class="capabilities__head">
     <h2 class="m-text-3" id="capabilities-title" data-8b-motion="rise">What we do<span class="m-dot" aria-hidden="true"></span></h2>
     <p class="m-text-5 capabilities__lead">Five practices and one team in the room, from the first workshop to the last release.</p>
   </div>
-  <ol class="capabilities__deck" data-8b-items=":scope > .service" data-8b-fixed="5">
+  <ol class="capabilities__deck">
     {services.map(service => (
       <li class="service m-surface">
         <div class="service__text">
           <h3 class="m-text-4">{service.title}</h3>
           <p class="m-text-5 service__line">{service.line}</p>
-          <ul class="service__tags" data-8b-items=":scope > li">{service.tags.map(tag => <li class="m-badge">{tag}</li>)}</ul>
+          <ul class="service__tags">{service.tags.map(tag => <li class="m-badge">{tag}</li>)}</ul>
         </div>
-        <div class="service__media" data-8b-motion="iris" data-8b-enter="86%"><img src={service.src} width="1200" height="900" alt={service.alt} loading="lazy"></div>
+        <div class="service__media" data-8b-motion="iris"><img src={service.src} width="1200" height="900" alt={service.alt} loading="lazy"></div>
         <span class="service__shade" aria-hidden="true"></span>
       </li>
     ))}
@@ -90,4 +47,28 @@ const services = [
   #capabilities .service__media { aspect-ratio: auto; height: 100%; }
 }
 }
+@layer scenes {
+@media (prefers-reduced-motion: no-preference) {
+  #capabilities.is-deck .service { position: sticky; top: calc(clamp(80px, 12svh, 108px) + var(--i) * 14px); transform-origin: 50% 0; }
+}
+}
 </style>
+
+<script>
+import { gsap, scene } from '../scripts/motion.js';
+
+// The cards stack as you scroll; each one shrinks and dims as the next slides over it.
+scene('capabilities', () => {
+  const section = document.getElementById('capabilities')!;
+  const cards = [...section.querySelectorAll<HTMLElement>('.service')];
+  section.classList.add('is-deck');
+  cards.forEach((card, index) => card.style.setProperty('--i', String(index)));
+  cards.slice(0, -1).forEach((card, index) => {
+    const next = cards[index + 1];
+    gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: next, start: 'top bottom', end: () => `top ${parseFloat(getComputedStyle(next).top) || 0}px`, scrub: true, invalidateOnRefresh: true } })
+      .to(card, { scale: 0.9 }, 0)
+      .to(card.querySelector('.service__shade'), { opacity: 0.55 }, 0);
+  });
+  return () => { section.classList.remove('is-deck'); cards.forEach(card => card.style.removeProperty('--i')); };
+});
+</script>

@@ -9,18 +9,6 @@ const social = [
 const phone = offices[0].phone;
 ---
 <!-- footer: closing greeting "Bye" with the round photo full stop, link columns, newsletter, copyright and the Design: 8B credit (animation: scene:footer) -->
-<style is:inline data-8b-part="scene:footer">
-@layer scenes {
-[data-8b-live] { --ease-power2-inout: linear(0, 0.0001, 0.0005, 0.0017, 0.004, 0.0078, 0.0135, 0.0214, 0.032, 0.0456, 0.0625, 0.0832, 0.108, 0.1373, 0.1715, 0.2109, 0.256, 0.3071, 0.3645, 0.4287, 0.5, 0.5713, 0.6355, 0.6929, 0.744, 0.7891, 0.8285, 0.8627, 0.892, 0.9168, 0.9375, 0.9544, 0.968, 0.9786, 0.9865, 0.9922, 0.996, 0.9983, 0.9995, 0.9999, 1); }
-[data-8b-live] #footer .m-text-2 { view-timeline: --footer-t1 block; view-timeline-inset: 0; }
-[data-8b-live] #footer .footer__aperture { animation-name: footer-aperture-swell; animation-timeline: --footer-t1; animation-range: cover calc(100% - 100vh) cover calc(100% - 55vh); animation-timing-function: var(--ease-power2-inout); animation-fill-mode: both; transform: none; }
-[data-8b-live] #footer .footer__word { animation-name: footer-word-rise; animation-timeline: --footer-t1; animation-range: cover calc(100% - 100vh) cover calc(100% - 64vh); animation-timing-function: cubic-bezier(0.3333, 1, 0.6667, 1); animation-fill-mode: both; transform: none; }
-[data-8b-live] #footer .footer__tint { animation-name: footer-tint-clear; animation-timeline: --footer-t1; animation-range: cover calc(100% - 79.75vh) cover calc(100% - 57.25vh); animation-timing-function: linear; animation-fill-mode: both; }
-@keyframes footer-aperture-swell { 0% { scale: var(--footer-dot, 1); } 100% { scale: 1; } }
-@keyframes footer-word-rise { 0% { translate: 0px 30%; } 100% { translate: 0px 0px; } }
-@keyframes footer-tint-clear { 0% { opacity: 1; } 100% { opacity: 0; } }
-}
-</style>
 <footer id="footer" data-8b-section="footer">
   <p class="m-text-2 footer__bye" style="--len:3"><span class="footer__word">Bye</span><span class="footer__period" aria-hidden="true"><span class="footer__aperture"><img class="footer__img" src="https://images.unsplash.com/photo-1754738381783-f9a2847bfef2?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8MXx8cHVycGxlJTIwYWJzdHJhY3QlMjAzZCUyMHNoYXBlfGVufDF8Mnx8fDE3OTEyMDk2Mjd8MA&ixlib=rb-4.1.0&auto=format&fit=crop&w=470&h=470&q=60" width="1200" height="1200" alt=""><span class="footer__tint"></span></span></span></p>
   <div class="footer__grid">
@@ -81,7 +69,7 @@ const phone = offices[0].phone;
 </style>
 
 <script>
-import { measure, scene, set, watchOffscreen } from '../scripts/motion-kit.js';
+import { gsap, scene, watchOffscreen } from '../scripts/motion.js';
 
 const footer = document.getElementById('footer')!;
 const form = footer.querySelector<HTMLFormElement>('.footer__news')!;
@@ -98,7 +86,10 @@ watchOffscreen(footer);
 // Bye's full stop grows from a dot into the round photo.
 scene('footer', () => {
   const aperture = footer.querySelector<HTMLElement>('.footer__aperture')!;
-  const period = footer.querySelector<HTMLElement>('.footer__period')!;
-  measure(() => set(footer, { '--footer-dot': (period.offsetWidth / aperture.offsetWidth).toFixed(4) }));
+  const dot = () => footer.querySelector<HTMLElement>('.footer__period')!.offsetWidth / aperture.offsetWidth;
+  gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: footer.querySelector('.footer__bye'), start: 'bottom bottom', end: 'bottom 55%', scrub: true, invalidateOnRefresh: true } })
+    .fromTo(aperture, { scale: dot }, { scale: 1, ease: 'power2.inOut', duration: 1 }, 0)
+    .fromTo(footer.querySelector('.footer__tint'), { opacity: 1 }, { opacity: 0, duration: 0.5 }, 0.45)
+    .fromTo(footer.querySelector('.footer__word'), { yPercent: 30 }, { yPercent: 0, ease: 'power2.out', duration: 0.8 }, 0);
 });
 </script>

@@ -18,26 +18,16 @@ const roles = [
 ];
 ---
 <!-- studio: team and careers: photo collage that deals out from a pile, with open roles (animation: scene:studio) -->
-<style is:inline data-8b-part="scene:studio">
-@layer scenes {
-[data-8b-live] #studio .studio__collage { view-timeline: --studio-t1 block; view-timeline-inset: 0; }
-[data-8b-live] #studio .shot { animation-name: studio-shot-deal; animation-timeline: --studio-t1; animation-range: cover calc(18vh + var(--studio-a, 0) * (50% - 23vh)) cover calc(18vh + var(--studio-b, 1) * (50% - 23vh)); animation-timing-function: cubic-bezier(0.3333, 1, 0.6667, 1); animation-fill-mode: both; transform: none; }
-@media (max-width: 899px) {
-  [data-8b-live] #studio .shot { animation-range: cover calc(18vh + var(--studio-a, 0) * 72vh) cover calc(18vh + var(--studio-b, 1) * 72vh); }
-}
-@keyframes studio-shot-deal { 0% { translate: var(--studio-x, 0px) var(--studio-y, 0px); rotate: var(--studio-tilt, 0deg); scale: 0.66; } 100% { translate: 0px 0px; rotate: 0deg; scale: 1; } }
-}
-</style>
 <section id="studio" data-8b-section="studio" aria-labelledby="studio-title">
   <div class="studio__head">
     <h2 class="m-text-3" id="studio-title">Inside the studio<span class="m-dot" aria-hidden="true"></span></h2>
-    <p class="m-text-5 studio__lead" data-8b-motion="ink" data-8b-split="words">Ninety people between Lisbon and Brooklyn: strategists, designers, engineers and writers who would rather show you than tell you. We work in small mixed teams, sit with the people we build for, and keep Friday afternoons for our own experiments.</p>
+    <p class="m-text-5 studio__lead" data-8b-motion="ink">Ninety people between Lisbon and Brooklyn: strategists, designers, engineers and writers who would rather show you than tell you. We work in small mixed teams, sit with the people we build for, and keep Friday afternoons for our own experiments.</p>
   </div>
   <div class="studio__collage">
     {shots.map(shot => <figure class={`shot shot--${shot.shape}`}><img src={shot.src} {...size[shot.shape]} alt={shot.alt} loading="lazy"></figure>)}
     <div class="studio__roles">
       <h3 class="m-text-7" data-8b-motion="rise">Open roles<span class="m-dot" aria-hidden="true"></span></h3>
-      <ul data-8b-items=":scope > li">
+      <ul>
         {roles.map(role => <li class="role"><span class="m-text-7">{role.title}</span><span class="m-text-6 role__place">{role.place}</span></li>)}
       </ul>
       <ArrowLink data-8b-placeholder="email" href={`mailto:${careers}`} label={careers} />
@@ -74,26 +64,16 @@ const roles = [
 </style>
 
 <script>
-import { measure, scene, set } from '../scripts/motion-kit.js';
+import { gsap, scene } from '../scripts/motion.js';
 
 // The photos start as a tilted pile in the centre and deal out to their places.
 scene('studio', () => {
   const collage = document.querySelector<HTMLElement>('#studio .studio__collage')!;
+  const shots = [...collage.querySelectorAll<HTMLElement>('.shot')];
   const tilt = [-8, 6, -4, 9, -6];
-  measure(() => {
-    const shots = [...collage.querySelectorAll<HTMLElement>('.shot')];
-    const total = 1 + (shots.length - 1) * 0.08;
-    const cx = collage.offsetWidth / 2, cy = Math.min(collage.offsetHeight / 2, innerHeight * 0.45);
-    shots.forEach((shot, index) => {
-      const a = (shots.length - 1 - index) * 0.08 / total;
-      set(shot, {
-        '--studio-x': `${(cx - shot.offsetLeft - shot.offsetWidth / 2).toFixed(2)}px`,
-        '--studio-y': `${(cy - shot.offsetTop - shot.offsetHeight / 2).toFixed(2)}px`,
-        '--studio-tilt': `${tilt[index % tilt.length]}deg`,
-        '--studio-a': a.toFixed(5),
-        '--studio-b': (a + 1 / total).toFixed(5)
-      });
-    });
-  });
+  const offsetX = (shot: HTMLElement) => collage.offsetWidth / 2 - shot.offsetLeft - shot.offsetWidth / 2;
+  const offsetY = (shot: HTMLElement) => Math.min(collage.offsetHeight / 2, innerHeight * 0.45) - shot.offsetTop - shot.offsetHeight / 2;
+  const timeline = gsap.timeline({ defaults: { ease: 'power2.out' }, scrollTrigger: { trigger: collage, start: 'top 82%', end: () => (innerWidth < 900 ? 'top 10%' : 'center 55%'), scrub: true, invalidateOnRefresh: true } });
+  shots.forEach((shot, index) => timeline.fromTo(shot, { x: () => offsetX(shot), y: () => offsetY(shot), rotation: tilt[index % tilt.length], scale: 0.66 }, { x: 0, y: 0, rotation: 0, scale: 1, duration: 1 }, (shots.length - 1 - index) * 0.08));
 });
 </script>

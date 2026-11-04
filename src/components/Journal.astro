@@ -9,39 +9,15 @@ const stories = [
 const longDate = (iso: string) => new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 ---
 <!-- journal: news and articles: four stories beside a sticky photo frame (animation: scene:journal) -->
-<style is:inline data-8b-part="scene:journal">
-@layer scenes {
-@media (prefers-reduced-motion: no-preference) {
-  [data-8b-live] #journal .journal__frame { position: sticky; z-index: 1; top: 80px; }
-  [data-8b-live] #journal .journal__shot:first-child { z-index: auto; }
-  @media (min-width: 900px) { [data-8b-live] #journal .journal__frame { top: calc(50svh - min(30svh, 22vw)); max-height: 60svh; } }
-}
-}
-@layer scenes {
-[data-8b-live] #journal { timeline-scope: --journal-t2, --journal-t3, --journal-t4; }
-[data-8b-live] #journal .journal__list > .story { view-timeline-inset: 0; animation-name: journal-li-story-opacity; animation-timeline: --journal-item; animation-range: cover 16vh cover 43.2vh; animation-timing-function: linear; animation-fill-mode: both; }
-[data-8b-live] #journal .journal__list > li:first-of-type { animation-range: cover 16vh cover 50vh; }
-[data-8b-live] #journal .journal__list > li:nth-of-type(1) { view-timeline: --journal-item block; }
-[data-8b-live] #journal .journal__list > li:nth-of-type(2) { view-timeline: --journal-item block, --journal-t2 block; }
-[data-8b-live] #journal .journal__list > li:nth-of-type(3) { view-timeline: --journal-item block, --journal-t3 block; }
-[data-8b-live] #journal .journal__list > li:nth-of-type(4) { view-timeline: --journal-item block, --journal-t4 block; }
-[data-8b-live] #journal .journal__frame > img:is(:nth-of-type(2), :nth-of-type(3), :nth-of-type(4)) { animation-name: journal-img-journal-shot-clippath; animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); }
-[data-8b-live] #journal .journal__frame > img:nth-of-type(2) { animation-timeline: --journal-t2; animation-range: cover 16vh cover 50vh; animation-fill-mode: both; }
-[data-8b-live] #journal .journal__frame > img:nth-of-type(3) { animation-timeline: --journal-t3; animation-range: cover 16vh cover 50vh; animation-fill-mode: both; }
-[data-8b-live] #journal .journal__frame > img:nth-of-type(4) { animation-timeline: --journal-t4; animation-range: cover 16vh cover 50vh; animation-fill-mode: both; }
-@keyframes journal-li-story-opacity { 0% { opacity: 0.25; } 100% { opacity: 1; } }
-@keyframes journal-img-journal-shot-clippath { 0% { clip-path: circle(0% at 50% 50%); } 100% { clip-path: circle(75% at 50% 50%); } }
-}
-</style>
 <section id="journal" data-8b-section="journal" aria-labelledby="journal-title">
   <div class="journal__head">
     <h2 class="m-text-3" id="journal-title" data-8b-motion="rise">Ideas and news<span class="m-dot" aria-hidden="true"></span></h2>
   </div>
   <div class="journal__body">
-    <div class="journal__frame" data-8b-items=":scope > img" data-8b-fixed="4">
+    <div class="journal__frame">
       {stories.map(story => <img class="journal__shot" src={story.src} width="1000" height="1250" alt={story.alt} loading="lazy">)}
     </div>
-    <ol class="journal__list" data-8b-items=":scope > .story" data-8b-fixed="4">
+    <ol class="journal__list">
       {stories.map(story => <li class="story"><p class="m-text-6 story__meta"><span>{story.kind}</span> · <time datetime={story.date}>{longDate(story.date)}</time> · {story.read} min read</p><h3 class="m-text-7">{story.title}</h3><p class="m-text story__text">{story.text}</p></li>)}
     </ol>
   </div>
@@ -66,4 +42,28 @@ const longDate = (iso: string) => new Date(iso).toLocaleDateString('en-GB', { da
   #journal .journal__list { gap: clamp(64px, 18vh, 170px); padding-block: 6svh 10svh; }
 }
 }
+@layer scenes {
+@media (prefers-reduced-motion: no-preference) {
+  #journal.is-swap .journal__frame { position: sticky; z-index: 1; top: 80px; }
+  #journal.is-swap .journal__shot:first-child { z-index: auto; }
+  @media (min-width: 900px) { #journal.is-swap .journal__frame { top: calc(50svh - min(30svh, 22vw)); max-height: 60svh; } }
+}
+}
 </style>
+
+<script>
+import { gsap, scene } from '../scripts/motion.js';
+
+// Each story brightens as it reaches the middle, and its photo opens over the last in the sticky frame.
+scene('journal', () => {
+  const journal = document.getElementById('journal')!;
+  const shots = [...journal.querySelectorAll('.journal__shot')];
+  journal.classList.add('is-swap');
+  journal.querySelectorAll('.story').forEach((story, index) => {
+    const timeline = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: story, start: 'top 84%', end: 'top 50%', scrub: true } })
+      .fromTo(story, { opacity: 0.25 }, { opacity: 1, duration: 0.8 }, 0);
+    if (index && shots[index]) timeline.fromTo(shots[index], { clipPath: 'circle(0% at 50% 50%)' }, { clipPath: 'circle(75% at 50% 50%)', ease: 'power1.inOut', duration: 1 }, 0);
+  });
+  return () => journal.classList.remove('is-swap');
+});
+</script>

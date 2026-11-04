@@ -9,29 +9,6 @@ const partners = [
 ];
 ---
 <!-- again: long-term clients: six cards on a wheel that turns with scroll (demo: years of partnership) (animation: scene:again) -->
-<style is:inline data-8b-part="scene:again">
-@layer scenes {
-@media (prefers-reduced-motion: no-preference) {
-  [data-8b-live] #again { height: calc(100svh + var(--spin, 0px)); }
-  [data-8b-live] #again .again__stage { position: sticky; top: 0; height: 100svh; min-height: 560px; overflow: clip; padding-top: clamp(84px, 13svh, 120px); }
-  [data-8b-live] #again .again__swing { position: absolute; left: 50%; top: calc(var(--arc-top) + var(--radius)); width: 0; height: 0; margin: 0; }
-  [data-8b-live] #again .again__wheel { position: absolute; left: 0; top: 0; display: block; width: 0; height: 0; }
-  [data-8b-live] #again .partner { position: absolute; left: 0; top: 0; width: 0; height: 0; rotate: calc(var(--i) * var(--step)); }
-  [data-8b-live] #again .partner__card { position: absolute; left: calc(var(--card) / -2); top: calc(var(--radius) * -1); width: var(--card); }
-}
-}
-@layer scenes {
-[data-8b-live] #again { view-timeline: --again-t1 block; view-timeline-inset: 0; }
-[data-8b-live] #again .again__wheel, [data-8b-live] #again .again__swing, [data-8b-live] #again .again__head { animation-timeline: --again-t1; animation-fill-mode: both; transform: none; }
-[data-8b-live] #again .again__wheel { animation-name: again-wheel-turn; animation-range: cover 70vh cover calc(100% - 100vh); animation-timing-function: linear; }
-[data-8b-live] #again .again__swing { animation-name: again-swing-turn, again-swing-rise; animation-range: cover 0% cover 70vh; animation-timing-function: cubic-bezier(0.3333, 0.6667, 0.6667, 1), cubic-bezier(0.3333, 0, 0.6667, 0); }
-[data-8b-live] #again .again__head { animation-name: again-head-rise; animation-range: cover 0% cover 70vh; animation-timing-function: cubic-bezier(0.3333, 1, 0.6667, 1); }
-@keyframes again-wheel-turn { 0% { rotate: var(--again-from, 0deg); } 100% { rotate: var(--again-to, 0deg); } }
-@keyframes again-swing-turn { 0% { rotate: var(--again-swing-r, 0deg); } 100% { rotate: 0deg; } }
-@keyframes again-swing-rise { 0% { translate: 0px var(--again-swing-y, 0px); } 100% { translate: 0px 0px; } }
-@keyframes again-head-rise { 0% { translate: 0px 45%; } 100% { translate: 0px 0px; } }
-}
-</style>
 <section id="again" data-8b-section="again" aria-labelledby="again-title">
   <div class="again__stage">
     <div class="again__head">
@@ -39,7 +16,7 @@ const partners = [
       <p class="m-text-5 again__lead">Most of our partners have been with us for more than five years. Every lap around, the work gets sharper.</p>
     </div>
     <div class="again__swing">
-      <ul class="again__wheel" data-8b-items=":scope > .partner">
+      <ul class="again__wheel">
         {partners.map(partner => (
           <li class="partner">
             <div class="partner__card"><img class="partner__img" src={partner.src} width="900" height="1125" alt={partner.alt} loading="lazy">
@@ -69,37 +46,60 @@ const partners = [
 @media (min-width: 640px) { #again .again__wheel { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 1000px) { #again .again__wheel { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 }
+@layer scenes {
+@media (prefers-reduced-motion: no-preference) {
+  #again.is-wheel { height: calc(100svh + var(--spin, 0px)); }
+  #again.is-wheel .again__stage { position: sticky; top: 0; height: 100svh; min-height: 560px; overflow: clip; padding-top: clamp(84px, 13svh, 120px); }
+  #again.is-wheel .again__swing { position: absolute; left: 50%; top: calc(var(--arc-top) + var(--radius)); width: 0; height: 0; margin: 0; }
+  #again.is-wheel .again__wheel { position: absolute; left: 0; top: 0; display: block; width: 0; height: 0; }
+  #again.is-wheel .partner { position: absolute; left: 0; top: 0; width: 0; height: 0; rotate: calc(var(--i) * var(--step)); }
+  #again.is-wheel .partner__card { position: absolute; left: calc(var(--card) / -2); top: calc(var(--radius) * -1); width: var(--card); }
+}
+}
 </style>
 
 <script>
-import { measure, scene, set } from '../scripts/motion-kit.js';
+import { adjacent, gsap, scene, ScrollTrigger } from '../scripts/motion.js';
 
-// Sizes the wheel to the room under the head; the cards ride its rim.
+// Sizes the wheel to the room under the head; the cards ride its rim and the scroll turns it.
 scene('again', () => {
   const again = document.getElementById('again')!;
   const stage = again.querySelector<HTMLElement>('.again__stage')!;
   const head = again.querySelector<HTMLElement>('.again__head')!;
+  const swing = again.querySelector('.again__swing')!;
   const wheel = again.querySelector('.again__wheel')!;
-  measure(() => {
-    const count = wheel.querySelectorAll('.partner').length;
+  const cards = [...wheel.querySelectorAll<HTMLElement>('.partner')];
+  again.classList.add('is-wheel');
+  cards.forEach((card, index) => card.style.setProperty('--i', String(index)));
+  let step = 0, arcTop = 0, radius = 1;
+  const measure = () => {
     const width = innerWidth, height = stage.offsetHeight;
     const headBottom = head.offsetTop + head.offsetHeight;
     const room = height - headBottom - innerHeight * 0.04;
     const card = Math.max(180, Math.min(width * (width < 700 ? 0.7 : 0.28), (room - 32) / 1.25));
-    const arcTop = headBottom + Math.max(28, (room - card * 1.25) * 0.4);
-    const radius = Math.max(width * 0.95, card * 3.3);
-    const step = 2 * Math.asin((card + Math.max(18, width * 0.024)) / (2 * radius)) * 180 / Math.PI;
-    set(again, {
-      '--card': `${card.toFixed(1)}px`,
-      '--radius': `${radius.toFixed(1)}px`,
-      '--step': `${step.toFixed(3)}deg`,
-      '--arc-top': `${arcTop.toFixed(1)}px`,
-      '--spin': `${Math.round(count * innerHeight * 0.42)}px`,
-      '--again-from': `${(step * 0.55).toFixed(3)}deg`,
-      '--again-to': `${(-(count - 0.45) * step).toFixed(3)}deg`,
-      '--again-swing-r': `${Math.max(4, Math.asin(Math.min(1, width * 0.3 / radius)) * 180 / Math.PI - step * 0.55).toFixed(3)}deg`,
-      '--again-swing-y': `${(-(arcTop - 40)).toFixed(2)}px`
-    });
-  });
+    arcTop = headBottom + Math.max(28, (room - card * 1.25) * 0.4);
+    radius = Math.max(width * 0.95, card * 3.3);
+    step = 2 * Math.asin((card + Math.max(18, width * 0.024)) / (2 * radius)) * 180 / Math.PI;
+    again.style.setProperty('--card', `${card.toFixed(1)}px`);
+    again.style.setProperty('--radius', `${radius.toFixed(1)}px`);
+    again.style.setProperty('--step', `${step.toFixed(3)}deg`);
+    again.style.setProperty('--arc-top', `${arcTop.toFixed(1)}px`);
+    again.style.setProperty('--spin', `${Math.round(cards.length * innerHeight * 0.42)}px`);
+  };
+  measure();
+  ScrollTrigger.addEventListener('refreshInit', measure);
+  gsap.fromTo(wheel, { rotation: () => step * 0.55 }, { rotation: () => -(cards.length - 0.45) * step, ease: 'none', scrollTrigger: { trigger: again, start: 'top 30%', end: 'bottom bottom', scrub: true, invalidateOnRefresh: true } });
+  if (adjacent('work', 'again')) {
+    gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: again, start: 'top bottom', end: 'top 30%', scrub: true, invalidateOnRefresh: true } })
+      .fromTo(swing, { rotation: () => Math.max(4, Math.asin(Math.min(1, innerWidth * 0.3 / radius)) * 180 / Math.PI - step * 0.55) }, { rotation: 0, ease: 'power1.out' }, 0)
+      .fromTo(swing, { y: () => -(arcTop - 40) }, { y: 0, ease: 'power2.in' }, 0)
+      .fromTo(head, { yPercent: 45 }, { yPercent: 0, ease: 'power2.out' }, 0);
+  }
+  return () => {
+    ScrollTrigger.removeEventListener('refreshInit', measure);
+    again.classList.remove('is-wheel');
+    ['--card', '--radius', '--step', '--arc-top', '--spin'].forEach(name => again.style.removeProperty(name));
+    cards.forEach(card => card.style.removeProperty('--i'));
+  };
 });
 </script>
