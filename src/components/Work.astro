@@ -1,0 +1,107 @@
+---
+const cases = [
+  { name: 'Northwind Bikes', tag: 'Brand, launch', line: 'An e-bike brand launched in eleven cities in a single spring.', alt: 'A rider on an electric bike on a seaside promenade under a wide blue sky', src: 'https://images.unsplash.com/photo-1620802090791-fd9420668913?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8M3x8ZWxlY3RyaWMlMjBiaWtlJTIwY2l0eSUyMHJpZGVyfGVufDF8MHx8fDE3OTEyMDk3MDZ8MA&ixlib=rb-4.1.0&auto=format&fit=crop&w=1140&h=713&q=60' },
+  { name: 'Halden Bank', tag: 'Product, app', line: 'A 120-year-old bank, rebuilt as the app its customers open first.', alt: 'A smiling woman in an orange sweater against a lilac wall', src: 'https://images.unsplash.com/photo-1713371690087-baafaf440240?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8NXx8d29tYW4lMjBzbWlsaW5nJTIwaG9sZGluZyUyMHBob25lJTIwY29sb3JmdWx8ZW58MXwwfHx8MTc5MTIwOTcwN3ww&ixlib=rb-4.1.0&auto=format&fit=crop&w=1140&h=713&q=60' },
+  { name: 'Copper & Oat', tag: 'Commerce', line: 'A neighbourhood bakery that now sells more by phone than by window.', alt: 'A baker in front of warmly lit wooden shelves of bread', src: 'https://images.unsplash.com/photo-1587241321921-91a834d6d191?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8MXx8YXJ0aXNhbiUyMGJha2VyeSUyMGJyZWFkJTIwY291bnRlcnxlbnwxfDB8fHwxNzkxMjA5NzA3fDA&ixlib=rb-4.1.0&auto=format&fit=crop&w=1140&h=713&q=60' },
+  { name: 'Atlas Museum', tag: 'Service, content', line: 'A quiet collection turned into a weekly night out.', alt: 'Visitors walking among white statues in a gallery with blue walls', src: 'https://images.unsplash.com/photo-1544213456-bc37cb97df74?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8Nnx8bXVzZXVtJTIwZ2FsbGVyeSUyMHZpc2l0b3JzfGVufDF8MHx8fDE3OTEyMDk3MDd8MA&ixlib=rb-4.1.0&auto=format&fit=crop&w=1140&h=713&q=60' },
+  { name: 'Sola Sound', tag: 'Campaign', line: 'A headphone launch that sold out its first run in nine days.', alt: 'Black wireless headphones lit in red and blue', src: 'https://images.unsplash.com/photo-1614149162883-504ce4d13909?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8Nnx8aGVhZHBob25lcyUyMGNvbG9yZnVsJTIwYmFja2dyb3VuZHxlbnwxfDB8fHwxNzkxMjA5NzA4fDA&ixlib=rb-4.1.0&auto=format&fit=crop&w=1360&h=850&q=60' },
+];
+---
+<!-- work: case studies: five large cards on a horizontal track (demo: five client launches) (animation: scene:work) -->
+<style is:inline data-8b-part="scene:work">
+@layer scenes {
+@media (prefers-reduced-motion: no-preference) {
+  [data-8b-live] #work { height: calc(100svh + var(--run, 0px)); }
+  [data-8b-live] #work .work__stage { position: sticky; top: 0; height: 100svh; min-height: 560px; padding-top: clamp(84px, 13svh, 120px); padding-bottom: clamp(24px, 5svh, 48px); grid-template-rows: auto minmax(0, 1fr); overflow: clip; }
+  [data-8b-live] #work .work__window { display: flex; align-items: center; min-height: 0; transform-origin: 0 50%; }
+  [data-8b-live] #work .work__track { display: flex; gap: clamp(14px, 1.6vw, 24px); width: max-content; height: min(100%, 64svh); }
+  [data-8b-live] #work .case { width: auto; height: 100%; aspect-ratio: 4 / 5; flex: none; }
+  @media (min-width: 700px) { [data-8b-live] #work .case { aspect-ratio: 16 / 10.5; } }
+}
+}
+@layer scenes {
+[data-8b-live] #work { view-timeline: --work-t1 block; view-timeline-inset: 0; }
+[data-8b-live] #work .work__plate, [data-8b-live] #work .work__track, [data-8b-live] #work .case__img, [data-8b-live] #work .work__window, [data-8b-live] #work .case { animation-timeline: --work-t1; animation-fill-mode: both; }
+[data-8b-live] #work .work__plate { animation-name: work-plate-grow; animation-range: cover 0% cover 85vh; animation-timing-function: cubic-bezier(0.3333, 0.6667, 0.6667, 1); }
+[data-8b-live] #work .work__track { animation-name: work-track-slide; animation-range: cover 100vh cover calc(100% - 100vh); animation-timing-function: linear; transform: none; }
+[data-8b-live] #work .case__img { animation-name: work-img-drift; animation-range: cover 100vh cover calc(100% - 100vh); animation-timing-function: linear; transform: none; }
+[data-8b-live] #work .work__window, [data-8b-live] #work .case { animation-range: cover calc(100% - 100vh) cover calc(100% - 30vh); animation-timing-function: cubic-bezier(0.3333, 0, 0.6667, 0.3333); transform: none; }
+[data-8b-live] #work .work__window { animation-name: work-window-sweep; }
+[data-8b-live] #work .case { animation-name: work-case-bend; }
+@keyframes work-plate-grow { 0% { clip-path: inset(0% 3.2% round 44px); } 100% { clip-path: inset(0%); } }
+@keyframes work-track-slide { 0% { translate: 0px 0px; } 100% { translate: calc(-1 * var(--work-run, 0px)) 0px; } }
+@keyframes work-img-drift { 0% { translate: -5% 0px; } 100% { translate: 5% 0px; } }
+@keyframes work-window-sweep { 0% { translate: 0px 0px; } 100% { translate: -20vw 0px; } }
+@keyframes work-case-bend { 0% { translate: 0px 0px; rotate: 0deg; } 100% { translate: var(--work-x, 0px) var(--work-y, 0px); rotate: var(--work-r, 0deg); } }
+}
+</style>
+<section id="work" data-8b-section="work" aria-labelledby="work-title">
+  <div class="work__plate" aria-hidden="true"></div>
+  <div class="work__stage">
+    <div class="work__head">
+      <h2 class="m-text-3" id="work-title">Selected work<span class="m-dot" aria-hidden="true"></span></h2>
+      <p class="m-text-5 work__lead">Five launches from the last two years. Every one of them is still growing.</p>
+    </div>
+    <div class="work__window">
+      <ul class="work__track" data-8b-items=":scope > .case" data-8b-fixed="5">
+        {cases.map(item => (
+          <li class="case">
+            <div class="case__media"><img class="case__img" src={item.src} width="1600" height="1000" alt={item.alt} loading="lazy"></div>
+            <span class="m-badge case__tag">{item.tag}</span>
+            <div class="case__text"><h3 class="m-text-4 case__name">{item.name}</h3><p class="m-text-5 case__line">{item.line}</p></div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+@layer sections {
+#work { position: relative; color: var(--color-2); }
+#work .work__plate { position: absolute; inset: 0 0 -2px; background: var(--color-1); }
+#work .work__stage { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: clamp(28px, 4vh, 48px); padding: var(--space-2) var(--space-1); }
+#work .work__head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px 40px; }
+#work .work__lead { max-width: 25rem; color: var(--color-5); }
+#work .work__track { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+#work .case { position: relative; display: block; overflow: hidden; border-radius: var(--radius-1); background: var(--color-7); aspect-ratio: 4 / 5; }
+#work .case__media { position: absolute; inset: 0; overflow: hidden; }
+#work .case__img { position: absolute; top: 0; left: -7%; width: 114%; max-width: none; height: 100%; object-fit: cover; }
+#work .case__media::after { content: ""; position: absolute; inset: 40% 0 0; background: linear-gradient(to top, color-mix(in srgb, var(--color-1) 82%, transparent), transparent); }
+#work .case__tag { position: absolute; left: clamp(18px, 2vw, 28px); top: clamp(18px, 2vw, 28px); background: color-mix(in srgb, var(--color-1) 62%, transparent); }
+#work .case__text { position: absolute; left: clamp(18px, 2.4vw, 36px); right: clamp(18px, 2.4vw, 36px); bottom: clamp(18px, 2.4vw, 36px); display: grid; gap: 10px; }
+#work .case__line { max-width: 30rem; color: var(--color-2); }
+@media (min-width: 700px) {
+  #work .work__track { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #work .case { aspect-ratio: 16 / 11; }
+  #work .case:last-child:nth-child(odd) { grid-column: span 2; aspect-ratio: 16 / 6.5; }
+}
+}
+</style>
+
+<script>
+import { box, measure, scene, set } from '../scripts/motion-kit.js';
+
+// Holds the stage while the track slides by --work-run, then bends the cards onto a curve.
+scene('work', () => {
+  const work = document.getElementById('work')!;
+  const stage = work.querySelector('.work__stage')!;
+  const frame = work.querySelector<HTMLElement>('.work__window')!;
+  const track = work.querySelector<HTMLElement>('.work__track')!;
+  measure(() => {
+    const run = Math.max(0, track.offsetWidth - (work.clientWidth - 2 * parseFloat(getComputedStyle(stage).paddingLeft)));
+    set(work, { '--run': `${Math.round(run)}px`, '--work-run': `${run.toFixed(2)}px` });
+    const radius = innerWidth < 700 ? innerWidth * 2.1 : innerWidth * 0.95;
+    const origin = box(frame).x;
+    track.querySelectorAll<HTMLElement>('.case').forEach(card => {
+      const offset = origin + card.offsetLeft + card.offsetWidth / 2 - run - innerWidth / 2;
+      const angle = offset / radius;
+      set(card, {
+        '--work-x': `${(radius * Math.sin(angle) - offset).toFixed(2)}px`,
+        '--work-y': `${(radius * (1 - Math.cos(angle))).toFixed(2)}px`,
+        '--work-r': `${(angle * 180 / Math.PI).toFixed(3)}deg`
+      });
+    });
+  });
+});
+</script>

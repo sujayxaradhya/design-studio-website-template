@@ -1,0 +1,99 @@
+---
+import ArrowLink from './ArrowLink.astro';
+import { careers } from '../site';
+
+// Five photos: on desktop each takes its own collage position (:nth-child in the CSS below).
+const size = { wide: { width: 1400, height: 933 }, tall: { width: 900, height: 1200 } };
+const shots = [
+  { shape: 'wide', alt: 'A team working together around a desk in a colourful studio', src: 'https://images.unsplash.com/photo-1787647559705-d2ad3322020e?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8MXx8Y3JlYXRpdmUlMjB0ZWFtJTIwbWVldGluZyUyMHN0dWRpb3xlbnwxfDB8fHwxNzkxMjA5NzQ5fDA&ixlib=rb-4.1.0&auto=format&fit=crop&w=450&h=300&q=60' },
+  { shape: 'tall', alt: 'Two colleagues laughing together on a blue chair', src: 'https://images.unsplash.com/photo-1643373977342-73cfc7cc0c5e?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8Nnx8cGVvcGxlJTIwbGF1Z2hpbmclMjBvZmZpY2V8ZW58MXwxfHx8MTc5MTIwOTc1MHww&ixlib=rb-4.1.0&auto=format&fit=crop&w=210&h=280&q=60' },
+  { shape: 'tall', alt: 'A smiling designer standing in front of a warm wall', src: 'https://images.unsplash.com/photo-1745434159123-4908d0b9df94?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8NHx8cGVvcGxlJTIwbGF1Z2hpbmclMjBvZmZpY2V8ZW58MXwxfHx8MTc5MTIwOTc1MHww&ixlib=rb-4.1.0&auto=format&fit=crop&w=200&h=267&q=60' },
+  { shape: 'wide', alt: 'Four people collaborating around a table seen from above', src: 'https://images.unsplash.com/photo-1787647560262-ebfcf6c5f979?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8M3x8Y3JlYXRpdmUlMjB0ZWFtJTIwbWVldGluZyUyMHN0dWRpb3xlbnwxfDB8fHwxNzkxMjA5NzQ5fDA&ixlib=rb-4.1.0&auto=format&fit=crop&w=460&h=307&q=60' },
+  { shape: 'wide', alt: 'A team discussing ideas in front of a wall of notes', src: 'https://images.unsplash.com/photo-1623652653308-d49d335c92eb?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8Nnx8d29ya3Nob3AlMjBzdGlja3klMjBub3RlcyUyMHdhbGx8ZW58MXwwfHx8MTc5MTIwOTc1MHww&ixlib=rb-4.1.0&auto=format&fit=crop&w=440&h=293&q=60' },
+] as const;
+const roles = [
+  { title: 'Senior product designer', place: 'Lisbon' },
+  { title: 'Creative technologist', place: 'Brooklyn' },
+  { title: 'Strategy director', place: 'Remote, Europe' },
+];
+---
+<!-- studio: team and careers: photo collage that deals out from a pile, with open roles (animation: scene:studio) -->
+<style is:inline data-8b-part="scene:studio">
+@layer scenes {
+[data-8b-live] #studio .studio__collage { view-timeline: --studio-t1 block; view-timeline-inset: 0; }
+[data-8b-live] #studio .shot { animation-name: studio-shot-deal; animation-timeline: --studio-t1; animation-range: cover calc(18vh + var(--studio-a, 0) * (50% - 23vh)) cover calc(18vh + var(--studio-b, 1) * (50% - 23vh)); animation-timing-function: cubic-bezier(0.3333, 1, 0.6667, 1); animation-fill-mode: both; transform: none; }
+@media (max-width: 899px) {
+  [data-8b-live] #studio .shot { animation-range: cover calc(18vh + var(--studio-a, 0) * 72vh) cover calc(18vh + var(--studio-b, 1) * 72vh); }
+}
+@keyframes studio-shot-deal { 0% { translate: var(--studio-x, 0px) var(--studio-y, 0px); rotate: var(--studio-tilt, 0deg); scale: 0.66; } 100% { translate: 0px 0px; rotate: 0deg; scale: 1; } }
+}
+</style>
+<section id="studio" data-8b-section="studio" aria-labelledby="studio-title">
+  <div class="studio__head">
+    <h2 class="m-text-3" id="studio-title">Inside the studio<span class="m-dot" aria-hidden="true"></span></h2>
+    <p class="m-text-5 studio__lead" data-8b-motion="ink" data-8b-split="words">Ninety people between Lisbon and Brooklyn: strategists, designers, engineers and writers who would rather show you than tell you. We work in small mixed teams, sit with the people we build for, and keep Friday afternoons for our own experiments.</p>
+  </div>
+  <div class="studio__collage">
+    {shots.map(shot => <figure class={`shot shot--${shot.shape}`}><img src={shot.src} {...size[shot.shape]} alt={shot.alt} loading="lazy"></figure>)}
+    <div class="studio__roles">
+      <h3 class="m-text-7" data-8b-motion="rise">Open roles<span class="m-dot" aria-hidden="true"></span></h3>
+      <ul data-8b-items=":scope > li">
+        {roles.map(role => <li class="role"><span class="m-text-7">{role.title}</span><span class="m-text-6 role__place">{role.place}</span></li>)}
+      </ul>
+      <ArrowLink data-8b-placeholder="email" href={`mailto:${careers}`} label={careers} />
+    </div>
+  </div>
+</section>
+
+<style is:global>
+@layer sections {
+#studio { position: relative; padding: var(--space-2) var(--space-1); background: var(--color-2); }
+#studio .studio__head { display: grid; gap: 28px; margin-bottom: clamp(48px, 8vh, 96px); }
+#studio .studio__lead { max-width: 42rem; }
+#studio .studio__collage { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+#studio .shot { position: relative; overflow: hidden; border-radius: var(--radius-3); background: var(--color-4); }
+#studio .shot img { width: 100%; height: 100%; object-fit: cover; }
+#studio .shot--wide { grid-column: span 2; aspect-ratio: 3 / 2; }
+#studio .shot--tall { aspect-ratio: 3 / 4; }
+#studio .studio__roles { grid-column: span 2; display: grid; align-content: start; gap: 18px; padding-top: 24px; }
+#studio .studio__roles ul { display: grid; }
+#studio .role { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; padding: 14px 0; border-top: 1px solid color-mix(in srgb, var(--color-1) 16%, transparent); }
+#studio .role__place { color: var(--color-6); }
+@media (min-width: 900px) {
+  #studio .studio__head { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); align-items: end; column-gap: 6vw; }
+  #studio .studio__collage { display: block; aspect-ratio: 1.85; }
+  #studio .shot { position: absolute; }
+  #studio .shot:nth-child(1) { left: 0; top: 0; width: 34%; }
+  #studio .shot:nth-child(2) { left: 37%; top: 5.5%; width: 19%; }
+  #studio .shot:nth-child(3) { left: 8%; top: 47%; width: 20%; }
+  #studio .shot:nth-child(4) { left: 59%; top: 0; width: 41%; }
+  #studio .shot:nth-child(5) { left: 31%; top: 53.3%; width: 36%; }
+  #studio .studio__roles { position: absolute; left: 71%; top: 55%; width: 29%; padding-top: 0; }
+}
+}
+</style>
+
+<script>
+import { measure, scene, set } from '../scripts/motion-kit.js';
+
+// The photos start as a tilted pile in the centre and deal out to their places.
+scene('studio', () => {
+  const collage = document.querySelector<HTMLElement>('#studio .studio__collage')!;
+  const tilt = [-8, 6, -4, 9, -6];
+  measure(() => {
+    const shots = [...collage.querySelectorAll<HTMLElement>('.shot')];
+    const total = 1 + (shots.length - 1) * 0.08;
+    const cx = collage.offsetWidth / 2, cy = Math.min(collage.offsetHeight / 2, innerHeight * 0.45);
+    shots.forEach((shot, index) => {
+      const a = (shots.length - 1 - index) * 0.08 / total;
+      set(shot, {
+        '--studio-x': `${(cx - shot.offsetLeft - shot.offsetWidth / 2).toFixed(2)}px`,
+        '--studio-y': `${(cy - shot.offsetTop - shot.offsetHeight / 2).toFixed(2)}px`,
+        '--studio-tilt': `${tilt[index % tilt.length]}deg`,
+        '--studio-a': a.toFixed(5),
+        '--studio-b': (a + 1 / total).toFixed(5)
+      });
+    });
+  });
+});
+</script>

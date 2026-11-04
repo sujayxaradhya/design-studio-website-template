@@ -1,0 +1,105 @@
+---
+const partners = [
+  { name: 'Vela Air', year: 9, line: 'From the booking flow to the boarding gate.', alt: 'A sunset sky and a wing seen through an airplane window', src: 'https://images.unsplash.com/photo-1594386245199-289c2fe0bd0a?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8Mnx8YWlycGxhbmUlMjB3aW5kb3clMjBza3klMjBzdW5zZXR8ZW58MXwxfHx8MTc5MTIwOTcyOHww&ixlib=rb-4.1.0&auto=format&fit=crop&w=730&h=913&q=60' },
+  { name: 'Kiln Coffee', year: 4, line: 'One roastery grew into a subscription habit.', alt: 'A barista pouring milk into a latte', src: 'https://images.unsplash.com/photo-1532713107108-dfb5d8d2fc42?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8MXx8YmFyaXN0YSUyMHBvdXJpbmclMjBjb2ZmZWV8ZW58MXwxfHx8MTc5MTIwOTcyOXww&ixlib=rb-4.1.0&auto=format&fit=crop&w=730&h=913&q=60' },
+  { name: 'Larch Outdoor', year: 6, line: 'A storefront rebuilt around the off-season.', alt: 'A hiker with a backpack standing on a rock above green mountains', src: 'https://images.unsplash.com/photo-1658296777645-0f389d06867c?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8M3x8aGlrZXIlMjBtb3VudGFpbiUyMHJpZGdlfGVufDF8MXx8fDE3OTEyMDk3Mjl8MA&ixlib=rb-4.1.0&auto=format&fit=crop&w=730&h=913&q=60' },
+  { name: 'Tessera Games', year: 7, line: 'A launch campaign for every season since day one.', alt: 'Rows of arcade machines glowing with neon light', src: 'https://images.unsplash.com/photo-1558324190-c940eb141401?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8M3x8bmVvbiUyMGFyY2FkZSUyMGdhbWluZ3xlbnwxfDF8fHwxNzkxMjA5NzMwfDA&ixlib=rb-4.1.0&auto=format&fit=crop&w=730&h=913&q=60' },
+  { name: 'Civic Lab', year: 8, line: 'Public services people can finish on a phone.', alt: 'A cyclist riding past a red-brick city hall under a blue sky', src: 'https://images.unsplash.com/photo-1641675301559-468f9f4ca037?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8MXx8Y2l0eSUyMGhhbGwlMjBwZW9wbGUlMjBzdHJlZXR8ZW58MXwxfHx8MTc5MTIwOTczMHww&ixlib=rb-4.1.0&auto=format&fit=crop&w=730&h=913&q=60' },
+  { name: 'Marrow Health', year: 5, line: 'One patient app across three hospital systems.', alt: 'A nurse comforting a young child on a sofa', src: 'https://images.unsplash.com/photo-1761234852163-23f2ededd04e?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8M3x8ZG9jdG9yJTIwcGF0aWVudCUyMGNsaW5pY3xlbnwxfDF8fHwxNzkxMjA5NzMxfDA&ixlib=rb-4.1.0&auto=format&fit=crop&w=730&h=913&q=60' },
+];
+---
+<!-- again: long-term clients: six cards on a wheel that turns with scroll (demo: years of partnership) (animation: scene:again) -->
+<style is:inline data-8b-part="scene:again">
+@layer scenes {
+@media (prefers-reduced-motion: no-preference) {
+  [data-8b-live] #again { height: calc(100svh + var(--spin, 0px)); }
+  [data-8b-live] #again .again__stage { position: sticky; top: 0; height: 100svh; min-height: 560px; overflow: clip; padding-top: clamp(84px, 13svh, 120px); }
+  [data-8b-live] #again .again__swing { position: absolute; left: 50%; top: calc(var(--arc-top) + var(--radius)); width: 0; height: 0; margin: 0; }
+  [data-8b-live] #again .again__wheel { position: absolute; left: 0; top: 0; display: block; width: 0; height: 0; }
+  [data-8b-live] #again .partner { position: absolute; left: 0; top: 0; width: 0; height: 0; rotate: calc(var(--i) * var(--step)); }
+  [data-8b-live] #again .partner__card { position: absolute; left: calc(var(--card) / -2); top: calc(var(--radius) * -1); width: var(--card); }
+}
+}
+@layer scenes {
+[data-8b-live] #again { view-timeline: --again-t1 block; view-timeline-inset: 0; }
+[data-8b-live] #again .again__wheel, [data-8b-live] #again .again__swing, [data-8b-live] #again .again__head { animation-timeline: --again-t1; animation-fill-mode: both; transform: none; }
+[data-8b-live] #again .again__wheel { animation-name: again-wheel-turn; animation-range: cover 70vh cover calc(100% - 100vh); animation-timing-function: linear; }
+[data-8b-live] #again .again__swing { animation-name: again-swing-turn, again-swing-rise; animation-range: cover 0% cover 70vh; animation-timing-function: cubic-bezier(0.3333, 0.6667, 0.6667, 1), cubic-bezier(0.3333, 0, 0.6667, 0); }
+[data-8b-live] #again .again__head { animation-name: again-head-rise; animation-range: cover 0% cover 70vh; animation-timing-function: cubic-bezier(0.3333, 1, 0.6667, 1); }
+@keyframes again-wheel-turn { 0% { rotate: var(--again-from, 0deg); } 100% { rotate: var(--again-to, 0deg); } }
+@keyframes again-swing-turn { 0% { rotate: var(--again-swing-r, 0deg); } 100% { rotate: 0deg; } }
+@keyframes again-swing-rise { 0% { translate: 0px var(--again-swing-y, 0px); } 100% { translate: 0px 0px; } }
+@keyframes again-head-rise { 0% { translate: 0px 45%; } 100% { translate: 0px 0px; } }
+}
+</style>
+<section id="again" data-8b-section="again" aria-labelledby="again-title">
+  <div class="again__stage">
+    <div class="again__head">
+      <h2 class="m-text-3" id="again-title">Never a one-off<span class="m-dot" aria-hidden="true"></span></h2>
+      <p class="m-text-5 again__lead">Most of our partners have been with us for more than five years. Every lap around, the work gets sharper.</p>
+    </div>
+    <div class="again__swing">
+      <ul class="again__wheel" data-8b-items=":scope > .partner">
+        {partners.map(partner => (
+          <li class="partner">
+            <div class="partner__card"><img class="partner__img" src={partner.src} width="900" height="1125" alt={partner.alt} loading="lazy">
+            <div class="partner__text"><span class="m-badge partner__year">Year {partner.year}</span><h3 class="m-text-4 partner__name">{partner.name}</h3><p class="m-text partner__line">{partner.line}</p></div></div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+@layer sections {
+#again { position: relative; background: var(--color-1); color: var(--color-2); }
+#again .again__stage { position: relative; padding: calc(var(--space-2) * 0.7) var(--space-1) var(--space-2); }
+#again .again__head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px 40px; }
+#again .again__lead { max-width: 27rem; color: var(--color-5); }
+#again .again__swing { margin-top: clamp(40px, 7vh, 72px); }
+#again .again__wheel { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+#again .partner__card { position: relative; display: block; overflow: hidden; border-radius: var(--radius-1); background: var(--color-7); aspect-ratio: 4 / 5; }
+#again .partner__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+#again .partner__card::after { content: ""; position: absolute; inset: 35% 0 0; background: linear-gradient(to top, color-mix(in srgb, var(--color-1) 86%, transparent), transparent); }
+#again .partner__text { position: absolute; z-index: 1; left: clamp(16px, 1.8vw, 26px); right: clamp(16px, 1.8vw, 26px); bottom: clamp(16px, 1.8vw, 26px); display: grid; justify-items: start; gap: 10px; }
+#again .partner__year { background: color-mix(in srgb, var(--color-1) 62%, transparent); }
+#again .partner__name { font-size: clamp(28px, 2.6vw, 40px); }
+#again .partner__line { color: var(--color-2); }
+@media (min-width: 640px) { #again .again__wheel { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1000px) { #again .again__wheel { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+}
+</style>
+
+<script>
+import { measure, scene, set } from '../scripts/motion-kit.js';
+
+// Sizes the wheel to the room under the head; the cards ride its rim.
+scene('again', () => {
+  const again = document.getElementById('again')!;
+  const stage = again.querySelector<HTMLElement>('.again__stage')!;
+  const head = again.querySelector<HTMLElement>('.again__head')!;
+  const wheel = again.querySelector('.again__wheel')!;
+  measure(() => {
+    const count = wheel.querySelectorAll('.partner').length;
+    const width = innerWidth, height = stage.offsetHeight;
+    const headBottom = head.offsetTop + head.offsetHeight;
+    const room = height - headBottom - innerHeight * 0.04;
+    const card = Math.max(180, Math.min(width * (width < 700 ? 0.7 : 0.28), (room - 32) / 1.25));
+    const arcTop = headBottom + Math.max(28, (room - card * 1.25) * 0.4);
+    const radius = Math.max(width * 0.95, card * 3.3);
+    const step = 2 * Math.asin((card + Math.max(18, width * 0.024)) / (2 * radius)) * 180 / Math.PI;
+    set(again, {
+      '--card': `${card.toFixed(1)}px`,
+      '--radius': `${radius.toFixed(1)}px`,
+      '--step': `${step.toFixed(3)}deg`,
+      '--arc-top': `${arcTop.toFixed(1)}px`,
+      '--spin': `${Math.round(count * innerHeight * 0.42)}px`,
+      '--again-from': `${(step * 0.55).toFixed(3)}deg`,
+      '--again-to': `${(-(count - 0.45) * step).toFixed(3)}deg`,
+      '--again-swing-r': `${Math.max(4, Math.asin(Math.min(1, width * 0.3 / radius)) * 180 / Math.PI - step * 0.55).toFixed(3)}deg`,
+      '--again-swing-y': `${(-(arcTop - 40)).toFixed(2)}px`
+    });
+  });
+});
+</script>

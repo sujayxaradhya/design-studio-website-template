@@ -1,0 +1,8 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = HTMLAttributes<'a'> & { label: string };
+
+const { label, class: className, ...attrs } = Astro.props;
+---
+<a class:list={['m-link', className]} {...attrs}><span class="m-link__label">{label}</span><svg class="m-link__arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3.5 13.5 8 9 12.5"/></svg></a>

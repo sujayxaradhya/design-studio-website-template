@@ -1,0 +1,69 @@
+---
+// Four steps for the four ring stations (top, right, bottom, left).
+const steps = [
+  { title: 'Listen', text: 'Two weeks with your customers, your data and your front line before we draw anything at all.' },
+  { title: 'Make', text: 'Small mixed teams ship real, testable things early: in days, not quarters, and in front of real people.' },
+  { title: 'Measure', text: 'We agree on what better looks like before we start, then report it honestly, good news or not.' },
+  { title: 'Again', text: 'We take what we learned and go round once more. It is not the end of the project. It is the job.' },
+];
+const stations = [[0, -1], [1, 0], [0, 1], [-1, 0]];
+---
+<!-- method: process: four steps beside a ring the scroll draws round (demo: Listen, Make, Measure, Again) (animation: scene:method) -->
+<style is:inline data-8b-part="scene:method">
+@layer scenes {
+[data-8b-live] #method .method__ring { position: sticky; top: 104px; }
+@media (min-width: 900px) { [data-8b-live] #method .method__ring { top: calc(50svh - min(25svh, 21vw)); } }
+[data-8b-live] #method .method__body { timeline-scope: --method-steps; }
+[data-8b-live] #method .method__steps { view-timeline: --method-steps block; }
+[data-8b-live] #method .method__arc, [data-8b-live] #method .method__arm { animation-timeline: --method-steps; animation-range: cover 38vh cover calc(100% - 62vh); animation-timing-function: linear; animation-fill-mode: both; }
+[data-8b-live] #method .method__arc { animation-name: method-arc-draw; }
+[data-8b-live] #method .method__arm { animation-name: method-arm-turn; }
+[data-8b-live] #method .step { --method-from: max(0, var(--i) / var(--n) - 0.03); animation-name: method-step-light; animation-timeline: --method-steps; animation-range: cover calc(38vh + var(--method-from) * (100% - 100vh)) cover calc(38vh + (var(--method-from) + 0.07) * (100% - 100vh)); animation-timing-function: linear; animation-fill-mode: both; }
+[data-8b-live] #method .method__station { --method-at: calc(var(--i) / var(--n)); animation-name: method-station-swell, method-station-settle; animation-timeline: --method-steps, --method-steps; animation-range: cover calc(38vh + var(--method-at) * (100% - 100vh)) cover calc(38vh + (var(--method-at) + 0.05) * (100% - 100vh)), cover calc(38vh + (var(--method-at) + 0.06) * (100% - 100vh)) cover calc(38vh + (var(--method-at) + 0.14) * (100% - 100vh)); animation-timing-function: linear(0, 0.1444, 0.278, 0.4011, 0.514, 0.6172, 0.711, 0.7958, 0.872, 0.9399, 1, 1.0526, 1.098, 1.1367, 1.169, 1.1953, 1.216, 1.2314, 1.242, 1.2481, 1.25, 1.2482, 1.243, 1.2348, 1.224, 1.2109, 1.196, 1.1796, 1.162, 1.1437, 1.125, 1.1063, 1.088, 1.0704, 1.054, 1.0391, 1.026, 1.0152, 1.007, 1.0018, 1), linear; animation-fill-mode: both, forwards; }
+@keyframes method-arc-draw { 0% { stroke-dashoffset: 1; } 100% { stroke-dashoffset: 0; } }
+@keyframes method-arm-turn { 0% { rotate: 0deg; } 100% { rotate: 360deg; } }
+@keyframes method-step-light { 0% { opacity: 0.2; } 100% { opacity: 1; } }
+@keyframes method-station-swell { 0% { scale: 0.4; } 100% { scale: 1.35; } }
+@keyframes method-station-settle { 0% { scale: 1.35; } 100% { scale: 1; } }
+}
+</style>
+<section id="method" data-8b-section="method" aria-labelledby="method-title">
+  <div class="method__head">
+    <h2 class="m-text-3" id="method-title" data-8b-motion="rise">How we work<span class="m-dot" aria-hidden="true"></span></h2>
+    <p class="m-text-5 method__lead" data-8b-motion="ink" data-8b-split="words">Every project runs the same loop of four steps. The fourth is the one most studios skip, and it is where the best work happens.</p>
+  </div>
+  <div class="method__body">
+    <div class="method__ring" aria-hidden="true" data-8b-items=":scope > .method__station" data-8b-fixed="4">
+      <svg class="method__svg" viewBox="0 0 400 400"><circle class="method__track" cx="200" cy="200" r="170"/><circle class="method__arc" cx="200" cy="200" r="170" pathLength="1" stroke-dasharray="1 1" stroke-dashoffset="0"/></svg>
+      {stations.map(([x, y]) => <span class="method__station" style={`--x:${x};--y:${y}`}></span>)}
+      <span class="method__arm"><span class="method__runner"></span></span>
+    </div>
+    <ol class="method__steps" data-8b-items=":scope > .step" data-8b-fixed="4">
+      {steps.map(step => <li class="step"><h3 class="m-text-4">{step.title}</h3><p class="m-text-5 step__text">{step.text}</p></li>)}
+    </ol>
+  </div>
+</section>
+
+<style is:global>
+@layer sections {
+#method { position: relative; padding: var(--space-2) var(--space-1); background: var(--color-2); }
+#method .method__head { display: grid; gap: 24px; max-width: 60rem; margin-bottom: clamp(48px, 9vh, 110px); }
+#method .method__lead { max-width: 34rem; }
+#method .method__body { display: grid; grid-template-columns: minmax(0, 1fr) 92px; gap: 20px; align-items: start; }
+#method .method__ring { position: relative; grid-column: 2; grid-row: 1; width: 100%; aspect-ratio: 1; }
+#method .method__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; rotate: -90deg; }
+#method .method__track { fill: none; stroke: color-mix(in srgb, var(--color-1) 14%, transparent); stroke-width: 1.5; }
+#method .method__arc { fill: none; stroke: var(--color-3); stroke-width: 5; stroke-linecap: round; }
+#method .method__station { position: absolute; left: calc(50% + 42.5% * var(--x)); top: calc(50% + 42.5% * var(--y)); width: 9%; height: 9%; margin: -4.5% 0 0 -4.5%; border-radius: var(--radius-2); background: var(--color-3); }
+#method .method__arm { position: absolute; inset: 7.5%; }
+#method .method__runner { position: absolute; left: 50%; top: 0; width: 15%; height: 15%; margin: -7.5% 0 0 -7.5%; border: 3px solid var(--color-3); border-radius: var(--radius-2); background: var(--color-2); }
+#method .method__steps { grid-column: 1; grid-row: 1; display: grid; gap: clamp(56px, 18vh, 170px); }
+#method .step { display: grid; gap: 14px; max-width: 34rem; }
+#method .step__text { color: var(--color-6); }
+@media (min-width: 900px) {
+  #method .method__body { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 7vw; }
+  #method .method__ring { grid-column: 1; width: min(100%, 50svh); justify-self: center; }
+  #method .method__steps { grid-column: 2; padding-block: 8svh 14svh; }
+}
+}
+</style>

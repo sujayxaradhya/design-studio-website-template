@@ -1,6 +1,6 @@
 # Credits
 
-Third-party photos, fonts and libraries used by `index.html`.
+Third-party photos, fonts and libraries used by the site (`src/`).
 
 ## Photos (Unsplash License)
 
@@ -42,7 +42,4 @@ Loaded from images.unsplash.com. Free to use under the [Unsplash License](https:
 
 ## Libraries
 
-`index.html` uses none. `index.gsap.html` uses:
-
-- GSAP 3.13.0, GreenSock, standard "no charge" license: https://gsap.com/standard-license
-- Lenis 1.3.4, darkroom.engineering, MIT: https://github.com/darkroomengineering/lenis
+None in the page. The site is built with Astro (MIT): https://astro.build

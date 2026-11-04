@@ -1,0 +1,72 @@
+---
+import { email, nav } from '../site';
+
+const menu = [...nav, { href: '#contact', label: 'Contact' }];
+---
+<!-- navigation: fixed top bar: wordmark, section links, Start a project button; phone menu overlay -->
+<header id="navigation" class="nav" data-8b-section="navigation">
+  <a class="nav__brand" href="#hero" aria-label="Onda, back to the top">Onda<span class="m-dot" aria-hidden="true"></span></a>
+  <nav class="nav__links" aria-label="Main">
+    <ul data-8b-items=":scope > li">
+      {nav.map(link => <li><a class="m-link-2" href={link.href}>{link.label}</a></li>)}
+    </ul>
+  </nav>
+  <a class="m-btn nav__cta" href="#contact"><span class="m-btn__label">Start a project</span></a>
+  <button class="m-btn-2 nav__menu" type="button" aria-expanded="false" aria-controls="menu"><span class="m-btn__label">Menu</span></button>
+  <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menu" hidden>
+    <div class="menu__top"><button class="m-icon menu__close" type="button" aria-label="Close the menu"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3l10 10M13 3 3 13"/></svg></button></div>
+    <ul class="menu__list" data-8b-items=":scope > li">
+      {menu.map(link => <li><a href={link.href}>{link.label}<span class="m-dot" aria-hidden="true"></span></a></li>)}
+    </ul>
+    <p class="m-text menu__foot">{email} · Lisbon and Brooklyn</p>
+  </div>
+</header>
+
+<style is:global>
+@layer sections {
+#navigation { position: fixed; z-index: 40; inset: 0 0 auto; display: flex; align-items: center; gap: 12px; padding: 14px var(--space-1); pointer-events: none; }
+#navigation > * { pointer-events: auto; }
+#navigation .nav__brand { display: inline-flex; align-items: baseline; min-height: 48px; padding: 9px 18px 0; border-radius: var(--radius-2); background: var(--color-1); color: var(--color-2); font-family: var(--font-1); font-size: 25px; font-weight: 800; line-height: 1.2; letter-spacing: -0.05em; text-decoration: none; }
+#navigation .nav__links { margin-inline: auto; padding: 0 8px; border-radius: var(--radius-2); background: var(--color-1); color: var(--color-2); }
+#navigation .nav__links ul { display: flex; }
+#navigation .nav__cta { box-shadow: var(--shadow-3); }
+#navigation .nav__links a { display: block; margin: 0 14px; padding-block: 14px; }
+#navigation .nav__links a::after { bottom: 10px; }
+#navigation .nav__menu { display: none; margin-left: auto; }
+#navigation .menu { position: fixed; inset: 0; z-index: 60; display: grid; grid-template-rows: auto 1fr auto; padding: 14px var(--space-1) 32px; background: var(--color-1); color: var(--color-2); overflow-y: auto; }
+#navigation .menu[hidden] { display: none; }
+#navigation .menu__top { display: flex; justify-content: flex-end; }
+#navigation .menu__list { align-self: center; display: grid; gap: 6px; }
+#navigation .menu__list a { font-family: var(--font-1); font-size: clamp(42px, 13vw, 72px); font-weight: 800; line-height: 1; letter-spacing: -0.05em; text-decoration: none; }
+#navigation .menu__foot { color: var(--color-5); }
+@media (max-width: 899px) {
+  #navigation .nav__links, #navigation .nav__cta { display: none; }
+  #navigation .nav__menu { display: inline-flex; }
+}
+}
+</style>
+
+<script>
+import { wheel } from '../scripts/motion-kit.js';
+
+const nav = document.getElementById('navigation')!;
+const toggle = nav.querySelector<HTMLElement>('.nav__menu')!;
+const menu = nav.querySelector<HTMLElement>('.menu')!;
+const close = menu.querySelector<HTMLElement>('.menu__close')!;
+const setOpen = (open: boolean) => {
+  menu.hidden = !open;
+  toggle.setAttribute('aria-expanded', String(open));
+  if (open) { wheel.stop(); close.focus(); } else { wheel.start(); toggle.focus(); }
+};
+toggle.addEventListener('click', () => setOpen(true));
+close.addEventListener('click', () => setOpen(false));
+menu.addEventListener('keydown', event => {
+  if (event.key === 'Escape') setOpen(false);
+  if (event.key !== 'Tab') return;
+  const items = [...menu.querySelectorAll<HTMLElement>('a, button')];
+  const first = items[0], last = items[items.length - 1];
+  if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+  else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+});
+menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { menu.hidden = true; toggle.setAttribute('aria-expanded', 'false'); wheel.start(); }));
+</script>

@@ -1,8 +1,8 @@
 # Free HTML design studio website template with scroll animations and no libraries
 
-Design studio website template: one free HTML file for a brand, product or digital agency, with ten sections from a one-word greeting to a contact form. The look is black, white and one violet, with giant type and a round photo that travels down the page as you scroll. It moves with plain CSS and no JavaScript libraries, in one file of 31 KB gzipped; AGENTS.md lets Claude Code, Cursor or Codex adapt it.
+Design studio website template: a free Astro site for a brand, product or digital agency, with ten sections from a one-word greeting to a contact form. The look is black, white and one violet, with giant type and a round photo that travels down the page as you scroll. It moves with plain CSS and no JavaScript libraries, one component per section; AGENTS.md lets Claude Code, Cursor or Codex adapt it.
 
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE) ![one HTML file: no build](https://img.shields.io/badge/one%20HTML%20file-no%20build-orange) ![dependencies: none](https://img.shields.io/badge/dependencies-none-brightgreen)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE) ![built with Astro](https://img.shields.io/badge/built%20with-Astro-orange) ![dependencies: none](https://img.shields.io/badge/dependencies-none-brightgreen)
 
 **[Live demo](https://8bsite.github.io/design-studio-website-template/)** · **[Use this template](https://github.com/new?template_name=design-studio-website-template&template_owner=8bsite)** · **[Download ZIP](https://github.com/8bsite/design-studio-website-template/archive/refs/heads/main.zip)** · **[Template page on 8b.com](https://8b.com/templates/onda/)**
 
@@ -12,24 +12,26 @@ Design studio website template: one free HTML file for a brand, product or digit
 
 ## Use it with Claude Code, Cursor or Codex
 
-Download the four files into your project folder (`curl.exe` in Windows PowerShell):
+Clone it and start the dev server (Node 22.12 or newer):
 
 ```bash
-curl -LO https://raw.githubusercontent.com/8bsite/design-studio-website-template/main/index.html
-curl -LO https://raw.githubusercontent.com/8bsite/design-studio-website-template/main/AGENTS.md
-curl -LO https://raw.githubusercontent.com/8bsite/design-studio-website-template/main/LICENSE
-curl -LO https://raw.githubusercontent.com/8bsite/design-studio-website-template/main/CREDITS.md
+git clone https://github.com/8bsite/design-studio-website-template.git
+cd design-studio-website-template
+npm install
+npm run dev
 ```
+
+`npm run build` writes the static site to `dist/`.
 
 Then fill in the angle brackets and give your agent this prompt:
 
 ```text
-Read AGENTS.md, then edit index.html. Make it the site for <your studio: name, what you make and for whom, offices, contacts, client projects and results, long term clients, services, how a project starts and is priced, team and open roles>. Motion is CSS scroll-driven animation plus the inline kit: keep the gate script in the head, the section ids, the data-8b attributes, the classes AGENTS.md lists, each heading's dot span and the length number on Hello and Let's talk; add no animation library. Keep four process steps, five collage photos and one journal photo per story. Never invent clients, results, rates, addresses or contacts; ask me.
+Read AGENTS.md, then edit the Astro components in src/. Make it the site for <your studio: name, what you make and for whom, offices, contacts, client projects and results, long term clients, services, how a project starts and is priced, team and open roles>. Motion is CSS scroll-driven animation plus the inline kit: keep the gate script in the head, the section ids, the data-8b attributes, the classes AGENTS.md lists, each heading's dot span and the length number on Hello and Let's talk; add no animation library. Keep four process steps, five collage photos and one journal photo per story. Never invent clients, results, rates, addresses or contacts; ask me.
 ```
 
 As a design studio website template for Claude Code, Cursor or Codex, and if you vibe code the site, the first edits are the studio name, the two-line statement, the five case cards and the six long-term clients, because every client and result in the demo is invented. Keep these counts in step: four process steps for the four ring stations, five photos in the desktop collage (each has its own position), and one frame photo per journal story, in the same order. Have the agent ask you for real offices, addresses, phone numbers, team size, rates and open roles instead of guessing.
 
-No agent? Click **[Use this template](https://github.com/new?template_name=design-studio-website-template&template_owner=8bsite)**, edit `index.html` on GitHub and turn on **Settings > Pages**.
+No agent? Click **[Use this template](https://github.com/new?template_name=design-studio-website-template&template_owner=8bsite)**, edit the files in `src/` on GitHub and set **Settings > Pages > Source** to **GitHub Actions**; `.github/workflows/deploy.yml` builds and publishes it.
 
 ## Sections and motion
 
@@ -63,15 +65,15 @@ No agent? Click **[Use this template](https://github.com/new?template_name=desig
 **Does it work as a design agency website if we do not do AI work?**  
 Yes. Case studies, long-term clients, services, process, team and journal suit any agency, so it also works as a digital agency template. Rewrite the hero line, the title and meta description, and delete or rewrite the Applied AI card, then update the Five practices lead.
 
-**Does this version need GSAP, Lenis or any other library?**  
-No. The scroll scenes are CSS scroll-driven animations, and a short inline script measures distances and smooths the mouse wheel. The page downloads 31 KB of code gzipped in one file against 76 KB for the GSAP build. Keep the gate script, the data-8b attributes, the heading dots and the --len number on Hello and Let's talk. Type and colour are also [set down as YAML tokens](https://8b.com/templates/design-md/).
+**Does it need GSAP, Lenis or any other library?**  
+No. The scroll scenes are CSS scroll-driven animations, and a small motion kit (`src/scripts/motion-kit.js`) measures distances and smooths the mouse wheel. Astro is the only dependency, and it runs at build time. Keep the gate script, the data-8b attributes, the heading dots and the --len number on Hello and Let's talk. Type and colour are also [set down as YAML tokens](https://8b.com/templates/design-md/).
 
 **Do the contact form and the newsletter field send anything?**  
 No, not yet. Both check what was typed and show a thank-you or error message, but nothing leaves the page until you connect a service such as Formspree or Netlify Forms. Without a service, remove the form together with its script and keep the email link.
 
 ## Is it the right base?
 
-Pick this base for a design studio website when the proof is a handful of strong projects and the page itself should feel designed. This is the light build: the same look and scroll behaviour, with no animation library and no script from a CDN, 31 KB of code gzipped in one file where the GSAP version needs 76 KB and three more requests. A creative agency or production house may find the [production house](https://8b.com/templates/sillage/) template nearer. The weak spot is depth: one page cannot hold dozens of projects, and the work section holds for a long sideways scroll.
+Pick this base for a design studio website when the proof is a handful of strong projects and the page itself should feel designed. It ships no animation library and no script from a CDN, only Astro's static output. A creative agency or production house may find the [production house](https://8b.com/templates/sillage/) template nearer. The weak spot is depth: one page cannot hold dozens of projects, and the work section holds for a long sideways scroll.
 
 ## Before you publish
 
@@ -80,9 +82,16 @@ Pick this base for a design studio website when the proof is a handful of strong
 
 ## Tech
 
-No JavaScript libraries: CSS scroll-driven animations and a small inline motion script with its own smooth wheel scrolling, 115 KB, no build step. Chrome and Edge 111+, Safari 16.2+, Firefox 113+ (it uses color-mix(), cascade layers, small/dynamic viewport units). Without scroll-driven animations (Firefox today) the scroll motion and the smooth wheel are off and each section shows its finished layout, while any load-in or looping animation still plays; with "reduce motion" on, the page is complete and nothing moves on its own (hover effects stay).
+Astro, static output. No JavaScript libraries in the page: CSS scroll-driven animations and a small motion kit with its own smooth wheel scrolling. Chrome and Edge 111+, Safari 16.2+, Firefox 113+ (it uses color-mix(), cascade layers, small/dynamic viewport units). Without scroll-driven animations (Firefox today) the scroll motion and the smooth wheel are off and each section shows its finished layout, while any load-in or looping animation still plays; with "reduce motion" on, the page is complete and nothing moves on its own (hover effects stay).
 
-A GSAP build of the same page is [`index.gsap.html`](index.gsap.html): GSAP 3.13.0, ScrollTrigger, Lenis 1.3.4 from jsDelivr, 137 KB; its scroll motion also plays in Firefox. Use one of the two files.
+```text
+src/layouts/Layout.astro   head, meta, motion gate
+src/pages/index.astro      section order
+src/components/*.astro     one per section: markup, data, styles, scene script
+src/styles/global.css      fonts, tokens, base, atoms, motion classes
+src/scripts/motion-kit.js  measuring, smooth wheel, reveal, word split
+src/site.ts                emails, offices, phones, nav links
+```
 
 ## License
 

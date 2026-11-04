@@ -1,0 +1,33 @@
+---
+const faqs = [
+  { q: 'What size of company do you work with?', a: 'Mostly companies between fifty and five thousand people, plus a few public bodies. Size matters less than whether the people who decide are in the room.' },
+  { q: 'How does a project usually start?', a: 'With a two-week listening sprint: interviews, data and a day on your front line. You get a short written point of view and a plan before any big commitment.' },
+  { q: 'Do you work alongside in-house teams?', a: 'Almost always. We pair with your designers, engineers and marketers, and we hand over every system we build so you are never stuck with us. Most partners keep us around anyway.' },
+  { q: 'How do you price the work?', a: 'Fixed fees for defined phases, then a monthly team for ongoing work. We are open about our rates on the first call.' },
+  { q: 'Where are you based?', a: 'Lisbon and Brooklyn, with people working remotely across Europe and the US east coast. We travel for workshops and launches.' },
+];
+---
+<!-- faq: questions and answers (native <details>) -->
+<section id="faq" data-8b-section="faq" aria-labelledby="faq-title">
+  <h2 class="m-text-3 faq__title" id="faq-title" data-8b-motion="rise">Fair questions<span class="m-dot" aria-hidden="true"></span></h2>
+  <div class="faq__list" data-8b-items=":scope > details">
+    {faqs.map(faq => <details class="faq__item"><summary class="m-text-7">{faq.q}<span class="faq__mark" aria-hidden="true"></span></summary><p class="m-text faq__answer">{faq.a}</p></details>)}
+  </div>
+</section>
+
+<style is:global>
+@layer sections {
+#faq { position: relative; display: grid; gap: 40px; padding: var(--space-2) var(--space-1); background: var(--color-2); border-top: 1px solid color-mix(in srgb, var(--color-1) 12%, transparent); }
+#faq .faq__title { font-size: clamp(48px, 7.2vw, 116px); }
+#faq .faq__item { border-bottom: 1px solid color-mix(in srgb, var(--color-1) 16%, transparent); }
+#faq .faq__item:first-child { border-top: 1px solid color-mix(in srgb, var(--color-1) 16%, transparent); }
+#faq summary { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 22px 0; cursor: pointer; list-style: none; }
+#faq summary::-webkit-details-marker { display: none; }
+#faq .faq__mark { position: relative; flex: none; width: 34px; height: 34px; border: 1.5px solid var(--color-1); border-radius: var(--radius-2); }
+#faq .faq__mark::after { content: ""; position: absolute; inset: 0; margin: auto; width: 10px; height: 10px; border-radius: var(--radius-2); background: var(--color-3); transition: transform .45s cubic-bezier(.7, 0, .2, 1); }
+#faq details[open] .faq__mark::after { transform: scale(3.1); }
+#faq .faq__answer { max-width: 40rem; padding: 0 0 26px; color: var(--color-6); }
+@media (hover: hover) { #faq summary:hover .faq__mark::after { transform: scale(1.8); } #faq details[open] summary:hover .faq__mark::after { transform: scale(3.1); } }
+@media (min-width: 900px) { #faq { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 6vw; } }
+}
+</style>

@@ -1,0 +1,104 @@
+---
+import { careers, email, nav, offices, tel } from '../site';
+
+const social = [
+  { href: 'https://www.instagram.com/', label: 'Instagram' },
+  { href: 'https://www.linkedin.com/', label: 'LinkedIn' },
+  { href: 'https://vimeo.com/', label: 'Vimeo' },
+];
+const phone = offices[0].phone;
+---
+<!-- footer: closing greeting "Bye" with the round photo full stop, link columns, newsletter, copyright and the Design: 8B credit (animation: scene:footer) -->
+<style is:inline data-8b-part="scene:footer">
+@layer scenes {
+[data-8b-live] { --ease-power2-inout: linear(0, 0.0001, 0.0005, 0.0017, 0.004, 0.0078, 0.0135, 0.0214, 0.032, 0.0456, 0.0625, 0.0832, 0.108, 0.1373, 0.1715, 0.2109, 0.256, 0.3071, 0.3645, 0.4287, 0.5, 0.5713, 0.6355, 0.6929, 0.744, 0.7891, 0.8285, 0.8627, 0.892, 0.9168, 0.9375, 0.9544, 0.968, 0.9786, 0.9865, 0.9922, 0.996, 0.9983, 0.9995, 0.9999, 1); }
+[data-8b-live] #footer .m-text-2 { view-timeline: --footer-t1 block; view-timeline-inset: 0; }
+[data-8b-live] #footer .footer__aperture { animation-name: footer-aperture-swell; animation-timeline: --footer-t1; animation-range: cover calc(100% - 100vh) cover calc(100% - 55vh); animation-timing-function: var(--ease-power2-inout); animation-fill-mode: both; transform: none; }
+[data-8b-live] #footer .footer__word { animation-name: footer-word-rise; animation-timeline: --footer-t1; animation-range: cover calc(100% - 100vh) cover calc(100% - 64vh); animation-timing-function: cubic-bezier(0.3333, 1, 0.6667, 1); animation-fill-mode: both; transform: none; }
+[data-8b-live] #footer .footer__tint { animation-name: footer-tint-clear; animation-timeline: --footer-t1; animation-range: cover calc(100% - 79.75vh) cover calc(100% - 57.25vh); animation-timing-function: linear; animation-fill-mode: both; }
+@keyframes footer-aperture-swell { 0% { scale: var(--footer-dot, 1); } 100% { scale: 1; } }
+@keyframes footer-word-rise { 0% { translate: 0px 30%; } 100% { translate: 0px 0px; } }
+@keyframes footer-tint-clear { 0% { opacity: 1; } 100% { opacity: 0; } }
+}
+</style>
+<footer id="footer" data-8b-section="footer">
+  <p class="m-text-2 footer__bye" style="--len:3"><span class="footer__word">Bye</span><span class="footer__period" aria-hidden="true"><span class="footer__aperture"><img class="footer__img" src="https://images.unsplash.com/photo-1754738381783-f9a2847bfef2?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8MXx8cHVycGxlJTIwYWJzdHJhY3QlMjAzZCUyMHNoYXBlfGVufDF8Mnx8fDE3OTEyMDk2Mjd8MA&ixlib=rb-4.1.0&auto=format&fit=crop&w=470&h=470&q=60" width="1200" height="1200" alt=""><span class="footer__tint"></span></span></span></p>
+  <div class="footer__grid">
+    <nav class="footer__col" aria-label="Footer">
+      <p class="m-text-6 footer__label">Explore</p>
+      {nav.map(link => <a class="m-link-2" href={link.href}>{link.label}</a>)}
+    </nav>
+    <div class="footer__col">
+      <p class="m-text-6 footer__label">Talk</p>
+      <a data-8b-placeholder="email" class="m-link-2" href={`mailto:${email}`}>{email}</a>
+      <a data-8b-placeholder="email" class="m-link-2" href={`mailto:${careers}`}>{careers}</a>
+      <a data-8b-placeholder="phone" class="m-link-2" href={tel(phone)}>{phone}</a>
+    </div>
+    <div class="footer__col">
+      <p class="m-text-6 footer__label">Follow</p>
+      {social.map(link => <a data-8b-placeholder="social" class="m-link-2" href={link.href}>{link.label}</a>)}
+    </div>
+    <form data-8b-placeholder="form" class="footer__news" novalidate>
+      <label class="m-text-7" for="news-email">Onda in your inbox, once a month<span class="m-dot" aria-hidden="true"></span></label>
+      <div class="footer__field">
+        <input class="m-field" id="news-email" name="email" type="email" autocomplete="email" placeholder="Your email" required>
+        <button class="m-icon" type="submit" aria-label="Subscribe"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3.5 13.5 8 9 12.5"/></svg></button>
+      </div>
+      <p class="m-text-6 footer__note" role="status" aria-live="polite" data-idle="No spam, one email a month, unsubscribe in one click." data-success="You are in. See you next month." data-error="Please enter a valid email address.">No spam, one email a month, unsubscribe in one click.</p>
+    </form>
+  </div>
+  <div class="footer__legal m-text-6"><p>© 2026 Onda Studio · Design: <a href="https://8b.com/" style="color:inherit" data-8b-credit>8B</a></p><p>Made in Lisbon and Brooklyn</p></div>
+</footer>
+
+<style is:global>
+@layer sections {
+#footer { --ap: min(30vw, 44svh); position: relative; padding: clamp(80px, 12vh, 140px) var(--space-1) 28px; background: var(--color-1); color: var(--color-2); overflow: clip; }
+#footer .footer__bye { position: relative; padding-top: var(--ap); white-space: nowrap; font-size: min(36vw, 40svh); }
+#footer .footer__word { display: inline-block; }
+#footer .footer__period { position: relative; display: inline-block; width: 0.19em; height: 0.19em; margin-left: 0.035em; vertical-align: baseline; }
+#footer .footer__aperture { position: absolute; left: 0; bottom: 0; width: var(--ap); height: var(--ap); overflow: hidden; border-radius: var(--radius-2); background: var(--color-3); transform-origin: 0 100%; }
+#footer .footer__img { width: 100%; height: 100%; object-fit: cover; }
+#footer .footer__tint { position: absolute; inset: 0; background: var(--color-3); opacity: 0; }
+#footer .footer__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 24px; margin-top: clamp(48px, 9vh, 96px); padding-top: 32px; border-top: 1px solid color-mix(in srgb, var(--color-2) 16%, transparent); }
+#footer .footer__col { display: grid; align-content: start; gap: 6px; }
+#footer .footer__label { margin-bottom: 8px; color: var(--color-5); }
+#footer .footer__news { grid-column: 1 / -1; display: grid; gap: 14px; }
+#footer .footer__field { display: flex; align-items: center; gap: 12px; }
+#footer .footer__field .m-field { flex: 1; }
+#footer .footer__note { color: var(--color-5); }
+#footer .footer__legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; margin-top: 56px; color: var(--color-5); }
+@media (min-width: 900px) {
+  #footer .footer__bye { font-size: min(24vw, 40svh); }
+  #footer .footer__grid { grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(0, 2fr); }
+  #footer .footer__news { grid-column: auto; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  #footer .footer__img { animation: footer-turn 46s linear infinite; }
+  #footer.is-offscreen .footer__img { animation-play-state: paused; }
+  @keyframes footer-turn { to { transform: rotate(360deg); } }
+}
+}
+</style>
+
+<script>
+import { measure, scene, set, watchOffscreen } from '../scripts/motion-kit.js';
+
+const footer = document.getElementById('footer')!;
+const form = footer.querySelector<HTMLFormElement>('.footer__news')!;
+const note = form.querySelector<HTMLElement>('.footer__note')!;
+// ponytail: checks the field in the browser only; connect a newsletter service to send (AGENTS.md).
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const ok = form.checkValidity();
+  note.textContent = (ok ? note.dataset.success : note.dataset.error) ?? '';
+  if (ok) form.reset();
+});
+watchOffscreen(footer);
+
+// Bye's full stop grows from a dot into the round photo.
+scene('footer', () => {
+  const aperture = footer.querySelector<HTMLElement>('.footer__aperture')!;
+  const period = footer.querySelector<HTMLElement>('.footer__period')!;
+  measure(() => set(footer, { '--footer-dot': (period.offsetWidth / aperture.offsetWidth).toFixed(4) }));
+});
+</script>
