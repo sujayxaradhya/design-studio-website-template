@@ -1,0 +1,52 @@
+---
+import ArrowLink from './ArrowLink.astro';
+
+const index = [
+  { href: '#work', label: 'See the work' },
+  { href: '#capabilities', label: 'What we do' },
+  { href: '#method', label: 'How we work' },
+  { href: '#studio', label: 'Inside the studio' },
+  { href: '#journal', label: 'Ideas and news' },
+  { href: '#contact', label: 'Start a project' },
+];
+---
+<!-- statement: two-line statement of what the studio does, a lead paragraph and an index of links into the page (animation: scene:statement) -->
+<style is:inline data-8b-part="scene:statement">
+@layer scenes {
+[data-8b-live] #statement { view-timeline: --statement-t1 block; view-timeline-inset: 0; }
+[data-8b-live] #statement-title > span:nth-of-type(-n+2), [data-8b-live] #statement .m-dot { animation-timeline: --statement-t1; animation-fill-mode: both; transform: none; }
+[data-8b-live] #statement-title > span:nth-of-type(-n+2) { animation-timing-function: cubic-bezier(0.3333, 1, 0.6667, 1); }
+[data-8b-live] #statement-title > span:nth-of-type(1) { animation-name: statement-span-statement-line-translate; animation-range: cover 0% cover 56vh; }
+[data-8b-live] #statement-title > span:nth-of-type(2) { animation-name: statement-span-statement-line-translate-2; animation-range: cover 8.4vh cover 64.4vh; }
+[data-8b-live] #statement .m-dot { animation-name: statement-span-m-dot-scale; animation-range: cover 63vh cover 70vh; animation-timing-function: linear; }
+@keyframes statement-span-statement-line-translate { 0% { translate: -6% 85%; } 100% { translate: 0px 0px; } }
+@keyframes statement-span-statement-line-translate-2 { 0% { translate: 9% 85%; } 100% { translate: 0px 0px; } }
+@keyframes statement-span-m-dot-scale { 0% { scale: 0; } 99.998% { scale: 0.999; } 100% { scale: 1; } }
+}
+</style>
+<section id="statement" data-8b-section="statement" aria-labelledby="statement-title">
+  <h2 class="m-text-3 statement__title" id="statement-title"><span class="statement__line">We make the things</span><span class="statement__line">people come back&nbsp;to<span class="m-dot statement__dot" aria-hidden="true"></span></span></h2>
+  <div class="statement__body">
+    <p class="m-text-5 statement__lead" data-8b-motion="ink" data-8b-split="words">Launching is easy. Being chosen again on an ordinary Tuesday is the hard part, whether you run a bank, a bakery or a museum. It takes strategy, craft, engineering and a lot of listening, and it is the only kind of work we do.</p>
+    <nav class="statement__index" aria-label="On this page" data-8b-motion="arrive" data-8b-enter="85%">
+      <ul data-8b-items=":scope > li">
+        {index.map(link => <li><ArrowLink {...link} /></li>)}
+      </ul>
+    </nav>
+  </div>
+</section>
+
+<style is:global>
+@layer sections {
+#statement { position: relative; padding: var(--space-2) var(--space-1) calc(var(--space-2) * 0.9); background: var(--color-2); }
+#statement .statement__title { font-size: clamp(40px, 8.7vw, 140px); }
+#statement .statement__line { display: block; }
+#statement .statement__body { display: grid; grid-template-columns: minmax(0, 1fr); gap: 48px; margin-top: clamp(56px, 11vh, 120px); }
+#statement .statement__lead { max-width: 36rem; }
+#statement .statement__index ul { display: grid; gap: 12px; }
+@media (min-width: 900px) {
+  #statement .statement__body { grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); align-items: start; }
+  #statement .statement__lead { font-size: clamp(24px, 2.35vw, 34px); line-height: 1.16; letter-spacing: -0.025em; }
+}
+}
+</style>

@@ -1,0 +1,85 @@
+---
+import { email, offices, tel } from '../site';
+
+const topics = ['A new brand', 'A product or app', 'A campaign', 'Something else'];
+---
+<!-- contact: violet contact field: big "Let's talk", email, two offices with phones, and a form (placeholders) (animation: scene:contact) -->
+<style is:inline data-8b-part="scene:contact">
+@layer scenes {
+[data-8b-live] { --ease-power2-in: linear(0, 0, 0.0001, 0.0004, 0.001, 0.0019, 0.0034, 0.0054, 0.008, 0.0114, 0.0156, 0.0208, 0.027, 0.0343, 0.0429, 0.0527, 0.064, 0.0768, 0.0911, 0.1072, 0.125, 0.1447, 0.1664, 0.1901, 0.216, 0.2441, 0.2746, 0.3075, 0.343, 0.3811, 0.4219, 0.4655, 0.512, 0.5615, 0.6141, 0.6699, 0.729, 0.7914, 0.8574, 0.9269, 1); }
+[data-8b-live] #contact { view-timeline: --contact-t1 block; view-timeline-inset: 0; }
+[data-8b-live] #contact .contact__voice, [data-8b-live] #contact .m-dot { animation-timeline: --contact-t1; animation-fill-mode: both; transform: none; }
+[data-8b-live] #contact .contact__voice { animation-name: contact-span-contact-voice-fontweight, contact-span-contact-voice-scale; animation-range: cover 0% cover 85vh; animation-timing-function: linear; }
+[data-8b-live] #contact .m-dot { animation-name: contact-span-m-dot-scale, contact-span-m-dot-translate; animation-range: cover 63.75vh cover 85vh; animation-timing-function: cubic-bezier(0.3333, 0, 0.6667, 0), var(--ease-power2-in); }
+@keyframes contact-span-contact-voice-fontweight { 0% { font-weight: 400; } 100% { font-weight: 800; } }
+@keyframes contact-span-contact-voice-scale { 0% { scale: 0.82; } 100% { scale: 1; } }
+@keyframes contact-span-m-dot-scale { 0% { scale: 0; } 99.998% { scale: 0.9988; } 100% { scale: 1; } }
+@keyframes contact-span-m-dot-translate { 0% { translate: 0px -400%; } 99.998% { translate: 0px -0.48%; } 100% { translate: 0px 0px; } }
+}
+</style>
+<section id="contact" data-8b-section="contact" aria-labelledby="contact-title">
+  <h2 class="m-text-3 contact__title" id="contact-title" style="--len:10"><span class="contact__voice">Let's talk</span><span class="m-dot" aria-hidden="true"></span></h2>
+  <div class="contact__grid">
+    <div class="contact__info">
+      <p class="m-text-5 contact__lead">Tell us what you are making. A real person reads every message and replies within two working days.</p>
+      <a data-8b-placeholder="email" class="contact__mail" href={`mailto:${email}`}><span>{email}</span></a>
+      <dl class="contact__places">
+        {offices.map(office => <div><dt class="m-text-7">{office.city}</dt><dd class="m-text">{office.address[0]}<br>{office.address[1]}</dd><dd class="m-text"><a data-8b-placeholder="phone" href={tel(office.phone)}>{office.phone}</a></dd></div>)}
+      </dl>
+    </div>
+    <form data-8b-placeholder="form" class="contact__form m-surface" novalidate>
+      <div class="contact__pair">
+        <label class="m-text-6">Your name<input class="m-field" name="name" type="text" autocomplete="name" required></label>
+        <label class="m-text-6">Email<input class="m-field" name="email" type="email" autocomplete="email" required></label>
+      </div>
+      <div class="contact__pair">
+        <label class="m-text-6">Company<input class="m-field" name="company" type="text" autocomplete="organization"></label>
+        <label class="m-text-6">What can we help with?<select class="m-field" name="topic">{topics.map(topic => <option>{topic}</option>)}</select></label>
+      </div>
+      <label class="m-text-6">A few words about the project<textarea class="m-field" name="message" rows="3" required></textarea></label>
+      <div class="contact__actions">
+        <button class="m-btn" type="submit"><span class="m-btn__label">Send message</span></button>
+        <p class="m-text contact__status" role="status" aria-live="polite" data-success="Thank you. We will reply within two working days." data-error="Please add your name, a valid email and a few words about the project."></p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<style is:global>
+@layer sections {
+#contact { position: relative; padding: var(--space-2) var(--space-1); background: var(--color-3); color: var(--color-2); }
+#contact :focus-visible { outline-color: var(--color-2); }
+#contact .contact__title { font-size: min(19vw, calc((100vw - 2 * var(--space-1)) / (var(--len) * 0.5))); line-height: 0.86; white-space: nowrap; }
+#contact .contact__title .m-dot { background: var(--color-2); }
+#contact .contact__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 48px; margin-top: clamp(40px, 8vh, 88px); }
+#contact .contact__info { display: grid; align-content: start; gap: 32px; }
+#contact .contact__lead { max-width: 30rem; }
+#contact .contact__mail { font-family: var(--font-1); font-size: clamp(28px, 3.4vw, 50px); font-weight: 700; line-height: 1; letter-spacing: -0.035em; text-decoration: none; }
+#contact .contact__mail span { background: linear-gradient(currentColor, currentColor) 0 100% / 100% 2px no-repeat; padding-bottom: 4px; }
+#contact .contact__places { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 24px; }
+#contact .contact__places dt { margin-bottom: 6px; }
+#contact .contact__places dd a { text-decoration: none; }
+#contact .contact__form { display: grid; gap: 18px; padding: clamp(22px, 3vw, 40px); }
+#contact .contact__form label { display: grid; gap: 2px; color: var(--color-6); }
+#contact .contact__form .m-field { color: var(--color-1); }
+#contact .contact__form :focus-visible { outline-color: var(--color-3); }
+#contact .contact__pair { display: grid; gap: 18px; }
+#contact .contact__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding-top: 6px; }
+#contact .contact__status { color: var(--color-1); }
+@media (min-width: 640px) { #contact .contact__pair { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1000px) { #contact .contact__grid { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 6vw; } }
+}
+</style>
+
+<script>
+// ponytail: checks fields in the browser only; connect Formspree or Netlify Forms to send (AGENTS.md).
+const form = document.querySelector<HTMLFormElement>('#contact .contact__form')!;
+const status = form.querySelector<HTMLElement>('.contact__status')!;
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const ok = form.checkValidity();
+  status.textContent = (ok ? status.dataset.success : status.dataset.error) ?? '';
+  if (ok) form.reset();
+  else form.querySelector<HTMLElement>(':invalid')?.focus();
+});
+</script>
