@@ -1,7 +1,6 @@
 import { defineConfig } from 'astro/config';
 
-// GitHub Pages project site; on your own domain set `site` to it and drop `base`.
+// Hosted by BetterCMS at the site root.
 export default defineConfig({
-  site: 'https://8bsite.github.io',
-  base: '/design-studio-website-template',
+  site: 'https://design-studio-website-template-zdimjj.bettercms.site',
 });
