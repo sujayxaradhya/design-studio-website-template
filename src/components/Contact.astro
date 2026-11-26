@@ -42,8 +42,8 @@ const topics = ['A new brand', 'A product or app', 'A campaign', 'Something else
       <div class="contact__actions">
         <button class="m-btn" type="submit"><span class="m-btn__label" data-bcms-field="m-btn__label.text" data-bcms-kind="text">{bcms(bcmsHome, "m-btn__label.text", "Send message")}</span></button>
         <p class="m-text contact__status" role="status" aria-live="polite"></p>
-        <span hidden data-msg="success" data-bcms-field="status.success" data-bcms-kind="text">{bcms(bcmsHome, "status.success", "Thank you. We will reply within two working days.")}</span>
-        <span hidden data-msg="error" data-bcms-field="status.error" data-bcms-kind="text">{bcms(bcmsHome, "status.error", "Please add your name, a valid email and a few words about the project.")}</span>
+        <span hidden data-msg="success" data-bcms-field="status.success" data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, "status.success")}>{bcms(bcmsHome, "status.success", "Thank you. We will reply within two working days.")}</span>
+        <span hidden data-msg="error" data-bcms-field="status.error" data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, "status.error")}>{bcms(bcmsHome, "status.error", "Please add your name, a valid email and a few words about the project.")}</span>
       </div>
     </form>
   </div>
