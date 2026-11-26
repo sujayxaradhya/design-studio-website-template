@@ -45,7 +45,9 @@ const phone = offices[0].phone;
         <input class="m-field" id="news-email" name="email" type="email" autocomplete="email" placeholder={bcmsLayout("footer:m-field.placeholder", "Your email")} required data-bcms-props="layout:footer:m-field.placeholder|text|placeholder">
         <button class="m-icon" type="submit" aria-label={bcmsLayout("footer:m-icon.aria", "Subscribe")} data-bcms-props="layout:footer:m-icon.aria|text|aria-label"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3.5 13.5 8 9 12.5"/></svg></button>
       </div>
-      <p class="m-text-6 footer__note" role="status" aria-live="polite" data-idle={bcmsLayout("footer:m-text-6.text-4", "No spam, one email a month, unsubscribe in one click.")} data-success={bcmsLayout("footer:newsletter.success", "You are in. See you next month.")} data-error={bcmsLayout("footer:newsletter.error", "Please enter a valid email address.")} data-bcms-props="layout:footer:newsletter.success|text|data-success;layout:footer:newsletter.error|text|data-error" data-bcms-layout-field="layout:footer:m-text-6.text-4" data-bcms-kind="text">{bcmsLayout("footer:m-text-6.text-4", "No spam, one email a month, unsubscribe in one click.")}</p>
+      <p class="m-text-6 footer__note" role="status" aria-live="polite" data-idle={bcmsLayout("footer:m-text-6.text-4", "No spam, one email a month, unsubscribe in one click.")} data-bcms-layout-field="layout:footer:m-text-6.text-4" data-bcms-kind="text">{bcmsLayout("footer:m-text-6.text-4", "No spam, one email a month, unsubscribe in one click.")}</p>
+      <span hidden data-msg="success" data-bcms-layout-field="layout:footer:newsletter.success" data-bcms-kind="text">{bcmsLayout("footer:newsletter.success", "You are in. See you next month.")}</span>
+      <span hidden data-msg="error" data-bcms-layout-field="layout:footer:newsletter.error" data-bcms-kind="text">{bcmsLayout("footer:newsletter.error", "Please enter a valid email address.")}</span>
     </form>
   </div>
   <div class="footer__legal m-text-6"><p><span data-bcms-layout-field="layout:footer:copyright-line" data-bcms-kind="text">{bcmsLayout("footer:copyright-line", "© 2026 Onda Studio")}</span> · <span data-bcms-layout-field="layout:footer:credit-label" data-bcms-kind="text">{bcmsLayout("footer:credit-label", "Design:")}</span> <a href={bcmsLayout("footer:credit-href", "https://8b.com/", "href")} style="color:inherit" data-8b-credit data-bcms-layout-field="layout:footer:credit-name" data-bcms-kind="text" data-bcms-props="layout:footer:credit-href|url|href">{bcmsLayout("footer:credit-name", "8B")}</a></p><p data-bcms-layout-field="layout:footer:footer__legal.text-2" data-bcms-kind="text">{bcmsLayout("footer:footer__legal.text-2", "Made in Lisbon and Brooklyn")}</p></div>
@@ -91,7 +93,7 @@ const note = form.querySelector<HTMLElement>('.footer__note')!;
 form.addEventListener('submit', event => {
   event.preventDefault();
   const ok = form.checkValidity();
-  note.textContent = (ok ? note.dataset.success : note.dataset.error) ?? '';
+  note.textContent = form.querySelector(`[data-msg="${ok ? 'success' : 'error'}"]`)?.textContent ?? '';
   if (ok) form.reset();
 });
 watchOffscreen(footer);

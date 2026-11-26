@@ -13,8 +13,8 @@ Deploy `dist/` with LICENSE and CREDITS.md; GitHub Pages builds it with `.github
 - The motion parts `motion-gate` (head, `is:inline`: sets `data-8b-live` on `<html>` only with scroll-driven animation support and no reduced motion), `src/scripts/motion-kit.js` and `motion`, and every other `data-8b-*` attribute (`data-8b-items` groups, `data-8b-off`, `data-8b-enter`): the CSS and the kit read them. Items ordered by `--i` follow their group; counts the CSS fixes are listed under Known limits (`data-8b-fixed` marks such a group).
 - Selectors the component scripts use:
   - `Navigation.astro`: `.nav__menu` `.menu` `.menu__close`
-  - `Contact.astro`: `.contact__form` `.contact__status` `data-success` `data-error`
-  - `Footer.astro`: `.footer__news` `.footer__note` `data-success` `data-error`
+  - `Contact.astro`: `.contact__form` `.contact__status` `[data-msg]` (hidden success and error messages)
+  - `Footer.astro`: `.footer__news` `.footer__note` `[data-msg]` (hidden success and error messages)
   - `Hero.astro`: `.hero__aperture` `data-8b-section` `.statement__dot`
   - `Work.astro`: `.work__stage` `.work__window` `.work__track` `.case`
   - `Again.astro`: `.again__stage` `.again__head` `.again__wheel` `.partner`
