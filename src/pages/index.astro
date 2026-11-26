@@ -1,0 +1,33 @@
+---
+import BcmsSections from "@bettercms-ai/astro/components/BcmsSections.astro";
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Statement from '../components/Statement.astro';
+import Work from '../components/Work.astro';
+import Again from '../components/Again.astro';
+import Capabilities from '../components/Capabilities.astro';
+import Method from '../components/Method.astro';
+import Studio from '../components/Studio.astro';
+import Journal from '../components/Journal.astro';
+import Faq from '../components/Faq.astro';
+import Contact from '../components/Contact.astro';
+---
+<Layout
+  title="Onda — brand, product and AI studio"
+  description="Onda is an independent brand, product and AI studio in Lisbon and Brooklyn. We make the things people come back to."
+>
+  <main id="main">
+    <BcmsSections page="home">
+    <Fragment slot="sec0"><Hero /></Fragment>
+    <Fragment slot="sec1"><Statement /></Fragment>
+    <Fragment slot="sec2"><Work /></Fragment>
+    <Fragment slot="sec3"><Again /></Fragment>
+    <Fragment slot="sec4"><Capabilities /></Fragment>
+    <Fragment slot="sec5"><Method /></Fragment>
+    <Fragment slot="sec6"><Studio /></Fragment>
+    <Fragment slot="sec7"><Journal /></Fragment>
+    <Fragment slot="sec8"><Faq /></Fragment>
+    <Fragment slot="sec9"><Contact /></Fragment>
+    </BcmsSections>
+  </main>
+</Layout>

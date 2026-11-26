@@ -1,0 +1,132 @@
+{
+  "runs": [
+    {
+      "id": "8e46fae2-8086-4f8c-b842-3d6395e5a4d7",
+      "at": "2026-11-26T20:53:44.433Z",
+      "base": "d3087b94debf5b88eeee147cf5ac997d7d24d9af",
+      "branch": "bettercms/editable",
+      "routes": null,
+      "briefDigest": "sha256:d7bec32467d1423d44451fdac41c3231984980d0de94695bf607429de28baa74",
+      "files": [
+        "bcms-content/home.json",
+        "bcms-content/layout.json",
+        "src/bcms-content.ts",
+        "src/components/Again.astro",
+        "src/components/ArrowLink.astro",
+        "src/components/Capabilities.astro",
+        "src/components/Contact.astro",
+        "src/components/Faq.astro",
+        "src/components/Footer.astro",
+        "src/components/Hero.astro",
+        "src/components/Journal.astro",
+        "src/components/Method.astro",
+        "src/components/Navigation.astro",
+        "src/components/Statement.astro",
+        "src/components/Studio.astro",
+        "src/components/Work.astro",
+        "src/layouts/Layout.astro",
+        "src/bcms-content.types.ts"
+      ],
+      "coverage": {
+        "literals": 80,
+        "bound": 73
+      },
+      "renderEqual": [
+        "/"
+      ],
+      "ms": {
+        "build": 2299,
+        "bind": 4425,
+        "render": 859
+      }
+    },
+    {
+      "id": "b025472a-c60e-4d68-8cbd-a09998193971",
+      "kind": "sectionize",
+      "at": "2026-11-26T20:54:59.248Z",
+      "from": "b7c91eb5ddd213d2c10f5b8e68af27a983e54a9f",
+      "branch": "bettercms/editable",
+      "files": [
+        "src/pages/index.astro",
+        "package.json"
+      ],
+      "pages": [
+        {
+          "page": "home",
+          "file": "src/pages/index.astro",
+          "sections": [
+            {
+              "id": "sec0",
+              "name": "Hero",
+              "sectionType": "hero",
+              "component": "src/components/Hero.astro"
+            },
+            {
+              "id": "sec1",
+              "name": "Statement",
+              "sectionType": "statement",
+              "component": "src/components/Statement.astro"
+            },
+            {
+              "id": "sec2",
+              "name": "Selected work",
+              "sectionType": "work",
+              "component": "src/components/Work.astro"
+            },
+            {
+              "id": "sec3",
+              "name": "Long-term clients",
+              "sectionType": "again",
+              "component": "src/components/Again.astro"
+            },
+            {
+              "id": "sec4",
+              "name": "Services",
+              "sectionType": "capabilities",
+              "component": "src/components/Capabilities.astro"
+            },
+            {
+              "id": "sec5",
+              "name": "Process",
+              "sectionType": "method",
+              "component": "src/components/Method.astro"
+            },
+            {
+              "id": "sec6",
+              "name": "Studio",
+              "sectionType": "studio",
+              "component": "src/components/Studio.astro"
+            },
+            {
+              "id": "sec7",
+              "name": "Journal",
+              "sectionType": "journal",
+              "component": "src/components/Journal.astro"
+            },
+            {
+              "id": "sec8",
+              "name": "FAQ",
+              "sectionType": "faq",
+              "component": "src/components/Faq.astro"
+            },
+            {
+              "id": "sec9",
+              "name": "Contact",
+              "sectionType": "contact",
+              "component": "src/components/Contact.astro"
+            }
+          ]
+        }
+      ],
+      "renderEqual": [
+        "/"
+      ],
+      "ms": {
+        "build": 2328,
+        "wrap": 1209,
+        "install": 8533,
+        "render": 1459
+      }
+    }
+  ]
+}
