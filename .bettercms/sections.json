@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "pages": [
+    {
+      "template": "src/pages/index.astro",
+      "candidates": "sha256:21f92f3ccff843a53c1c880fbf026c7527ce0627c4a9e281d01be27e2893ab41",
+      "sections": [
+        {
+          "id": "sec0",
+          "name": "Hero",
+          "sectionType": "hero"
+        },
+        {
+          "id": "sec1",
+          "name": "Statement",
+          "sectionType": "statement"
+        },
+        {
+          "id": "sec2",
+          "name": "Selected work",
+          "sectionType": "work"
+        },
+        {
+          "id": "sec3",
+          "name": "Long-term clients",
+          "sectionType": "again"
+        },
+        {
+          "id": "sec4",
+          "name": "Services",
+          "sectionType": "capabilities"
+        },
+        {
+          "id": "sec5",
+          "name": "Process",
+          "sectionType": "method"
+        },
+        {
+          "id": "sec6",
+          "name": "Studio",
+          "sectionType": "studio"
+        },
+        {
+          "id": "sec7",
+          "name": "Journal",
+          "sectionType": "journal"
+        },
+        {
+          "id": "sec8",
+          "name": "FAQ",
+          "sectionType": "faq"
+        },
+        {
+          "id": "sec9",
+          "name": "Contact",
+          "sectionType": "contact"
+        }
+      ]
+    }
+  ]
+}

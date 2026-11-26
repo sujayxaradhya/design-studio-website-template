@@ -1,0 +1,804 @@
+{
+  "version": 3,
+  "toolVersion": "0.50.0",
+  "sha": "6d0332c1befa59570b5885942ec9859922345db1",
+  "framework": "astro",
+  "build": {
+    "command": "npm run build",
+    "outDir": "dist"
+  },
+  "templates": [
+    {
+      "id": "src/pages/index.astro",
+      "file": "src/pages/index.astro",
+      "pattern": "/",
+      "routes": [
+        "/"
+      ],
+      "components": [
+        "src/layouts/Layout.astro",
+        "src/components/Navigation.astro",
+        "src/components/Hero.astro",
+        "src/components/ArrowLink.astro",
+        "src/components/Statement.astro",
+        "src/components/Work.astro",
+        "src/components/Again.astro",
+        "src/components/Capabilities.astro",
+        "src/components/Method.astro",
+        "src/components/Studio.astro",
+        "src/components/Journal.astro",
+        "src/components/Faq.astro",
+        "src/components/Contact.astro",
+        "src/components/Footer.astro"
+      ],
+      "literals": {
+        "text": 0,
+        "image": 0,
+        "link": 0,
+        "video": 0
+      },
+      "collection": null,
+      "sections": [
+        {
+          "id": "sec0",
+          "file": "src/pages/index.astro",
+          "start": 884,
+          "end": 892,
+          "line": 22,
+          "kind": "component",
+          "sectionType": "hero",
+          "label": "Hero",
+          "fields": [],
+          "component": "src/components/Hero.astro",
+          "props": [],
+          "repeats": [],
+          "variants": []
+        },
+        {
+          "id": "sec1",
+          "file": "src/pages/index.astro",
+          "start": 897,
+          "end": 910,
+          "line": 23,
+          "kind": "component",
+          "sectionType": "statement",
+          "label": "Statement",
+          "fields": [],
+          "component": "src/components/Statement.astro",
+          "props": [],
+          "repeats": [],
+          "variants": []
+        },
+        {
+          "id": "sec2",
+          "file": "src/pages/index.astro",
+          "start": 915,
+          "end": 923,
+          "line": 24,
+          "kind": "component",
+          "sectionType": "work",
+          "label": "Work",
+          "fields": [],
+          "component": "src/components/Work.astro",
+          "props": [],
+          "repeats": [],
+          "variants": []
+        },
+        {
+          "id": "sec3",
+          "file": "src/pages/index.astro",
+          "start": 928,
+          "end": 937,
+          "line": 25,
+          "kind": "component",
+          "sectionType": "again",
+          "label": "Again",
+          "fields": [],
+          "component": "src/components/Again.astro",
+          "props": [],
+          "repeats": [],
+          "variants": []
+        },
+        {
+          "id": "sec4",
+          "file": "src/pages/index.astro",
+          "start": 942,
+          "end": 958,
+          "line": 26,
+          "kind": "component",
+          "sectionType": "capabilities",
+          "label": "Capabilities",
+          "fields": [],
+          "component": "src/components/Capabilities.astro",
+          "props": [],
+          "repeats": [],
+          "variants": []
+        },
+        {
+          "id": "sec5",
+          "file": "src/pages/index.astro",
+          "start": 963,
+          "end": 973,
+          "line": 27,
+          "kind": "component",
+          "sectionType": "method",
+          "label": "Method",
+          "fields": [],
+          "component": "src/components/Method.astro",
+          "props": [],
+          "repeats": [],
+          "variants": []
+        },
+        {
+          "id": "sec6",
+          "file": "src/pages/index.astro",
+          "start": 978,
+          "end": 988,
+          "line": 28,
+          "kind": "component",
+          "sectionType": "studio",
+          "label": "Studio",
+          "fields": [],
+          "component": "src/components/Studio.astro",
+          "props": [],
+          "repeats": [],
+          "variants": []
+        },
+        {
+          "id": "sec7",
+          "file": "src/pages/index.astro",
+          "start": 993,
+          "end": 1004,
+          "line": 29,
+          "kind": "component",
+          "sectionType": "journal",
+          "label": "Journal",
+          "fields": [],
+          "component": "src/components/Journal.astro",
+          "props": [],
+          "repeats": [],
+          "variants": []
+        },
+        {
+          "id": "sec8",
+          "file": "src/pages/index.astro",
+          "start": 1009,
+          "end": 1016,
+          "line": 30,
+          "kind": "component",
+          "sectionType": "faq",
+          "label": "Faq",
+          "fields": [],
+          "component": "src/components/Faq.astro",
+          "props": [],
+          "repeats": [],
+          "variants": []
+        },
+        {
+          "id": "sec9",
+          "file": "src/pages/index.astro",
+          "start": 1021,
+          "end": 1032,
+          "line": 31,
+          "kind": "component",
+          "sectionType": "contact",
+          "label": "Contact",
+          "fields": [],
+          "component": "src/components/Contact.astro",
+          "props": [],
+          "repeats": [],
+          "variants": []
+        }
+      ]
+    }
+  ],
+  "components": [
+    {
+      "id": "src/components/Again.astro",
+      "file": "src/components/Again.astro",
+      "usedBy": [
+        "src/pages/index.astro"
+      ],
+      "props": [],
+      "literals": {
+        "text": 2,
+        "image": 0,
+        "link": 0,
+        "video": 0
+      },
+      "sectionCandidate": true
+    },
+    {
+      "id": "src/components/ArrowLink.astro",
+      "file": "src/components/ArrowLink.astro",
+      "usedBy": [
+        "src/pages/index.astro"
+      ],
+      "props": [
+        "label",
+        "class"
+      ],
+      "literals": {
+        "text": 0,
+        "image": 0,
+        "link": 0,
+        "video": 0
+      },
+      "sectionCandidate": false
+    },
+    {
+      "id": "src/components/Capabilities.astro",
+      "file": "src/components/Capabilities.astro",
+      "usedBy": [
+        "src/pages/index.astro"
+      ],
+      "props": [],
+      "literals": {
+        "text": 2,
+        "image": 0,
+        "link": 0,
+        "video": 0
+      },
+      "sectionCandidate": true
+    },
+    {
+      "id": "src/components/Contact.astro",
+      "file": "src/components/Contact.astro",
+      "usedBy": [
+        "src/pages/index.astro"
+      ],
+      "props": [],
+      "literals": {
+        "text": 12,
+        "image": 0,
+        "link": 0,
+        "video": 0
+      },
+      "sectionCandidate": true
+    },
+    {
+      "id": "src/components/Faq.astro",
+      "file": "src/components/Faq.astro",
+      "usedBy": [
+        "src/pages/index.astro"
+      ],
+      "props": [],
+      "literals": {
+        "text": 1,
+        "image": 0,
+        "link": 0,
+        "video": 0
+      },
+      "sectionCandidate": true
+    },
+    {
+      "id": "src/components/Footer.astro",
+      "file": "src/components/Footer.astro",
+      "usedBy": [
+        "src/pages/index.astro"
+      ],
+      "props": [],
+      "literals": {
+        "text": 17,
+        "image": 1,
+        "link": 6,
+        "video": 0
+      },
+      "sectionCandidate": true
+    },
+    {
+      "id": "src/components/Hero.astro",
+      "file": "src/components/Hero.astro",
+      "usedBy": [
+        "src/pages/index.astro"
+      ],
+      "props": [],
+      "literals": {
+        "text": 3,
+        "image": 1,
+        "link": 1,
+        "video": 0
+      },
+      "sectionCandidate": true
+    },
+    {
+      "id": "src/components/Journal.astro",
+      "file": "src/components/Journal.astro",
+      "usedBy": [
+        "src/pages/index.astro"
+      ],
+      "props": [],
+      "literals": {
+        "text": 1,
+        "image": 0,
+        "link": 0,
+        "video": 0
+      },
+      "sectionCandidate": true
+    },
+    {
+      "id": "src/components/Method.astro",
+      "file": "src/components/Method.astro",
+      "usedBy": [
+        "src/pages/index.astro"
+      ],
+      "props": [],
+      "literals": {
+        "text": 2,
+        "image": 0,
+        "link": 0,
+        "video": 0
+      },
+      "sectionCandidate": true
+    },
+    {
+      "id": "src/components/Navigation.astro",
+      "file": "src/components/Navigation.astro",
+      "usedBy": [
+        "src/pages/index.astro"
+      ],
+      "props": [],
+      "literals": {
+        "text": 13,
+        "image": 0,
+        "link": 7,
+        "video": 0
+      },
+      "sectionCandidate": true
+    },
+    {
+      "id": "src/components/Statement.astro",
+      "file": "src/components/Statement.astro",
+      "usedBy": [
+        "src/pages/index.astro"
+      ],
+      "props": [],
+      "literals": {
+        "text": 4,
+        "image": 0,
+        "link": 0,
+        "video": 0
+      },
+      "sectionCandidate": true
+    },
+    {
+      "id": "src/components/Studio.astro",
+      "file": "src/components/Studio.astro",
+      "usedBy": [
+        "src/pages/index.astro"
+      ],
+      "props": [],
+      "literals": {
+        "text": 3,
+        "image": 0,
+        "link": 0,
+        "video": 0
+      },
+      "sectionCandidate": true
+    },
+    {
+      "id": "src/components/Work.astro",
+      "file": "src/components/Work.astro",
+      "usedBy": [
+        "src/pages/index.astro"
+      ],
+      "props": [],
+      "literals": {
+        "text": 2,
+        "image": 0,
+        "link": 0,
+        "video": 0
+      },
+      "sectionCandidate": true
+    },
+    {
+      "id": "src/layouts/Layout.astro",
+      "file": "src/layouts/Layout.astro",
+      "usedBy": [
+        "src/pages/index.astro"
+      ],
+      "props": [
+        "title",
+        "description"
+      ],
+      "literals": {
+        "text": 1,
+        "image": 0,
+        "link": 1,
+        "video": 0
+      },
+      "sectionCandidate": false
+    }
+  ],
+  "layout": [
+    {
+      "file": "src/layouts/Layout.astro",
+      "role": "layout"
+    }
+  ],
+  "collections": [],
+  "locales": {
+    "default": null,
+    "locales": [],
+    "dictionaries": [],
+    "readBy": []
+  },
+  "forms": [
+    {
+      "file": "src/components/Contact.astro",
+      "line": 30,
+      "templates": [
+        "src/pages/index.astro"
+      ],
+      "action": null,
+      "method": null,
+      "handler": null,
+      "fields": 5
+    },
+    {
+      "file": "src/components/Footer.astro",
+      "line": 41,
+      "templates": [
+        "src/pages/index.astro"
+      ],
+      "action": null,
+      "method": null,
+      "handler": null,
+      "fields": 1
+    }
+  ],
+  "media": {
+    "images": 7,
+    "videos": 0,
+    "remoteHosts": [
+      "images.unsplash.com"
+    ],
+    "overPolicy": []
+  },
+  "styles": {
+    "tailwind": false,
+    "files": [
+      "src/styles/global.css"
+    ],
+    "colors": [
+      {
+        "name": "--color-1",
+        "value": "#0d0c11"
+      },
+      {
+        "name": "--color-2",
+        "value": "#ffffff"
+      },
+      {
+        "name": "--color-3",
+        "value": "#6c3cff"
+      },
+      {
+        "name": "--color-4",
+        "value": "#efeef4"
+      },
+      {
+        "name": "--color-5",
+        "value": "#aaa7b4"
+      },
+      {
+        "name": "--color-6",
+        "value": "#5d5a67"
+      },
+      {
+        "name": "--color-7",
+        "value": "#1f1d26"
+      }
+    ]
+  },
+  "blocked": [],
+  "partialDefault": [
+    "/"
+  ],
+  "styleGuide": {
+    "tokens": [
+      {
+        "name": "--color-1",
+        "group": "color",
+        "value": "#0d0c11",
+        "source": "src/styles/global.css",
+        "scope": ":root"
+      },
+      {
+        "name": "--color-2",
+        "group": "color",
+        "value": "#ffffff",
+        "source": "src/styles/global.css",
+        "scope": ":root"
+      },
+      {
+        "name": "--color-3",
+        "group": "color",
+        "value": "#6c3cff",
+        "source": "src/styles/global.css",
+        "scope": ":root"
+      },
+      {
+        "name": "--color-4",
+        "group": "color",
+        "value": "#efeef4",
+        "source": "src/styles/global.css",
+        "scope": ":root"
+      },
+      {
+        "name": "--color-5",
+        "group": "color",
+        "value": "#aaa7b4",
+        "source": "src/styles/global.css",
+        "scope": ":root"
+      },
+      {
+        "name": "--color-6",
+        "group": "color",
+        "value": "#5d5a67",
+        "source": "src/styles/global.css",
+        "scope": ":root"
+      },
+      {
+        "name": "--color-7",
+        "group": "color",
+        "value": "#1f1d26",
+        "source": "src/styles/global.css",
+        "scope": ":root"
+      },
+      {
+        "name": "--font-1",
+        "group": "font",
+        "value": "\"Gabarito\", \"Gabarito Fallback\", \"Arial Black\", Arial, sans-serif",
+        "source": "src/styles/global.css",
+        "scope": ":root"
+      },
+      {
+        "name": "--font-2",
+        "group": "font",
+        "value": "\"Onest\", \"Onest Fallback\", Arial, sans-serif",
+        "source": "src/styles/global.css",
+        "scope": ":root"
+      },
+      {
+        "name": "--radius-1",
+        "group": "radius",
+        "value": "28px",
+        "source": "src/styles/global.css",
+        "scope": ":root"
+      },
+      {
+        "name": "--radius-2",
+        "group": "radius",
+        "value": "999px",
+        "source": "src/styles/global.css",
+        "scope": ":root"
+      },
+      {
+        "name": "--radius-3",
+        "group": "radius",
+        "value": "14px",
+        "source": "src/styles/global.css",
+        "scope": ":root"
+      },
+      {
+        "name": "--shadow-1",
+        "group": "shadow",
+        "value": "0 -18px 50px color-mix(in srgb, #0d0c11 45%, transparent)",
+        "source": "src/styles/global.css",
+        "scope": ":root"
+      },
+      {
+        "name": "--shadow-2",
+        "group": "shadow",
+        "value": "0 2px 0 #6c3cff",
+        "source": "src/styles/global.css",
+        "scope": ":root"
+      },
+      {
+        "name": "--shadow-3",
+        "group": "shadow",
+        "value": "0 0 0 2px #0d0c11",
+        "source": "src/styles/global.css",
+        "scope": ":root"
+      },
+      {
+        "name": "--space-1",
+        "group": "spacing",
+        "value": "clamp(16px, 3.4vw, 48px)",
+        "source": "src/styles/global.css",
+        "scope": ":root"
+      },
+      {
+        "name": "--space-2",
+        "group": "spacing",
+        "value": "clamp(96px, 15vh, 200px)",
+        "source": "src/styles/global.css",
+        "scope": ":root"
+      },
+      {
+        "name": "--ease-power2-in",
+        "group": "other",
+        "value": "linear(0, 0, 0.0001, 0.0004, 0.001, 0.0019, 0.0034, 0.0054, 0.008, 0.0114, 0.0156, 0.0208, 0.027, 0.0343, 0.0429, 0.0527, 0.064, 0.0768, 0.0911, 0.1072, 0.125, 0.1447, 0.1664, 0.1901, 0.216, 0.2441, 0.2746, 0.3075, 0.343, 0.3811, 0.4219, 0.4655, 0.512, 0.5615, 0.6141, 0.6699, 0.729, 0.7914, 0.8574, 0.9269, 1)",
+        "source": "src/components/Contact.astro",
+        "scope": "[data-8b-live]"
+      },
+      {
+        "name": "--ease-power2-inout",
+        "group": "other",
+        "value": "linear(0, 0.0001, 0.0005, 0.0017, 0.004, 0.0078, 0.0135, 0.0214, 0.032, 0.0456, 0.0625, 0.0832, 0.108, 0.1373, 0.1715, 0.2109, 0.256, 0.3071, 0.3645, 0.4287, 0.5, 0.5713, 0.6355, 0.6929, 0.744, 0.7891, 0.8285, 0.8627, 0.892, 0.9168, 0.9375, 0.9544, 0.968, 0.9786, 0.9865, 0.9922, 0.996, 0.9983, 0.9995, 0.9999, 1)",
+        "source": "src/components/Footer.astro",
+        "scope": "[data-8b-live]"
+      },
+      {
+        "name": "--ease-power1-inout",
+        "group": "other",
+        "value": "linear(0, 0.0013, 0.005, 0.0112, 0.02, 0.0313, 0.045, 0.0612, 0.08, 0.1013, 0.125, 0.1512, 0.18, 0.2112, 0.245, 0.2813, 0.32, 0.3613, 0.405, 0.4512, 0.5, 0.5487, 0.595, 0.6388, 0.68, 0.7188, 0.755, 0.7887, 0.82, 0.8488, 0.875, 0.8988, 0.92, 0.9387, 0.955, 0.9688, 0.98, 0.9888, 0.995, 0.9988, 1)",
+        "source": "src/components/Hero.astro",
+        "scope": "[data-8b-live]"
+      },
+      {
+        "name": "--ease-power3-in",
+        "group": "other",
+        "value": "linear(0, 0, 0, 0, 0.0001, 0.0002, 0.0005, 0.0009, 0.0016, 0.0026, 0.0039, 0.0057, 0.0081, 0.0112, 0.015, 0.0198, 0.0256, 0.0326, 0.041, 0.0509, 0.0625, 0.076, 0.0915, 0.1093, 0.1296, 0.1526, 0.1785, 0.2076, 0.2401, 0.2763, 0.3164, 0.3608, 0.4096, 0.4632, 0.522, 0.5862, 0.6561, 0.7321, 0.8145, 0.9037, 1)",
+        "source": "src/components/Hero.astro",
+        "scope": "[data-8b-live]"
+      }
+    ],
+    "primary": {
+      "primary": {
+        "value": "#6C3CFF",
+        "token": "--color-3"
+      },
+      "accent": {
+        "value": "#6C3CFF",
+        "token": "--color-3"
+      },
+      "background": {
+        "value": "#FFFFFF",
+        "token": "--color-2"
+      },
+      "text": {
+        "value": "#0D0C11",
+        "token": "--color-1"
+      }
+    },
+    "typography": {
+      "heading": null,
+      "body": null,
+      "families": [
+        "Gabarito",
+        "Onest",
+        "Gabarito Fallback",
+        "Onest Fallback"
+      ],
+      "faces": [
+        {
+          "family": "Gabarito",
+          "source": "src/styles/global.css",
+          "weight": "400 800",
+          "style": "normal"
+        },
+        {
+          "family": "Onest",
+          "source": "src/styles/global.css",
+          "weight": "400 600",
+          "style": "normal"
+        }
+      ],
+      "scale": []
+    },
+    "used": {
+      "color": [],
+      "fontSize": [
+        "16px",
+        "13px",
+        "15px",
+        "17px",
+        "25px",
+        "clamp(17px, 1.45vw, 21px)",
+        "clamp(19px, 1.7vw, 25px)",
+        "clamp(22px, 2.05vw, 30px)",
+        "clamp(24px, 2.35vw, 34px)",
+        "clamp(28px, 2.6vw, 40px)",
+        "clamp(28px, 3.4vw, 50px)",
+        "clamp(30px, 3.9vw, 58px)",
+        "clamp(40px, 8.7vw, 140px)",
+        "clamp(42px, 13vw, 72px)",
+        "clamp(48px, 7.2vw, 116px)",
+        "clamp(50px, 9.2vw, 150px)",
+        "min(24vw, 40svh)",
+        "min(26.5vw, 43svh)",
+        "min(36vw, 40svh)"
+      ],
+      "spacing": [
+        "40px",
+        "18px",
+        "24px",
+        "14px",
+        "48px",
+        "16px",
+        "10px",
+        "12px",
+        "20px",
+        "8px",
+        "-4px",
+        "22px",
+        "28px",
+        "6px",
+        "0.035em",
+        "120px",
+        "32px",
+        "4px",
+        "56px",
+        "170px",
+        "72px",
+        "80px",
+        "84px",
+        "88px",
+        "96px",
+        "-1px",
+        "0.45em",
+        "110px",
+        "140px",
+        "150px",
+        "26px",
+        "2px",
+        "34px",
+        "36px",
+        "3px",
+        "52px",
+        "64px",
+        "92px",
+        "9px"
+      ],
+      "radius": [],
+      "shadow": [],
+      "breakpoint": [
+        "900px",
+        "899px",
+        "1000px",
+        "640px",
+        "700px"
+      ]
+    },
+    "components": {
+      "buttons": [
+        "src/components/Contact.astro",
+        "src/components/Footer.astro",
+        "src/components/Navigation.astro"
+      ],
+      "cards": [
+        "src/components/Again.astro"
+      ],
+      "headings": [
+        "src/components/Again.astro",
+        "src/components/Capabilities.astro",
+        "src/components/Contact.astro",
+        "src/components/Faq.astro",
+        "src/components/Hero.astro",
+        "src/components/Journal.astro",
+        "src/components/Method.astro",
+        "src/components/Statement.astro",
+        "src/components/Studio.astro",
+        "src/components/Work.astro"
+      ]
+    },
+    "reference": null,
+    "sources": [
+      "src/styles/global.css",
+      "src/components/Again.astro",
+      "src/components/Capabilities.astro",
+      "src/components/Contact.astro",
+      "src/components/Faq.astro",
+      "src/components/Footer.astro",
+      "src/components/Hero.astro",
+      "src/components/Journal.astro",
+      "src/components/Method.astro",
+      "src/components/Navigation.astro",
+      "src/components/Statement.astro",
+      "src/components/Studio.astro",
+      "src/components/Work.astro"
+    ]
+  }
+}
