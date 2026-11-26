@@ -1,4 +1,4 @@
-# bettercms-managed rung=prod api=https://api.bettercms.ai project=hkYTSJwKY0CCsVtPI44z0 — written by BetterCMS; do not edit
+# bettercms-managed rung=prod api=https://api.bettercms.ai project=zDimJJB2DPVcJzGEHBP0I — written by BetterCMS; do not edit
 # Validates one BetterCMS Section implementation in this repository's real app shell.
 # BetterCMS dispatches the request but never executes this repository's code.
 name: BetterCMS Section Validation
@@ -14,11 +14,11 @@ permissions:
 
 jobs:
   validate-section:
-    if: github.event.client_payload.projectId == 'hkYTSJwKY0CCsVtPI44z0'
+    if: github.event.client_payload.projectId == 'zDimJJB2DPVcJzGEHBP0I'
     runs-on: ubuntu-latest
     env:
       API_URL: https://api.bettercms.ai
-      PROJECT_ID: hkYTSJwKY0CCsVtPI44z0
+      PROJECT_ID: zDimJJB2DPVcJzGEHBP0I
       REQUEST_ID: ${{ github.event.client_payload.requestId }}
       SECTION_ID: ${{ github.event.client_payload.sectionId }}
       SECTION_VERSION: ${{ github.event.client_payload.version }}
@@ -131,7 +131,7 @@ jobs:
           BCMS_API_URL: https://api.bettercms.ai
           BCMS_API_KEY: ${{ secrets.BCMS_API_KEY_PROD || secrets.BCMS_API_KEY }}
           BCMS_SECTION_CALLBACK_TOKEN: ${{ github.event.client_payload.callbackToken }}
-          BCMS_PROJECT_ID: hkYTSJwKY0CCsVtPI44z0
+          BCMS_PROJECT_ID: zDimJJB2DPVcJzGEHBP0I
           BCMS_SECTION_REQUEST_ID: ${{ github.event.client_payload.requestId }}
           BCMS_SECTION_ID: ${{ github.event.client_payload.sectionId }}
           BCMS_SECTION_VERSION: ${{ github.event.client_payload.version }}
