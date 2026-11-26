@@ -1,6 +1,7 @@
 ---
 import bcmsHome from "../../bcms-content/home.json";
-import { bcms, bcmsStyleText } from "../bcms-content";
+import { bcms, bcmsClean, bcmsStyleText } from "../bcms-content";
+const heroTitle = bcms(bcmsHome, "hero-title", "Hello");
 import ArrowLink from './ArrowLink.astro';
 ---
 <!-- hero: first screen: a one-word greeting whose full stop is a giant round photo (demo: "Hello") (animation: scene:hero) -->
@@ -26,10 +27,10 @@ import ArrowLink from './ArrowLink.astro';
 </style>
 <section id="hero" data-8b-section="hero" aria-labelledby="hero-title" data-bcms-section-label="Hero">
   <div class="hero__intro">
-    <p class="m-text-5 hero__lead" data-bcms-field="m-text-5.text" data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, "m-text-5.text")}>{bcms(bcmsHome, "m-text-5.text", "We're Onda, an independent brand, product and AI studio. We make things people come back to, and we'd love to hear what you're making.")}</p>
-    <ArrowLink class="hero__link" href={bcms(bcmsHome, "arrowLink.href", "#work", null, "href")} label={bcms(bcmsHome, "arrowLink.label", "See the work")} data-bcms-props="arrowLink.href|url|href" bcmsBindings={{ label: "arrowLink.label" }} />
+    <p class="m-text-5 hero__lead" data-bcms-field="hero-lead" data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, "hero-lead")}>{bcms(bcmsHome, "hero-lead", "We're Onda, an independent brand, product and AI studio. We make things people come back to, and we'd love to hear what you're making.")}</p>
+    <ArrowLink class="hero__link" href={bcms(bcmsHome, "hero-link.href", "#work", null, "href")} label={bcms(bcmsHome, "hero-link.label", "See the work")} data-bcms-props="hero-link.href|url|href" data-bcms-button="hero-link" bcmsBindings={{ label: "hero-link.label" }} />
   </div>
-  <h1 class="m-text-2 hero__title" id="hero-title" style="--len:5"><span class="hero__word"><span class="hero__mask"><span class="hero__glyphs" data-bcms-field="hero__glyphs.text" data-bcms-kind="text">{bcms(bcmsHome, "hero__glyphs.text", "Hello")}</span></span></span><span class="hero__period" aria-hidden="true"><span class="hero__stage"><span class="hero__orbit"><span class="hero__moon"></span></span><span class="hero__aperture"><img class="hero__img" src={bcms(bcmsHome, "hero__img.image", "https://images.unsplash.com/photo-1754738381783-f9a2847bfef2?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8MXx8cHVycGxlJTIwYWJzdHJhY3QlMjAzZCUyMHNoYXBlfGVufDF8Mnx8fDE3OTEyMDk2Mjd8MA&ixlib=rb-4.1.0&auto=format&fit=crop&w=470&h=470&q=60")} width="1200" height="1200" alt="" fetchpriority="high" data-bcms-field="hero__img.image" data-bcms-kind="image"><span class="hero__tint"></span></span></span></span></h1>
+  <h1 class="m-text-2 hero__title" id="hero-title" style={`--len:${bcmsClean(heroTitle).length}`}><span class="hero__word"><span class="hero__mask"><span class="hero__glyphs" data-bcms-field="hero-title" data-bcms-kind="text">{heroTitle}</span></span></span><span class="hero__period" aria-hidden="true"><span class="hero__stage"><span class="hero__orbit"><span class="hero__moon"></span></span><span class="hero__aperture"><img class="hero__img" src={bcms(bcmsHome, "hero-image", "https://images.unsplash.com/photo-1754738381783-f9a2847bfef2?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8MXx8cHVycGxlJTIwYWJzdHJhY3QlMjAzZCUyMHNoYXBlfGVufDF8Mnx8fDE3OTEyMDk2Mjd8MA&ixlib=rb-4.1.0&auto=format&fit=crop&w=470&h=470&q=60")} width="1200" height="1200" alt="" fetchpriority="high" data-bcms-field="hero-image" data-bcms-kind="image"><span class="hero__tint"></span></span></span></span></h1>
 </section>
 
 <style is:global>

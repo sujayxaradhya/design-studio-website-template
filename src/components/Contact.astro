@@ -1,6 +1,7 @@
 ---
 import bcmsHome from "../../bcms-content/home.json";
-import { bcms, bcmsStyleText } from "../bcms-content";
+import { bcms, bcmsClean, bcmsStyleText } from "../bcms-content";
+const contactHeading = bcms(bcmsHome, "contact-heading", "Let's talk");
 import { email, offices, tel } from '../site';
 
 const topics = ['A new brand', 'A product or app', 'A campaign', 'Something else'];
@@ -20,10 +21,10 @@ const topics = ['A new brand', 'A product or app', 'A campaign', 'Something else
 }
 </style>
 <section id="contact" data-8b-section="contact" aria-labelledby="contact-title" data-bcms-section-label="Contact">
-  <h2 class="m-text-3 contact__title" id="contact-title" style="--len:10"><span class="contact__voice" data-bcms-field="contact__voice.text" data-bcms-kind="text">{bcms(bcmsHome, "contact__voice.text", "Let's talk")}</span><span class="m-dot" aria-hidden="true"></span></h2>
+  <h2 class="m-text-3 contact__title" id="contact-title" style={`--len:${bcmsClean(contactHeading).length}`}><span class="contact__voice" data-bcms-field="contact-heading" data-bcms-kind="text">{contactHeading}</span><span class="m-dot" aria-hidden="true"></span></h2>
   <div class="contact__grid">
     <div class="contact__info">
-      <p class="m-text-5 contact__lead" data-bcms-field="m-text-5.text-8" data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, "m-text-5.text-8")}>{bcms(bcmsHome, "m-text-5.text-8", "Tell us what you are making. A real person reads every message and replies within two working days.")}</p>
+      <p class="m-text-5 contact__lead" data-bcms-field="contact-lead" data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, "contact-lead")}>{bcms(bcmsHome, "contact-lead", "Tell us what you are making. A real person reads every message and replies within two working days.")}</p>
       <a data-8b-placeholder="email" class="contact__mail" href={`mailto:${bcms(bcmsHome, "email", email)}`}><span data-bcms-field="email" data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, "email")}>{bcms(bcmsHome, "email", email)}</span></a>
       <dl class="contact__places">
         {offices.map((office, i) => <div><dt class="m-text-7" data-bcms-field={`offices[${i}].city`} data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, `offices[${i}].city`)}>{bcms(bcmsHome, `offices[${i}].city`, office.city)}</dt><dd class="m-text"><span data-bcms-field={`offices[${i}].street`} data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, `offices[${i}].street`)}>{bcms(bcmsHome, `offices[${i}].street`, office.address[0])}</span><br><span data-bcms-field={`offices[${i}].town`} data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, `offices[${i}].town`)}>{bcms(bcmsHome, `offices[${i}].town`, office.address[1])}</span></dd><dd class="m-text"><a data-8b-placeholder="phone" href={tel(bcms(bcmsHome, `offices[${i}].phone`, office.phone))} data-bcms-field={`offices[${i}].phone`} data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, `offices[${i}].phone`)}>{bcms(bcmsHome, `offices[${i}].phone`, office.phone)}</a></dd></div>)}
@@ -31,16 +32,16 @@ const topics = ['A new brand', 'A product or app', 'A campaign', 'Something else
     </div>
     <form data-8b-placeholder="form" class="contact__form m-surface" novalidate>
       <div class="contact__pair">
-        <label class="m-text-6"><span data-bcms-field="m-text-6.label" data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, "m-text-6.label")}>{bcms(bcmsHome, "m-text-6.label", "Your name")}</span><input class="m-field" name="name" type="text" autocomplete="name" required></label>
-        <label class="m-text-6"><span data-bcms-field="m-text-6.label-2" data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, "m-text-6.label-2")}>{bcms(bcmsHome, "m-text-6.label-2", "Email")}</span><input class="m-field" name="email" type="email" autocomplete="email" required></label>
+        <label class="m-text-6"><span data-bcms-field="form-name-label" data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, "form-name-label")}>{bcms(bcmsHome, "form-name-label", "Your name")}</span><input class="m-field" name="name" type="text" autocomplete="name" required></label>
+        <label class="m-text-6"><span data-bcms-field="form-email-label" data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, "form-email-label")}>{bcms(bcmsHome, "form-email-label", "Email")}</span><input class="m-field" name="email" type="email" autocomplete="email" required></label>
       </div>
       <div class="contact__pair">
-        <label class="m-text-6"><span data-bcms-field="m-text-6.label-3" data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, "m-text-6.label-3")}>{bcms(bcmsHome, "m-text-6.label-3", "Company")}</span><input class="m-field" name="company" type="text" autocomplete="organization"></label>
-        <label class="m-text-6"><span data-bcms-field="m-text-6.label-4" data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, "m-text-6.label-4")}>{bcms(bcmsHome, "m-text-6.label-4", "What can we help with?")}</span><select class="m-field" name="topic">{topics.map(topic => <option>{topic}</option>)}</select></label>
+        <label class="m-text-6"><span data-bcms-field="form-company-label" data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, "form-company-label")}>{bcms(bcmsHome, "form-company-label", "Company")}</span><input class="m-field" name="company" type="text" autocomplete="organization"></label>
+        <label class="m-text-6"><span data-bcms-field="form-topic-label" data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, "form-topic-label")}>{bcms(bcmsHome, "form-topic-label", "What can we help with?")}</span><select class="m-field" name="topic">{topics.map(topic => <option>{topic}</option>)}</select></label>
       </div>
-      <label class="m-text-6"><span data-bcms-field="m-text-6.label-5" data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, "m-text-6.label-5")}>{bcms(bcmsHome, "m-text-6.label-5", "A few words about the project")}</span><textarea class="m-field" name="message" rows="3" required></textarea></label>
+      <label class="m-text-6"><span data-bcms-field="form-message-label" data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, "form-message-label")}>{bcms(bcmsHome, "form-message-label", "A few words about the project")}</span><textarea class="m-field" name="message" rows="3" required></textarea></label>
       <div class="contact__actions">
-        <button class="m-btn" type="submit"><span class="m-btn__label" data-bcms-field="m-btn__label.text" data-bcms-kind="text">{bcms(bcmsHome, "m-btn__label.text", "Send message")}</span></button>
+        <button class="m-btn" type="submit"><span class="m-btn__label" data-bcms-field="form-submit" data-bcms-kind="text">{bcms(bcmsHome, "form-submit", "Send message")}</span></button>
         <p class="m-text contact__status" role="status" aria-live="polite"></p>
         <span hidden data-msg="success" data-bcms-field="status.success" data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, "status.success")}>{bcms(bcmsHome, "status.success", "Thank you. We will reply within two working days.")}</span>
         <span hidden data-msg="error" data-bcms-field="status.error" data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, "status.error")}>{bcms(bcmsHome, "status.error", "Please add your name, a valid email and a few words about the project.")}</span>
