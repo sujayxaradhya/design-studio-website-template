@@ -6,9 +6,9 @@ Design studio website template: one free HTML file for a brand, product or digit
 
 **[Live demo](https://8bsite.github.io/design-studio-website-template/)** · **[Use this template](https://github.com/new?template_name=design-studio-website-template&template_owner=8bsite)** · **[Download ZIP](https://github.com/8bsite/design-studio-website-template/archive/refs/heads/main.zip)** · **[Template page on 8b.com](https://8b.com/templates/onda/)**
 
-<a href="https://8bsite.github.io/design-studio-website-template/"><img src="previews/desktop.png" alt="Design studio website template: first screen on a desktop" width="76.1%"></a> <a href="https://8bsite.github.io/design-studio-website-template/"><img src="previews/phone.png" alt="Design studio website template: first screen on a phone" width="21.9%"></a>
+<a href="https://8bsite.github.io/design-studio-website-template/"><img src="https://cdn.bettercms.ai/media/f206e726-656b-4f20-87c4-93fbd3f457bf/desktop.png?v=1" alt="Design studio website template: first screen on a desktop" width="76.1%"></a> <a href="https://8bsite.github.io/design-studio-website-template/"><img src="https://cdn.bettercms.ai/media/43e179a8-5d2f-44db-aaa8-275401499169/phone.png?v=1" alt="Design studio website template: first screen on a phone" width="21.9%"></a>
 
-<p align="center"><a href="https://8bsite.github.io/design-studio-website-template/"><img src="previews/scroll.gif" alt="Design studio website template: scrolling through the first sections" width="40%"></a><br><sub>Scroll animation</sub></p>
+<p align="center"><a href="https://8bsite.github.io/design-studio-website-template/"><img src="https://cdn.bettercms.ai/media/910c1899-4672-4622-80a2-81c689b30c2d/scroll.gif?v=1" alt="Design studio website template: scrolling through the first sections" width="40%"></a><br><sub>Scroll animation</sub></p>
 
 ## Use it with Claude Code, Cursor or Codex
 
