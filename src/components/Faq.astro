@@ -13,7 +13,7 @@ const faqs = [
 <section id="faq" data-8b-section="faq" aria-labelledby="faq-title" data-bcms-section-label="FAQ">
   <h2 class="m-text-3 faq__title" id="faq-title" data-8b-motion="rise"><span data-bcms-field="faq-heading" data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, "faq-heading")}>{bcms(bcmsHome, "faq-heading", "Fair questions")}</span><span class="m-dot" aria-hidden="true"></span></h2>
   <div class="faq__list" data-8b-items=":scope > details">
-    {bcmsRows(bcmsHome, "faqs", faqs).map((faq, i) => <details class="faq__item"><summary class="m-text-7"><span data-bcms-field={`faqs[${i}].q`} data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, `faqs[${i}].q`)}>{faq.q}</span><span class="faq__mark" aria-hidden="true"></span></summary><p class="m-text faq__answer" data-bcms-field={`faqs[${i}].a`} data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, `faqs[${i}].a`)}>{faq.a}</p></details>)}
+    {bcmsRows(bcmsHome, "faq-questions", faqs).map((faq, i) => <details class="faq__item"><summary class="m-text-7"><span data-bcms-field={`faq-questions[${i}].q`} data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, `faq-questions[${i}].q`)}>{faq.q}</span><span class="faq__mark" aria-hidden="true"></span></summary><p class="m-text faq__answer" data-bcms-field={`faq-questions[${i}].a`} data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, `faq-questions[${i}].a`)}>{faq.a}</p></details>)}
   </div>
 </section>
 

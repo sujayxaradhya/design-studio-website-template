@@ -46,11 +46,11 @@ const cases = [
     </div>
     <div class="work__window">
       <ul class="work__track" data-8b-items=":scope > .case" data-8b-fixed="5">
-        {bcmsRows(bcmsHome, "cases", cases).map((item, i) => (
+        {bcmsRows(bcmsHome, "work-cases", cases).map((item, i) => (
           <li class="case">
-            <div class="case__media"><img class="case__img" src={bcmsImage(bcmsHome, `cases[${i}].src`, item.src)} width="1600" height="1000" alt={item.alt} loading="lazy" data-bcms-field={`cases[${i}].src`} data-bcms-kind="image" data-bcms-props={`cases[${i}].alt|text|alt`} data-bcms-style="2" style={bcmsStyleText(bcmsHome, `cases[${i}].src`)}></div>
-            <span class="m-badge case__tag" data-bcms-field={`cases[${i}].tag`} data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, `cases[${i}].tag`)}>{item.tag}</span>
-            <div class="case__text"><h3 class="m-text-4 case__name" data-bcms-field={`cases[${i}].name`} data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, `cases[${i}].name`)}>{item.name}</h3><p class="m-text-5 case__line" data-bcms-field={`cases[${i}].line`} data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, `cases[${i}].line`)}>{item.line}</p></div>
+            <div class="case__media"><img class="case__img" src={bcmsImage(bcmsHome, `work-cases[${i}].src`, item.src)} width="1600" height="1000" alt={item.alt} loading="lazy" data-bcms-field={`work-cases[${i}].src`} data-bcms-kind="image" data-bcms-props={`work-cases[${i}].alt|text|alt`} data-bcms-style="2" style={bcmsStyleText(bcmsHome, `work-cases[${i}].src`)}></div>
+            <span class="m-badge case__tag" data-bcms-field={`work-cases[${i}].tag`} data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, `work-cases[${i}].tag`)}>{item.tag}</span>
+            <div class="case__text"><h3 class="m-text-4 case__name" data-bcms-field={`work-cases[${i}].name`} data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, `work-cases[${i}].name`)}>{item.name}</h3><p class="m-text-5 case__line" data-bcms-field={`work-cases[${i}].line`} data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, `work-cases[${i}].line`)}>{item.line}</p></div>
           </li>
         ))}
       </ul>

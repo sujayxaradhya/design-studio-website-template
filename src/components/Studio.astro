@@ -36,13 +36,13 @@ const roles = [
     <p class="m-text-5 studio__lead" data-8b-motion="ink" data-8b-split="words" data-bcms-field="studio-lead" data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, "studio-lead")}>{bcms(bcmsHome, "studio-lead", "Ninety people between Lisbon and Brooklyn: strategists, designers, engineers and writers who would rather show you than tell you. We work in small mixed teams, sit with the people we build for, and keep Friday afternoons for our own experiments.")}</p>
   </div>
   <div class="studio__collage">
-    {bcmsRows(bcmsHome, "shots", shots as unknown as { alt: string; src: string }[]).map((shot, i) => { const shape = shots[i]?.shape ?? 'wide'; return <figure class={`shot shot--${shape}`}><img src={bcmsImage(bcmsHome, `shots[${i}].src`, shot.src)} {...size[shape]} alt={shot.alt} loading="lazy" data-bcms-field={`shots[${i}].src`} data-bcms-kind="image" data-bcms-props={`shots[${i}].alt|text|alt`}></figure>; })}
+    {bcmsRows(bcmsHome, "studio-photos", shots as unknown as { alt: string; src: string }[]).map((shot, i) => { const shape = shots[i]?.shape ?? 'wide'; return <figure class={`shot shot--${shape}`}><img src={bcmsImage(bcmsHome, `studio-photos[${i}].src`, shot.src)} {...size[shape]} alt={shot.alt} loading="lazy" data-bcms-field={`studio-photos[${i}].src`} data-bcms-kind="image" data-bcms-props={`studio-photos[${i}].alt|text|alt`}></figure>; })}
     <div class="studio__roles">
-      <h3 class="m-text-7" data-8b-motion="rise"><span data-bcms-field="roles-heading" data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, "roles-heading")}>{bcms(bcmsHome, "roles-heading", "Open roles")}</span><span class="m-dot" aria-hidden="true"></span></h3>
+      <h3 class="m-text-7" data-8b-motion="rise"><span data-bcms-field="studio-roles-heading" data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, "studio-roles-heading")}>{bcms(bcmsHome, "studio-roles-heading", "Open roles")}</span><span class="m-dot" aria-hidden="true"></span></h3>
       <ul data-8b-items=":scope > li">
-        {bcmsRows(bcmsHome, "roles", roles).map((role, i) => <li class="role"><span class="m-text-7" data-bcms-field={`roles[${i}].title`} data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, `roles[${i}].title`)}>{role.title}</span><span class="m-text-6 role__place" data-bcms-field={`roles[${i}].place`} data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, `roles[${i}].place`)}>{role.place}</span></li>)}
+        {bcmsRows(bcmsHome, "studio-roles", roles).map((role, i) => <li class="role"><span class="m-text-7" data-bcms-field={`studio-roles[${i}].title`} data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, `studio-roles[${i}].title`)}>{role.title}</span><span class="m-text-6 role__place" data-bcms-field={`studio-roles[${i}].place`} data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, `studio-roles[${i}].place`)}>{role.place}</span></li>)}
       </ul>
-      <ArrowLink data-8b-placeholder="email" href={`mailto:${bcms(bcmsHome, "careers", careers)}`} label={bcms(bcmsHome, "careers", careers)} bcmsBindings={{ label: "careers" }} />
+      <ArrowLink data-8b-placeholder="email" href={`mailto:${bcms(bcmsHome, "studio-careers", careers)}`} label={bcms(bcmsHome, "studio-careers", careers)} bcmsBindings={{ label: "studio-careers" }} />
     </div>
   </div>
 </section>
