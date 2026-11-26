@@ -37,7 +37,7 @@ const phone = offices[0].phone;
     </div>
     <div class="footer__col">
       <p class="m-text-6 footer__label" data-bcms-layout-field="layout:footer:m-text-6.text-3" data-bcms-kind="text">{bcmsLayout("footer:m-text-6.text-3", "Follow")}</p>
-      {bcmsLayoutRows("footer:social", social).map((link, i) => <a data-8b-placeholder="social" class="m-link-2" href={link.url} data-bcms-layout-field={`layout:footer:social[${i}].network`} data-bcms-kind="text" data-bcms-props={`layout:footer:social[${i}].url|url|href`}>{link.network}</a>)}
+      {bcmsLayoutRows("footer:social", social).map((link, i) => <a data-8b-placeholder="social" class="m-link-2" href={typeof link.url === "string" ? link.url : (link.url as { href?: string })?.href} data-bcms-layout-field={`layout:footer:social[${i}].network`} data-bcms-kind="text" data-bcms-props={`layout:footer:social[${i}].url|url|href`}>{link.network}</a>)}
     </div>
     <form data-8b-placeholder="form" class="footer__news" novalidate>
       <label class="m-text-7" for="news-email"><span data-bcms-layout-field="layout:footer:m-text-7.label" data-bcms-kind="text">{bcmsLayout("footer:m-text-7.label", "Onda in your inbox, once a month")}</span><span class="m-dot" aria-hidden="true"></span></label>
@@ -48,7 +48,7 @@ const phone = offices[0].phone;
       <p class="m-text-6 footer__note" role="status" aria-live="polite" data-idle={bcmsLayout("footer:m-text-6.text-4", "No spam, one email a month, unsubscribe in one click.")} data-success={bcmsLayout("footer:newsletter.success", "You are in. See you next month.")} data-error={bcmsLayout("footer:newsletter.error", "Please enter a valid email address.")} data-bcms-props="layout:footer:newsletter.success|text|data-success;layout:footer:newsletter.error|text|data-error" data-bcms-layout-field="layout:footer:m-text-6.text-4" data-bcms-kind="text">{bcmsLayout("footer:m-text-6.text-4", "No spam, one email a month, unsubscribe in one click.")}</p>
     </form>
   </div>
-  <div class="footer__legal m-text-6"><p><span data-bcms-layout-field="layout:footer:copyright-line" data-bcms-kind="text">{bcmsLayout("footer:copyright-line", "© 2026 Onda Studio")}</span> · Design: <a href="https://8b.com/" style="color:inherit" data-8b-credit>8B</a></p><p data-bcms-layout-field="layout:footer:footer__legal.text-2" data-bcms-kind="text">{bcmsLayout("footer:footer__legal.text-2", "Made in Lisbon and Brooklyn")}</p></div>
+  <div class="footer__legal m-text-6"><p><span data-bcms-layout-field="layout:footer:copyright-line" data-bcms-kind="text">{bcmsLayout("footer:copyright-line", "© 2026 Onda Studio")}</span> · <span data-bcms-layout-field="layout:footer:credit-label" data-bcms-kind="text">{bcmsLayout("footer:credit-label", "Design:")}</span> <a href={bcmsLayout("footer:credit-href", "https://8b.com/", "href")} style="color:inherit" data-8b-credit data-bcms-layout-field="layout:footer:credit-name" data-bcms-kind="text" data-bcms-props="layout:footer:credit-href|url|href">{bcmsLayout("footer:credit-name", "8B")}</a></p><p data-bcms-layout-field="layout:footer:footer__legal.text-2" data-bcms-kind="text">{bcmsLayout("footer:footer__legal.text-2", "Made in Lisbon and Brooklyn")}</p></div>
 </footer>
 
 <style is:global>
