@@ -924,11 +924,11 @@ if (matchMedia('(prefers-reduced-motion: no-preference)').matches && CSS.support
     <div class="studio__roles">
       <h3 class="m-text-7" data-8b-motion="rise"><span data-bcms-field="studio-subheading" data-bcms-kind="text">Open roles</span><span class="m-dot" aria-hidden="true"></span></h3>
       <ul data-8b-items=":scope > li">
-        <li class="role"><span class="m-text-7">Senior product designer</span><span class="m-text-6 role__place" data-bcms-field="contact-items[0].term" data-bcms-kind="text">Lisbon</span></li>
-        <li class="role"><span class="m-text-7">Creative technologist</span><span class="m-text-6 role__place" data-bcms-field="contact-items[1].term" data-bcms-kind="text">Brooklyn</span></li>
-        <li class="role"><span class="m-text-7">Strategy director</span><span class="m-text-6 role__place">Remote, Europe</span></li>
+        <li class="role"><span class="m-text-7" data-bcms-field="studio-items-2[0].text" data-bcms-kind="text">Senior product designer</span><span class="m-text-6 role__place" data-bcms-field="studio-items-2[0].place" data-bcms-kind="text">Lisbon</span></li>
+        <li class="role"><span class="m-text-7" data-bcms-field="studio-items-2[1].text" data-bcms-kind="text">Creative technologist</span><span class="m-text-6 role__place" data-bcms-field="studio-items-2[1].place" data-bcms-kind="text">Brooklyn</span></li>
+        <li class="role"><span class="m-text-7" data-bcms-field="studio-items-2[2].text" data-bcms-kind="text">Strategy director</span><span class="m-text-6 role__place" data-bcms-field="studio-items-2[2].place" data-bcms-kind="text">Remote, Europe</span></li>
       </ul>
-      <a data-8b-placeholder="email" class="m-link" href="mailto:careers@onda.example" data-bcms-props="studio-button.href|url|href"><span class="m-link__label">careers@onda.example</span><svg class="m-link__arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3.5 13.5 8 9 12.5"/></svg></a>
+      <a data-8b-placeholder="email" class="m-link" href="mailto:careers@onda.example" data-bcms-props="studio-button.href|url|href"><span class="m-link__label" data-bcms-field="studio-button.label" data-bcms-kind="text">careers@onda.example</span><svg class="m-link__arrow" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 8h11M9 3.5 13.5 8 9 12.5"/></svg></a>
     </div>
   </div>
 </section>
@@ -972,7 +972,7 @@ if (matchMedia('(prefers-reduced-motion: no-preference)').matches && CSS.support
   <div class="contact__grid">
     <div class="contact__info">
       <p class="m-text-5 contact__lead" data-bcms-field="contact-paragraph" data-bcms-kind="text">Tell us what you are making. A real person reads every message and replies within two working days.</p>
-      <a data-8b-placeholder="email" class="contact__mail" href="mailto:hello@onda.example"><span>hello@onda.example</span></a>
+      <a data-8b-placeholder="email" class="contact__mail" href="mailto:hello@onda.example" data-bcms-props="contact-button.href|url|href"><span data-bcms-field="contact-button.label" data-bcms-kind="text">hello@onda.example</span></a>
       <dl class="contact__places">
         <div><dt class="m-text-7" data-bcms-field="contact-items[0].term" data-bcms-kind="text">Lisbon</dt><dd class="m-text" data-bcms-field="contact-items[0].definition" data-bcms-kind="richtext">Rua do Exemplo 1<br>1200-000 Lisbon</dd><dd class="m-text"><a data-8b-placeholder="phone" href="tel:+351210000000" data-bcms-field="contact-items[0].button.label" data-bcms-kind="text" data-bcms-props="contact-items[0].button.href|url|href">+351 210 000 000</a></dd></div>
         <div><dt class="m-text-7" data-bcms-field="contact-items[1].term" data-bcms-kind="text">Brooklyn</dt><dd class="m-text" data-bcms-field="contact-items[1].definition" data-bcms-kind="richtext">100 Example Street<br>Brooklyn, NY 11200</dd><dd class="m-text"><a data-8b-placeholder="phone" href="tel:+17180000000" data-bcms-field="contact-items[1].button.label" data-bcms-kind="text" data-bcms-props="contact-items[1].button.href|url|href" data-bcms-button="contact-items[1].button">+1 718 000 0000</a></dd></div>
@@ -1011,9 +1011,9 @@ if (matchMedia('(prefers-reduced-motion: no-preference)').matches && CSS.support
     </nav>
     <div class="footer__col">
       <p class="m-text-6 footer__label" data-bcms-field="footer-paragraph" data-bcms-kind="text">Talk</p>
-      <a data-8b-placeholder="email" class="m-link-2" href="mailto:hello@onda.example" data-bcms-field="footer-links[0].link" data-bcms-kind="text">hello@onda.example</a>
-      <a data-8b-placeholder="email" class="m-link-2" href="mailto:careers@onda.example">careers@onda.example</a>
-      <a data-8b-placeholder="phone" class="m-link-2" href="tel:+351210000000">+351 210 000 000</a>
+      <a data-8b-placeholder="email" class="m-link-2" href="mailto:hello@onda.example" data-bcms-field="footer-links[0].link" data-bcms-kind="text" data-bcms-props="footer-links[0].link-href|url|href">hello@onda.example</a>
+      <a data-8b-placeholder="email" class="m-link-2" href="mailto:careers@onda.example" data-bcms-field="footer-links[1].link" data-bcms-kind="text" data-bcms-props="footer-links[1].link-href|url|href">careers@onda.example</a>
+      <a data-8b-placeholder="phone" class="m-link-2" href="tel:+351210000000" data-bcms-field="footer-links[2].link" data-bcms-kind="text" data-bcms-props="footer-links[2].link-href|url|href">+351 210 000 000</a>
     </div>
     <div class="footer__col">
       <p class="m-text-6 footer__label" data-bcms-field="footer-paragraph-2" data-bcms-kind="text">Follow</p>
