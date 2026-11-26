@@ -41,7 +41,7 @@ const stations = [[0, -1], [1, 0], [0, 1], [-1, 0]];
       <span class="method__arm"><span class="method__runner"></span></span>
     </div>
     <ol class="method__steps" data-8b-items=":scope > .step" data-8b-fixed="4">
-      {bcmsRows(bcmsHome, "steps", steps).map((step, i) => <li class="step"><h3 class="m-text-4" data-bcms-field={`steps[${i}].title`} data-bcms-kind="text">{step.title}</h3><p class="m-text-5 step__text" data-bcms-field={`steps[${i}].text`} data-bcms-kind="text">{step.text}</p></li>)}
+      {bcmsRows(bcmsHome, "steps", steps).map((step, i) => <li class="step"><h3 class="m-text-4" data-bcms-field={`steps[${i}].title`} data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, `steps[${i}].title`)}>{step.title}</h3><p class="m-text-5 step__text" data-bcms-field={`steps[${i}].text`} data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, `steps[${i}].text`)}>{step.text}</p></li>)}
     </ol>
   </div>
 </section>

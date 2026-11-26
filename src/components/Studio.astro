@@ -40,7 +40,7 @@ const roles = [
     <div class="studio__roles">
       <h3 class="m-text-7" data-8b-motion="rise"><span data-bcms-field="m-text-7.heading" data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, "m-text-7.heading")}>{bcms(bcmsHome, "m-text-7.heading", "Open roles")}</span><span class="m-dot" aria-hidden="true"></span></h3>
       <ul data-8b-items=":scope > li">
-        {bcmsRows(bcmsHome, "roles", roles).map((role, i) => <li class="role"><span class="m-text-7" data-bcms-field={`roles[${i}].title`} data-bcms-kind="text">{role.title}</span><span class="m-text-6 role__place" data-bcms-field={`roles[${i}].place`} data-bcms-kind="text">{role.place}</span></li>)}
+        {bcmsRows(bcmsHome, "roles", roles).map((role, i) => <li class="role"><span class="m-text-7" data-bcms-field={`roles[${i}].title`} data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, `roles[${i}].title`)}>{role.title}</span><span class="m-text-6 role__place" data-bcms-field={`roles[${i}].place`} data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, `roles[${i}].place`)}>{role.place}</span></li>)}
       </ul>
       <ArrowLink data-8b-placeholder="email" href={`mailto:${bcms(bcmsHome, "careers", careers)}`} label={bcms(bcmsHome, "careers", careers)} bcmsBindings={{ label: "careers" }} />
     </div>
