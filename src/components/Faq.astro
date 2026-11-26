@@ -1,6 +1,6 @@
 ---
 import bcmsHome from "../../bcms-content/home.json";
-import { bcms, bcmsStyleText } from "../bcms-content";
+import { bcms, bcmsRows, bcmsStyleText } from "../bcms-content";
 const faqs = [
   { q: 'What size of company do you work with?', a: 'Mostly companies between fifty and five thousand people, plus a few public bodies. Size matters less than whether the people who decide are in the room.' },
   { q: 'How does a project usually start?', a: 'With a two-week listening sprint: interviews, data and a day on your front line. You get a short written point of view and a plan before any big commitment.' },
@@ -13,7 +13,7 @@ const faqs = [
 <section id="faq" data-8b-section="faq" aria-labelledby="faq-title" data-bcms-section-label="FAQ">
   <h2 class="m-text-3 faq__title" id="faq-title" data-8b-motion="rise"><span data-bcms-field="m-text-3.heading-7" data-bcms-kind="text" data-bcms-style="2" style={bcmsStyleText(bcmsHome, "m-text-3.heading-7")}>{bcms(bcmsHome, "m-text-3.heading-7", "Fair questions")}</span><span class="m-dot" aria-hidden="true"></span></h2>
   <div class="faq__list" data-8b-items=":scope > details">
-    {faqs.map(faq => <details class="faq__item"><summary class="m-text-7">{faq.q}<span class="faq__mark" aria-hidden="true"></span></summary><p class="m-text faq__answer">{faq.a}</p></details>)}
+    {bcmsRows(bcmsHome, "faqs", faqs).map((faq, i) => <details class="faq__item"><summary class="m-text-7"><span data-bcms-field={`faqs[${i}].q`} data-bcms-kind="text">{faq.q}</span><span class="faq__mark" aria-hidden="true"></span></summary><p class="m-text faq__answer" data-bcms-field={`faqs[${i}].a`} data-bcms-kind="text">{faq.a}</p></details>)}
   </div>
 </section>
 

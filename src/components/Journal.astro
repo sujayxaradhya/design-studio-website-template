@@ -1,6 +1,6 @@
 ---
 import bcmsHome from "../../bcms-content/home.json";
-import { bcms, bcmsStyleText } from "../bcms-content";
+import { bcms, bcmsImage, bcmsRows, bcmsStyleText } from "../bcms-content";
 // Four stories, each with its frame photo; scene:journal counts them with :nth-of-type rules.
 const stories = [
   { kind: 'Event', date: '2026-10-01', read: 2, title: 'Open Studio Night returns to Lisbon on 14 November', text: 'Talks, half-built prototypes and a long table in the old print hall. Bring a friend who makes things.', alt: 'A speaker on a stage addressing a large audience in a dim hall', src: 'https://images.unsplash.com/photo-1769755409781-9e8924c57362?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8NXx8Y29uZmVyZW5jZSUyMHN0YWdlJTIwYXVkaWVuY2UlMjBsaWdodHN8ZW58MXwwfHx8MTc5MTIwOTc3M3ww&ixlib=rb-4.1.0&auto=format&fit=crop&w=570&h=713&q=60' },
@@ -41,10 +41,10 @@ const longDate = (iso: string) => new Date(iso).toLocaleDateString('en-GB', { da
   </div>
   <div class="journal__body">
     <div class="journal__frame" data-8b-items=":scope > img" data-8b-fixed="4">
-      {stories.map(story => <img class="journal__shot" src={story.src} width="1000" height="1250" alt={story.alt} loading="lazy">)}
+      {bcmsRows(bcmsHome, "stories", stories).map((story, i) => <img class="journal__shot" src={bcmsImage(bcmsHome, `stories[${i}].src`, story.src)} width="1000" height="1250" alt={story.alt} loading="lazy" data-bcms-field={`stories[${i}].src`} data-bcms-kind="image" data-bcms-props={`stories[${i}].alt|text|alt`}>)}
     </div>
     <ol class="journal__list" data-8b-items=":scope > .story" data-8b-fixed="4">
-      {stories.map(story => <li class="story"><p class="m-text-6 story__meta"><span>{story.kind}</span> · <time datetime={story.date}>{longDate(story.date)}</time> · {story.read} min read</p><h3 class="m-text-7">{story.title}</h3><p class="m-text story__text">{story.text}</p></li>)}
+      {bcmsRows(bcmsHome, "stories", stories).map((story, i) => <li class="story"><p class="m-text-6 story__meta"><span data-bcms-field={`stories[${i}].kind`} data-bcms-kind="text">{story.kind}</span> · <time datetime={story.date} data-bcms-props={`stories[${i}].date|text|datetime`}>{longDate(story.date)}</time> · <span data-bcms-field={`stories[${i}].read`} data-bcms-kind="text">{story.read}</span> min read</p><h3 class="m-text-7" data-bcms-field={`stories[${i}].title`} data-bcms-kind="text">{story.title}</h3><p class="m-text story__text" data-bcms-field={`stories[${i}].text`} data-bcms-kind="text">{story.text}</p></li>)}
     </ol>
   </div>
 </section>

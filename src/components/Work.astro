@@ -1,6 +1,6 @@
 ---
 import bcmsHome from "../../bcms-content/home.json";
-import { bcms, bcmsStyleText } from "../bcms-content";
+import { bcms, bcmsImage, bcmsRows, bcmsStyleText } from "../bcms-content";
 const cases = [
   { name: 'Northwind Bikes', tag: 'Brand, launch', line: 'An e-bike brand launched in eleven cities in a single spring.', alt: 'A rider on an electric bike on a seaside promenade under a wide blue sky', src: 'https://images.unsplash.com/photo-1620802090791-fd9420668913?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8M3x8ZWxlY3RyaWMlMjBiaWtlJTIwY2l0eSUyMHJpZGVyfGVufDF8MHx8fDE3OTEyMDk3MDZ8MA&ixlib=rb-4.1.0&auto=format&fit=crop&w=1140&h=713&q=60' },
   { name: 'Halden Bank', tag: 'Product, app', line: 'A 120-year-old bank, rebuilt as the app its customers open first.', alt: 'A smiling woman in an orange sweater against a lilac wall', src: 'https://images.unsplash.com/photo-1713371690087-baafaf440240?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8NXx8d29tYW4lMjBzbWlsaW5nJTIwaG9sZGluZyUyMHBob25lJTIwY29sb3JmdWx8ZW58MXwwfHx8MTc5MTIwOTcwN3ww&ixlib=rb-4.1.0&auto=format&fit=crop&w=1140&h=713&q=60' },
@@ -46,11 +46,11 @@ const cases = [
     </div>
     <div class="work__window">
       <ul class="work__track" data-8b-items=":scope > .case" data-8b-fixed="5">
-        {cases.map(item => (
+        {bcmsRows(bcmsHome, "cases", cases).map((item, i) => (
           <li class="case">
-            <div class="case__media"><img class="case__img" src={item.src} width="1600" height="1000" alt={item.alt} loading="lazy"></div>
-            <span class="m-badge case__tag">{item.tag}</span>
-            <div class="case__text"><h3 class="m-text-4 case__name">{item.name}</h3><p class="m-text-5 case__line">{item.line}</p></div>
+            <div class="case__media"><img class="case__img" src={bcmsImage(bcmsHome, `cases[${i}].src`, item.src)} width="1600" height="1000" alt={item.alt} loading="lazy" data-bcms-field={`cases[${i}].src`} data-bcms-kind="image" data-bcms-props={`cases[${i}].alt|text|alt`}></div>
+            <span class="m-badge case__tag" data-bcms-field={`cases[${i}].tag`} data-bcms-kind="text">{item.tag}</span>
+            <div class="case__text"><h3 class="m-text-4 case__name" data-bcms-field={`cases[${i}].name`} data-bcms-kind="text">{item.name}</h3><p class="m-text-5 case__line" data-bcms-field={`cases[${i}].line`} data-bcms-kind="text">{item.line}</p></div>
           </li>
         ))}
       </ul>

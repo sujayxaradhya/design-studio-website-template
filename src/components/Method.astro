@@ -1,6 +1,6 @@
 ---
 import bcmsHome from "../../bcms-content/home.json";
-import { bcms, bcmsStyleText } from "../bcms-content";
+import { bcms, bcmsRows, bcmsStyleText } from "../bcms-content";
 // Four steps for the four ring stations (top, right, bottom, left).
 const steps = [
   { title: 'Listen', text: 'Two weeks with your customers, your data and your front line before we draw anything at all.' },
@@ -41,7 +41,7 @@ const stations = [[0, -1], [1, 0], [0, 1], [-1, 0]];
       <span class="method__arm"><span class="method__runner"></span></span>
     </div>
     <ol class="method__steps" data-8b-items=":scope > .step" data-8b-fixed="4">
-      {steps.map(step => <li class="step"><h3 class="m-text-4">{step.title}</h3><p class="m-text-5 step__text">{step.text}</p></li>)}
+      {bcmsRows(bcmsHome, "steps", steps).map((step, i) => <li class="step"><h3 class="m-text-4" data-bcms-field={`steps[${i}].title`} data-bcms-kind="text">{step.title}</h3><p class="m-text-5 step__text" data-bcms-field={`steps[${i}].text`} data-bcms-kind="text">{step.text}</p></li>)}
     </ol>
   </div>
 </section>

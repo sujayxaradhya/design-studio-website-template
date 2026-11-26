@@ -1,6 +1,6 @@
 ---
 import bcmsHome from "../../bcms-content/home.json";
-import { bcms, bcmsStyleText } from "../bcms-content";
+import { bcms, bcmsImage, bcmsRows, bcmsStyleText } from "../bcms-content";
 const partners = [
   { name: 'Vela Air', year: 9, line: 'From the booking flow to the boarding gate.', alt: 'A sunset sky and a wing seen through an airplane window', src: 'https://images.unsplash.com/photo-1594386245199-289c2fe0bd0a?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8Mnx8YWlycGxhbmUlMjB3aW5kb3clMjBza3klMjBzdW5zZXR8ZW58MXwxfHx8MTc5MTIwOTcyOHww&ixlib=rb-4.1.0&auto=format&fit=crop&w=730&h=913&q=60' },
   { name: 'Kiln Coffee', year: 4, line: 'One roastery grew into a subscription habit.', alt: 'A barista pouring milk into a latte', src: 'https://images.unsplash.com/photo-1532713107108-dfb5d8d2fc42?ixid=M3w0Mzc5fDB8MXxzZWFyY2h8MXx8YmFyaXN0YSUyMHBvdXJpbmclMjBjb2ZmZWV8ZW58MXwxfHx8MTc5MTIwOTcyOXww&ixlib=rb-4.1.0&auto=format&fit=crop&w=730&h=913&q=60' },
@@ -42,10 +42,10 @@ const partners = [
     </div>
     <div class="again__swing">
       <ul class="again__wheel" data-8b-items=":scope > .partner">
-        {partners.map(partner => (
+        {bcmsRows(bcmsHome, "partners", partners).map((partner, i) => (
           <li class="partner">
-            <div class="partner__card"><img class="partner__img" src={partner.src} width="900" height="1125" alt={partner.alt} loading="lazy">
-            <div class="partner__text"><span class="m-badge partner__year">Year {partner.year}</span><h3 class="m-text-4 partner__name">{partner.name}</h3><p class="m-text partner__line">{partner.line}</p></div></div>
+            <div class="partner__card"><img class="partner__img" src={bcmsImage(bcmsHome, `partners[${i}].src`, partner.src)} width="900" height="1125" alt={partner.alt} loading="lazy" data-bcms-field={`partners[${i}].src`} data-bcms-kind="image" data-bcms-props={`partners[${i}].alt|text|alt`}>
+            <div class="partner__text"><span class="m-badge partner__year">Year <span data-bcms-field={`partners[${i}].year`} data-bcms-kind="text">{partner.year}</span></span><h3 class="m-text-4 partner__name" data-bcms-field={`partners[${i}].name`} data-bcms-kind="text">{partner.name}</h3><p class="m-text partner__line" data-bcms-field={`partners[${i}].line`} data-bcms-kind="text">{partner.line}</p></div></div>
           </li>
         ))}
       </ul>
